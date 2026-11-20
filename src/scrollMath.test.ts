@@ -4,11 +4,28 @@ import {
   clamp,
   seg,
   ease,
+  capWheelDelta,
+  linearFlyIn,
   computeCropStyle,
   computeHeroGeometry,
   findNearestFrame,
   formatStatValue,
 } from './scrollMath';
+
+test('capWheelDelta caps fast scroll deltas by elapsed time and stops immediately at 0', () => {
+  assert.equal(capWheelDelta(0, 16), 0);
+  assert.equal(capWheelDelta(8, 16), 8);
+  assert.ok(Math.abs(capWheelDelta(600, 16) - 13.6) < 1e-9);
+  assert.ok(Math.abs(capWheelDelta(-900, 48) - -40.8) < 1e-9);
+});
+
+test('linearFlyIn advances at uniform constant speed across [0.05, 0.70]', () => {
+  assert.equal(linearFlyIn(0.05), 0);
+  assert.ok(Math.abs(linearFlyIn(0.2125) - 0.25) < 1e-12);
+  assert.ok(Math.abs(linearFlyIn(0.375) - 0.5) < 1e-12);
+  assert.ok(Math.abs(linearFlyIn(0.5375) - 0.75) < 1e-12);
+  assert.equal(linearFlyIn(0.70), 1);
+});
 
 test('seg and ease produce expected boundaries and midpoint', () => {
   assert.equal(clamp(-0.5), 0);

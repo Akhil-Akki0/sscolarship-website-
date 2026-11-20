@@ -10,6 +10,17 @@ export function ease(t: number): number {
   return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 }
 
+export function capWheelDelta(deltaY: number, dtMs = 16, maxPxPerMs = 0.85): number {
+  if (!Number.isFinite(deltaY) || deltaY === 0) return 0;
+  const clampedDt = Math.min(48, Math.max(8, dtMs));
+  const maxStep = clampedDt * maxPxPerMs;
+  return Math.sign(deltaY) * Math.min(Math.abs(deltaY), maxStep);
+}
+
+export function linearFlyIn(sp: number): number {
+  return seg(sp, 0.05, 0.70);
+}
+
 export function computeCropStyle(x: number, y: number, w: number, h: number) {
   return {
     aspectRatio: `${w}/${h}`,

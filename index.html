@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Mossline — Measure the Living Planet</title>
-  <meta name="description" content="Floating moss island scroll fly-in landing page for Mossline environmental data." />
-  <meta property="og:title" content="Mossline — Measure the Living Planet" />
-  <meta property="og:description" content="Floating moss island scroll fly-in landing page for Mossline environmental data." />
+  <title>SZ — Find Your Funded Future</title>
+  <meta name="description" content="Real scholarships matched to your student profile, with official application links only." />
+  <meta property="og:title" content="SZ — Find Your Funded Future" />
+  <meta property="og:description" content="Real scholarships matched to your student profile, with official application links only." />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -750,6 +750,13 @@
       overflow:hidden;
       background:#1b3122;
       color:#fff;
+      border:0;
+      padding:0;
+      text-align:left;
+      font:inherit;
+      cursor:pointer;
+      display:block;
+      width:100%;
       transform-style:preserve-3d;
       transition:transform .25s ease-out;
     }
@@ -814,9 +821,529 @@
       overflow:hidden;
       transition:max-height .6s,margin-top .6s;
     }
-    .scard:hover p{
+    .scard:hover p,
+    .scard:focus-visible p{
       max-height:80px;
       margin-top:10px;
+    }
+
+    /* Student profile form (#find) */
+    #find{
+      margin-top:76px;
+      scroll-margin-top:86px;
+    }
+    .sec-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:20px;
+      flex-wrap:wrap;
+      margin-bottom:24px;
+    }
+    .sec-head h2{
+      font-weight:500;
+      font-size:clamp(28px,3.1vw,44px);
+      line-height:1.02;
+      letter-spacing:-.035em;
+      margin-top:14px;
+    }
+    .sec-sub{
+      font-family:var(--mono);
+      font-size:11px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:#4a5a4f;
+      margin-top:10px;
+    }
+
+    .profile-form{
+      border-radius:12px;
+      background:rgba(246,248,245,.62);
+      backdrop-filter:blur(14px);
+      -webkit-backdrop-filter:blur(14px);
+      border:1px solid rgba(16,41,26,.12);
+      padding:28px;
+    }
+    .form-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:18px 22px;
+    }
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:7px;
+    }
+    .field label,
+    .field .flabel{
+      font-family:var(--mono);
+      font-size:11px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:var(--ink);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:8px;
+    }
+    .field .opt{
+      font-size:9.5px;
+      color:#5a6b5f;
+    }
+    .field input,
+    .field select{
+      width:100%;
+      height:42px;
+      padding:0 12px;
+      background:#fff;
+      color:var(--ink);
+      border:1px solid rgba(16,41,26,.14);
+      border-radius:6px;
+      font-family:var(--sans);
+      font-size:14.5px;
+      transition:border-color .2s,box-shadow .2s;
+    }
+    .field input:focus,
+    .field select:focus{
+      outline:none;
+      border-color:var(--lime2);
+      box-shadow:0 0 0 3px rgba(169,221,58,.35);
+    }
+    .field.invalid input,
+    .field.invalid select{
+      border-color:#b42318;
+    }
+    .ferr{
+      font-size:12px;
+      color:#b42318;
+      min-height:16px;
+    }
+    .fhint{
+      font-size:12px;
+      color:#4a5a4f;
+    }
+
+    .marks-wrap{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    .marks-top{
+      display:flex;
+      gap:8px;
+      align-items:center;
+    }
+    .seg-toggle{
+      display:inline-flex;
+      background:rgba(16,41,26,.06);
+      border-radius:6px;
+      padding:3px;
+      gap:3px;
+      flex-shrink:0;
+    }
+    .seg-toggle button{
+      border:0;
+      background:transparent;
+      color:var(--ink2);
+      font-family:var(--mono);
+      font-size:10px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      padding:7px 10px;
+      border-radius:4px;
+      cursor:pointer;
+      transition:background .2s,color .2s;
+    }
+    .seg-toggle button[aria-pressed="true"]{
+      background:var(--ink);
+      color:#fff;
+    }
+
+    .form-actions{
+      margin-top:24px;
+      padding-top:20px;
+      border-top:1px solid rgba(16,41,26,.12);
+      display:flex;
+      flex-wrap:wrap;
+      align-items:center;
+      gap:14px;
+    }
+    .submit-btn{
+      display:inline-flex;
+      align-items:center;
+      gap:12px;
+      height:44px;
+      padding:0 18px;
+      background:var(--lime);
+      color:var(--ink);
+      border:0;
+      border-radius:6px;
+      font-family:var(--mono);
+      font-size:11.5px;
+      font-weight:500;
+      letter-spacing:.15em;
+      text-transform:uppercase;
+      cursor:pointer;
+      transition:background .2s,transform .2s;
+    }
+    .submit-btn:hover{background:var(--lime2)}
+    .submit-btn .sq{
+      width:20px;
+      height:20px;
+      border-radius:3px;
+      background:var(--ink);
+      color:var(--lime);
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      font-size:14px;
+      transition:transform .25s;
+    }
+    .submit-btn:hover .sq{transform:translateX(3px)}
+
+    .ai-btn{
+      height:44px;
+      padding:0 16px;
+      background:#fff;
+      color:var(--ink);
+      border:1px solid rgba(16,41,26,.22);
+      border-radius:6px;
+      font-family:var(--mono);
+      font-size:11px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      cursor:pointer;
+      transition:border-color .2s,background .2s;
+    }
+    .ai-btn:hover{border-color:var(--ink);background:var(--paper)}
+    .privacy-note{
+      font-size:12.5px;
+      color:#4a5a4f;
+      margin-top:10px;
+    }
+
+    /* Results (#results) */
+    #results{
+      margin-top:76px;
+      scroll-margin-top:86px;
+    }
+    .toolbar{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      align-items:center;
+      justify-content:space-between;
+      padding:16px;
+      border-radius:12px;
+      background:var(--paper);
+      border:1px solid #e0e5e0;
+      margin-bottom:22px;
+    }
+    .toolbar-left{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+      flex:1;
+    }
+    .toolbar-right{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+    }
+    .search-in{
+      height:38px;
+      min-width:220px;
+      flex:1 1 220px;
+      max-width:320px;
+      padding:0 12px;
+      background:#fff;
+      color:var(--ink);
+      border:1px solid rgba(16,41,26,.14);
+      border-radius:6px;
+      font-family:var(--sans);
+      font-size:14px;
+    }
+    .search-in:focus,
+    .tool-sel:focus{
+      outline:none;
+      border-color:var(--lime2);
+      box-shadow:0 0 0 3px rgba(169,221,58,.35);
+    }
+    .type-pills{
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+    }
+    .tpill{
+      height:34px;
+      padding:0 11px;
+      border-radius:6px;
+      border:1px solid rgba(16,41,26,.14);
+      background:#fff;
+      color:var(--ink2);
+      font-family:var(--mono);
+      font-size:10.5px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      cursor:pointer;
+      transition:background .2s,border-color .2s,color .2s;
+    }
+    .tpill[aria-pressed="true"]{
+      background:var(--lime);
+      border-color:var(--lime2);
+      color:var(--ink);
+    }
+    .tool-sel{
+      height:36px;
+      padding:0 10px;
+      border-radius:6px;
+      border:1px solid rgba(16,41,26,.14);
+      background:#fff;
+      color:var(--ink);
+      font-family:var(--mono);
+      font-size:10.5px;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+    }
+    .saved-toggle{
+      height:36px;
+      padding:0 12px;
+      border-radius:6px;
+      border:1px solid rgba(16,41,26,.18);
+      background:#fff;
+      color:var(--ink);
+      font-family:var(--mono);
+      font-size:10.5px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      cursor:pointer;
+    }
+    .saved-toggle[aria-pressed="true"]{
+      background:var(--ink);
+      color:var(--lime);
+      border-color:var(--ink);
+    }
+
+    .results-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:16px;
+    }
+    .rcard{
+      background:#fff;
+      border:1px solid #e0e5e0;
+      border-radius:12px;
+      padding:22px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      transform-style:preserve-3d;
+      transition:transform .25s ease-out,box-shadow .25s ease-out,border-color .25s;
+    }
+    .rcard:hover{
+      box-shadow:0 16px 36px rgba(16,41,26,.08);
+      border-color:rgba(16,41,26,.22);
+    }
+    .rcard-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .rcard-meta-top{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .provider-lbl{
+      font-family:var(--mono);
+      font-size:10.5px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:#4a5a4f;
+    }
+    .save-btn{
+      width:34px;
+      height:34px;
+      border-radius:6px;
+      border:1px solid rgba(16,41,26,.14);
+      background:#fff;
+      color:var(--ink);
+      font-size:16px;
+      line-height:1;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      flex-shrink:0;
+      transition:background .2s,border-color .2s;
+    }
+    .save-btn[aria-pressed="true"]{
+      background:var(--lime);
+      border-color:var(--lime2);
+    }
+
+    .rcard h3{
+      font-size:21px;
+      font-weight:500;
+      letter-spacing:-.025em;
+      line-height:1.15;
+    }
+    .rcard .rsum{
+      font-size:14.5px;
+      line-height:1.45;
+      color:#3d4f43;
+    }
+    .rtags{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:8px;
+      padding:12px;
+      border-radius:8px;
+      background:var(--paper);
+    }
+    .rtag{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+    }
+    .rtag span:first-child{
+      font-family:var(--mono);
+      font-size:9.5px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:#6a7a6f;
+    }
+    .rtag span:last-child{
+      font-size:13px;
+      color:var(--ink);
+    }
+
+    .reasons{
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+    }
+    .rchip{
+      display:inline-flex;
+      align-items:center;
+      padding:4px 8px;
+      border-radius:4px;
+      font-family:var(--mono);
+      font-size:10px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .rchip.why{
+      background:#eaf7d0;
+      color:#1c4a12;
+    }
+    .rchip.check{
+      background:#fef3c7;
+      color:#78350f;
+    }
+    .rchip.web{
+      background:#e7ebe8;
+      color:var(--ink);
+    }
+
+    .docs-box{
+      border-top:1px solid #ebeeeb;
+      padding-top:10px;
+    }
+    .docs-box summary{
+      font-family:var(--mono);
+      font-size:10.5px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:var(--ink2);
+      cursor:pointer;
+      list-style:none;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .docs-box summary::-webkit-details-marker{display:none}
+    .docs-box summary::after{content:"+";font-size:14px}
+    .docs-box[open] summary::after{content:"−"}
+    .docs-box ul{
+      margin-top:8px;
+      padding-left:18px;
+      font-size:13.5px;
+      line-height:1.55;
+      color:#4a5a4f;
+    }
+
+    .rcard-foot{
+      margin-top:auto;
+      padding-top:12px;
+      border-top:1px solid #ebeeeb;
+      display:flex;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .apply-btn{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      height:38px;
+      padding:0 14px;
+      border-radius:6px;
+      background:var(--lime);
+      color:var(--ink);
+      font-family:var(--mono);
+      font-size:10.5px;
+      font-weight:500;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      transition:background .2s;
+    }
+    .apply-btn:hover{background:var(--lime2)}
+    .domain-link{
+      font-family:var(--mono);
+      font-size:10.5px;
+      letter-spacing:.1em;
+      color:#4a5a4f;
+      text-decoration:underline;
+      text-underline-offset:3px;
+    }
+    .domain-link:hover{color:var(--ink)}
+
+    .empty-box{
+      padding:40px 24px;
+      border-radius:12px;
+      border:1px dashed rgba(16,41,26,.22);
+      background:var(--paper);
+      text-align:center;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:14px;
+    }
+    .clear-btn{
+      height:36px;
+      padding:0 14px;
+      border-radius:6px;
+      border:0;
+      background:var(--ink);
+      color:#fff;
+      font-family:var(--mono);
+      font-size:10.5px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      cursor:pointer;
+    }
+
+    .portal-notice{
+      margin-top:22px;
+      font-size:13px;
+      line-height:1.5;
+      color:#5a6b5f;
     }
 
     .stats{
@@ -844,6 +1371,14 @@
       margin-top:10px;
     }
 
+    /* Accessible focus outlines */
+    a:focus-visible,
+    button:focus-visible,
+    summary:focus-visible{
+      outline:2px solid var(--lime2);
+      outline-offset:2px;
+    }
+
     @media (max-width:820px){
       .nav{padding:16px 18px;grid-template-columns:1fr auto}
       .menu{display:none}
@@ -863,6 +1398,13 @@
       #sol{padding:50px 18px 70px}
       .cards{grid-template-columns:1fr}
       .scard{height:340px}
+      .profile-form{padding:18px}
+      .form-grid{grid-template-columns:1fr}
+      .toolbar{flex-direction:column;align-items:stretch}
+      .toolbar-left,.toolbar-right{width:100%}
+      .search-in{max-width:none;width:100%}
+      .results-grid{grid-template-columns:1fr}
+      .rtags{grid-template-columns:1fr}
       .stats{grid-template-columns:repeat(2,1fr)}
     }
   </style>
@@ -874,22 +1416,22 @@
         <path d="M16 2l12 7v14l-12 7-12-7V9z" fill="currentColor" />
         <path d="M16 8c-4 4-5 9-1 16 1-5 4-9 8-11-3 0-5 1-7 3 0-3 0-5 0-8z" fill="#c6f35c" />
       </svg>
-      <span>Mossline</span>
+      <span>SZ</span>
     </a>
     <div class="menu">
-      <a href="#sol">Solutions <i class="chev" aria-hidden="true"></i></a>
-      <a href="#tech" data-jump="0.86">Our tech <i class="chev" aria-hidden="true"></i></a>
-      <a href="#company" data-jump="0.26">Company <i class="chev" aria-hidden="true"></i></a>
-      <a href="#resources" data-jump="0.54">Resources <i class="chev" aria-hidden="true"></i></a>
+      <a href="#find">Scholarships <i class="chev" aria-hidden="true"></i></a>
+      <a href="#find">Eligibility <i class="chev" aria-hidden="true"></i></a>
+      <a href="#find">Deadlines <i class="chev" aria-hidden="true"></i></a>
+      <a href="#find">Resources <i class="chev" aria-hidden="true"></i></a>
     </div>
-    <a href="#sol" class="talk">
-      <span>LET'S TALK</span>
+    <a href="#find" class="talk">
+      <span>FIND MINE</span>
       <span class="sq" aria-hidden="true">›</span>
     </a>
   </nav>
 
   <main>
-    <section id="story" aria-label="Mossline ecosystem scroll story">
+    <section id="story" aria-label="SZ scroll story">
       <div class="stage">
         <div class="cam" id="cam">
           <canvas id="cv" data-testid="flyin-canvas"></canvas>
@@ -920,8 +1462,8 @@
 
         <div class="layer" id="l0">
           <div class="hero-copy" id="heroCopy">
-            <span class="chip">Planet intelligence</span>
-            <h1 id="heroTitle"><span class="line"><span id="heroLine">Measure the Living Planet</span></span></h1>
+            <span class="chip">Scholarship search</span>
+            <h1 id="heroTitle"><span class="line"><span id="heroLine">Find Your Funded Future</span></span></h1>
           </div>
         </div>
 
@@ -957,15 +1499,15 @@
           <div class="hud" id="hud">
             <span class="xhair" aria-hidden="true"></span>
             <span class="hud-frame" aria-hidden="true"></span>
-            <span class="chip">Biodiversity</span>
-            <pre>LAT  34.0922° N
-LON 116.2432° W
-ELEV 842 M</pre>
+            <span class="chip">Matches</span>
+            <pre id="hudPre">SCHOLARSHIPS  20
+COUNTRIES  8
+UPDATED  REGULARLY</pre>
           </div>
           <p class="caption" id="caption">
-            Real-time ecosystem insights.<br />
-            Powered by science, blockchain,<br />
-            and transparent data.
+            Real scholarships.<br />
+            Matched to your profile.<br />
+            Official links only.
           </p>
           <div class="hint" id="hint">
             <span class="hint-circle" aria-hidden="true"><span class="hint-chev"></span></span>
@@ -975,89 +1517,89 @@ ELEV 842 M</pre>
 
         <div class="layer" id="l2">
           <div class="vision" id="vision">
-            <span class="chip" id="visChip">Our vision</span>
+            <span class="chip" id="visChip">Our mission</span>
             <h2 id="visH2">
-              <span class="w">From</span> <span class="w">Data</span> <span class="w">Chaos</span> <span class="w">to</span><br />
-              <span class="w">Science-Backed,</span><br />
-              <span class="w">Actionable</span> <span class="w">Insights</span>
+              <span class="w">From</span> <span class="w">Endless</span> <span class="w">Searching</span> <span class="w">to</span><br />
+              <span class="w">Scholarships</span> <span class="w">Made</span><br />
+              <span class="w">For</span> <span class="w">You</span>
             </h2>
             <p id="visP">
-              A breakthrough in environmental measurement,<br />
-              built for commercial use.
+              Tell us about yourself once.<br />
+              We match you to scholarships you qualify for.
             </p>
           </div>
         </div>
 
         <div class="layer" id="l3">
           <p class="acct" id="acct">
-            Our ecosystem-level accounting translates complex field science into verifiable, compliance-ready metrics — so you can drive measurable results, not just reports.
+            Answer a few simple questions about your course, marks, income and country — and we match you with scholarships you actually qualify for, with the official application link ready.
           </p>
 
           <button type="button" class="spot" style="left:12%;top:58%">
             <span class="dot" aria-hidden="true"></span>
-            <span class="lbl">Soil carbon<em>+3.8 t/ha</em></span>
+            <span class="lbl">Eligibility check<em>Instant</em></span>
           </button>
           <button type="button" class="spot" style="left:33%;top:41%">
             <span class="dot" aria-hidden="true"></span>
-            <span class="lbl">Canopy moisture<em>71 % RH</em></span>
+            <span class="lbl">Deadlines<em>Tracked</em></span>
           </button>
           <button type="button" class="spot" style="left:70%;top:66%">
             <span class="dot" aria-hidden="true"></span>
-            <span class="lbl">Species index<em>214 taxa</em></span>
+            <span class="lbl">Documents<em>Checklist ready</em></span>
           </button>
           <button type="button" class="spot" style="left:83%;top:47%">
             <span class="dot" aria-hidden="true"></span>
-            <span class="lbl">Microclimate<em>14.2 °C</em></span>
+            <span class="lbl">Official link<em>Verified source</em></span>
           </button>
         </div>
 
         <div class="layer" id="l4">
           <div class="cred" id="cred">
-            <span class="station-tag">✕ Field station 07</span>
-            <p>Scientific credibility for corporate climate action</p>
+            <span class="station-tag">✕ Step 03 · Apply</span>
+            <p>Apply on the official portal, never through middlemen</p>
           </div>
 
           <div class="card" id="card">
-            <h4>Accumulated carbon<br />balance</h4>
-            <p class="note">Plot 07 · 12 months</p>
+            <h4>Scholarships matched<br />for you</h4>
+            <p class="note">Your profile · live</p>
             <div class="num-row">
               <span id="cNum">0</span>
-              <span class="unit">tCO₂e</span>
+              <span class="unit">matches</span>
             </div>
-            <span class="chip tag">+2.6 tCO₂e</span>
-            <svg width="220" height="70" viewBox="0 0 220 70" aria-label="Carbon balance sparkline">
+            <span class="chip tag" id="topMatchTag">Top match 96%</span>
+            <svg width="220" height="70" viewBox="0 0 220 70" aria-label="Top 8 match scores sparkline">
               <polyline id="spark" points="0,60 30,55 60,57 90,44 120,46 150,30 180,24 214,10" fill="none" stroke="#c6f35c" stroke-width="1.6" />
               <circle id="spD1" cx="90" cy="44" r="2.4" fill="#fff" opacity="0" />
               <circle id="spD2" cx="150" cy="30" r="2.4" fill="#fff" opacity="0" />
               <circle id="spD3" cx="214" cy="10" r="3.4" fill="#c6f35c" opacity="0" />
             </svg>
-            <p class="qtr">Q1 · Q2 · Q3 · Q4</p>
+            <p class="qtr">Top 8 matches</p>
           </div>
 
           <div class="feats" id="feats">
             <button type="button" class="feat">
               <span>01</span>
-              <span>Gold-standard observation system</span>
+              <span>Free student profile, no account</span>
               <span aria-hidden="true">→</span>
             </button>
             <button type="button" class="feat">
               <span>02</span>
-              <span>World-class atmospheric monitoring (AMRV)</span>
+              <span>Smart eligibility matching</span>
               <span aria-hidden="true">→</span>
             </button>
             <button type="button" class="feat">
               <span>03</span>
-              <span>Integrated algorithmic processing</span>
+              <span>Deadline and document checklist</span>
               <span aria-hidden="true">→</span>
             </button>
             <button type="button" class="feat">
               <span>04</span>
-              <span>Blockchain-secured traceability</span>
+              <span>Official application links only</span>
               <span aria-hidden="true">→</span>
             </button>
             <button type="button" class="feat">
               <span>05</span>
-              <span>Built for scale and complexity</span>
+              <span>Save and compare scholarships</span>
               <span aria-hidden="true">→</span>
             </button>
           </div>
@@ -1067,72 +1609,309 @@ ELEV 842 M</pre>
       </div>
     </section>
 
-    <section id="sol" aria-label="Our solutions">
+    <section id="sol" aria-label="Scholarships and student matcher">
       <div class="sol-head">
         <div>
-          <span class="chip">Our solutions</span>
-          <h2>Validating what the ecosystem does naturally</h2>
+          <span class="chip">Browse by type</span>
+          <h2>Scholarships for every kind of student</h2>
         </div>
-        <p>Field sensors, atmospheric flux towers and satellite data fused into one auditable record — so every tonne you report can be traced back to the ground it came from.</p>
+        <p>Merit, need-based, government and study-abroad funding in one place — each with the official source behind it, so you always apply on the real website.</p>
       </div>
 
       <div class="cards">
-        <article class="scard">
+        <button type="button" class="scard" data-filter-types="merit">
           <div class="bg" style="background-image:url('https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20261106_025630_9a37a1e0-2547-4973-8160-c75205993914.png&w=1400&q=82');background-position:22% 70%;background-size:260%"></div>
           <div class="ov"></div>
           <div class="top">
-            <span class="mono">[Nature-based solutions]</span>
+            <span class="mono">[Merit &amp; talent]</span>
             <span class="arr" aria-hidden="true">→</span>
           </div>
           <div class="bot">
-            <h3>Forest &amp; peatland<br />carbon projects</h3>
-            <p>Continuous flux measurement replaces sampled estimates, so credits reflect what the land actually absorbs.</p>
+            <h3>Merit and<br />achievement awards</h3>
+            <p>For students with strong marks, test scores or special talents. Match by percentage and field.</p>
           </div>
-        </article>
+        </button>
 
-        <article class="scard">
+        <button type="button" class="scard" data-filter-types="need,government">
           <div class="bg" style="background-image:url('https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20261106_025545_b003e5cc-e68f-4fee-b686-c217a5d81eea.png&w=1400&q=82');background-position:50% 50%;background-size:190%"></div>
           <div class="ov"></div>
           <div class="top">
-            <span class="mono">[Supply chain solutions]</span>
+            <span class="mono">[Need-based &amp; government]</span>
             <span class="arr" aria-hidden="true">→</span>
           </div>
           <div class="bot">
-            <h3>Scope 3 sourcing<br />verification</h3>
-            <p>Trace commodities to the plots that grew them, with deforestation-free evidence attached to every shipment.</p>
+            <h3>Government and<br />need-based aid</h3>
+            <p>Fee waivers and stipends based on family income and category. Starts from the official national portal.</p>
           </div>
-        </article>
+        </button>
 
-        <article class="scard">
+        <button type="button" class="scard" data-filter-types="international">
           <div class="bg" style="background-image:url('https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20261106_025630_9a37a1e0-2547-4973-8160-c75205993914.png&w=1400&q=82');background-position:62% 30%;background-size:230%"></div>
           <div class="ov"></div>
           <div class="top">
-            <span class="mono">[Biodiversity credits]</span>
+            <span class="mono">[Study abroad]</span>
             <span class="arr" aria-hidden="true">→</span>
           </div>
           <div class="bot">
-            <h3>Living species<br />baselines</h3>
-            <p>Acoustic and eDNA monitoring builds a measurable biodiversity baseline you can report against year over year.</p>
+            <h3>International<br />scholarships</h3>
+            <p>Fully and partly funded programmes across countries. Filter by destination and degree level.</p>
           </div>
-        </article>
+        </button>
       </div>
+
+      <!-- D. Student Profile Form -->
+      <section id="find" aria-label="Student profile form">
+        <div class="sec-head">
+          <div>
+            <span class="chip">Step 01 · Your profile</span>
+            <h2>Tell us about you</h2>
+            <p class="sec-sub">Only used to match. Nothing is stored or sent anywhere.</p>
+          </div>
+        </div>
+
+        <form id="profileForm" class="profile-form" novalidate>
+          <div class="form-grid">
+            <div class="field">
+              <label for="fName">Name <span class="opt">(Optional)</span></label>
+              <input id="fName" name="name" type="text" placeholder="e.g. Ananya Sharma" autocomplete="off" />
+              <span class="ferr" id="err-name"></span>
+            </div>
+
+            <div class="field" data-req="age">
+              <label for="fAge">Age</label>
+              <input id="fAge" name="age" type="number" min="12" max="65" placeholder="e.g. 20" required />
+              <span class="ferr" id="err-age"></span>
+            </div>
+
+            <div class="field" data-req="citizenship">
+              <label for="fCitizen">Country of citizenship</label>
+              <select id="fCitizen" name="citizenship" required>
+                <option value="">Select citizenship</option>
+                <option value="India">India</option>
+                <option value="United States">United States</option>
+                <option value="United Kingdom">United Kingdom</option>
+                <option value="Germany">Germany</option>
+                <option value="Japan">Japan</option>
+                <option value="China">China</option>
+                <option value="South Korea">South Korea</option>
+                <option value="Canada">Canada</option>
+                <option value="Australia">Australia</option>
+                <option value="Other">Other</option>
+              </select>
+              <span class="ferr" id="err-citizenship"></span>
+            </div>
+
+            <div class="field">
+              <label for="fState">State / region <span class="opt">(Optional)</span></label>
+              <input id="fState" name="state" type="text" placeholder="e.g. Maharashtra" autocomplete="off" />
+              <span class="ferr" id="err-state"></span>
+            </div>
+
+            <div class="field" data-req="currentLevel">
+              <label for="fLevel">Current education level</label>
+              <select id="fLevel" name="currentLevel" required>
+                <option value="">Select current level</option>
+                <option value="Class 10">Class 10</option>
+                <option value="Class 12">Class 12</option>
+                <option value="Diploma">Diploma</option>
+                <option value="Undergraduate">Undergraduate</option>
+                <option value="Postgraduate">Postgraduate</option>
+                <option value="PhD">PhD</option>
+              </select>
+              <span class="ferr" id="err-currentLevel"></span>
+            </div>
+
+            <div class="field" data-req="applyingFor">
+              <label for="fApplying">Degree you are applying for</label>
+              <select id="fApplying" name="applyingFor" required>
+                <option value="">Select target degree</option>
+                <option value="Class 10">Class 10</option>
+                <option value="Class 12">Class 12</option>
+                <option value="Diploma">Diploma</option>
+                <option value="Undergraduate">Undergraduate</option>
+                <option value="Postgraduate">Postgraduate</option>
+                <option value="PhD">PhD</option>
+              </select>
+              <span class="ferr" id="err-applyingFor"></span>
+            </div>
+
+            <div class="field" data-req="field">
+              <label for="fField">Course or field of study</label>
+              <select id="fField" name="field" required>
+                <option value="">Select field</option>
+                <option value="Engineering & Technology">Engineering &amp; Technology</option>
+                <option value="Medicine & Health">Medicine &amp; Health</option>
+                <option value="Science">Science</option>
+                <option value="Commerce & Management">Commerce &amp; Management</option>
+                <option value="Arts & Humanities">Arts &amp; Humanities</option>
+                <option value="Law">Law</option>
+                <option value="Agriculture">Agriculture</option>
+                <option value="Design">Design</option>
+                <option value="Other">Other</option>
+              </select>
+              <span class="ferr" id="err-field"></span>
+            </div>
+
+            <div class="field" data-req="marks">
+              <div class="flabel">
+                <label for="fMarks" style="padding:0;margin:0">Latest marks</label>
+                <div class="seg-toggle" role="group" aria-label="Marks scale">
+                  <button type="button" id="modePct" aria-pressed="true">Percentage</button>
+                  <button type="button" id="modeCgpa" aria-pressed="false">CGPA (10-pt)</button>
+                </div>
+              </div>
+              <input id="fMarks" name="marks" type="number" step="0.1" min="0" max="100" placeholder="Enter percentage (0–100)" required />
+              <span class="fhint" id="marksPreview">Enter percentage between 0 and 100</span>
+              <span class="ferr" id="err-marks"></span>
+            </div>
+
+            <div class="field" data-req="incomeRange">
+              <label for="fIncome">Annual family income range</label>
+              <select id="fIncome" name="incomeRange" required>
+                <option value="">Select income range</option>
+                <option value="Below 1 lakh">Below ₹1 lakh (~under $1,200 USD)</option>
+                <option value="1–2.5 lakh">₹1–2.5 lakh (~$1,200–$3,000 USD)</option>
+                <option value="2.5–5 lakh">₹2.5–5 lakh (~$3,000–$6,000 USD)</option>
+                <option value="5–8 lakh">₹5–8 lakh (~$6,000–$9,600 USD)</option>
+                <option value="Above 8 lakh">Above ₹8 lakh (~$9,600+ USD)</option>
+                <option value="Prefer not to say">Prefer not to say</option>
+              </select>
+              <span class="ferr" id="err-incomeRange"></span>
+            </div>
+
+            <div class="field" data-req="category">
+              <label for="fCategory">Category</label>
+              <select id="fCategory" name="category" required>
+                <option value="">Select category</option>
+                <option value="General">General</option>
+                <option value="OBC">OBC</option>
+                <option value="SC">SC</option>
+                <option value="ST">ST</option>
+                <option value="EWS">EWS</option>
+                <option value="Minority">Minority</option>
+                <option value="Prefer not to say">Prefer not to say</option>
+              </select>
+              <span class="ferr" id="err-category"></span>
+            </div>
+
+            <div class="field" data-req="gender">
+              <label for="fGender">Gender</label>
+              <select id="fGender" name="gender" required>
+                <option value="">Select gender</option>
+                <option value="Female">Female</option>
+                <option value="Male">Male</option>
+                <option value="Other">Other</option>
+                <option value="Prefer not to say">Prefer not to say</option>
+              </select>
+              <span class="ferr" id="err-gender"></span>
+            </div>
+
+            <div class="field">
+              <label for="fDisability">Person with disability <span class="opt">(Optional)</span></label>
+              <select id="fDisability" name="disability">
+                <option value="No">No</option>
+                <option value="Yes">Yes</option>
+                <option value="Prefer not to say">Prefer not to say</option>
+              </select>
+              <span class="ferr" id="err-disability"></span>
+            </div>
+
+            <div class="field" data-req="destination" style="grid-column:1/-1">
+              <label for="fDest">Where do you want to study</label>
+              <select id="fDest" name="destination" required>
+                <option value="">Select destination</option>
+                <option value="India">India</option>
+                <option value="Abroad (any)">Abroad (any)</option>
+                <option value="United States">United States</option>
+                <option value="United Kingdom">United Kingdom</option>
+                <option value="Germany">Germany</option>
+                <option value="Europe">Europe</option>
+                <option value="Japan">Japan</option>
+                <option value="China">China</option>
+                <option value="South Korea">South Korea</option>
+              </select>
+              <span class="ferr" id="err-destination"></span>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="submit-btn">
+              <span>FIND MY SCHOLARSHIPS</span>
+              <span class="sq" aria-hidden="true">›</span>
+            </button>
+            <button type="button" id="aiSearchBtn" class="ai-btn" hidden>SEARCH THE WEB FOR MORE</button>
+          </div>
+          <p class="privacy-note" id="privacyNote">
+            Your answers stay in memory on this page only. Nothing is saved or sent anywhere.
+          </p>
+        </form>
+      </section>
+
+      <!-- E. Results -->
+      <section id="results" aria-label="Matched scholarships">
+        <div class="sec-head">
+          <div>
+            <span class="chip" id="resModeChip">Sample matches</span>
+            <h2>Your matched scholarships</h2>
+            <p class="sec-sub" id="resSubtitle">Showing sample matches for an Undergraduate Engineering student — submit your profile above to personalise.</p>
+          </div>
+        </div>
+
+        <div class="toolbar">
+          <div class="toolbar-left">
+            <label for="resSearch" class="mono" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Search scholarships</label>
+            <input id="resSearch" class="search-in" type="search" placeholder="Search name, provider or field..." />
+
+            <div class="type-pills" role="group" aria-label="Filter by scholarship type">
+              <button type="button" class="tpill" data-type="all" aria-pressed="true">All</button>
+              <button type="button" class="tpill" data-type="merit" aria-pressed="false">Merit</button>
+              <button type="button" class="tpill" data-type="need" aria-pressed="false">Need-based</button>
+              <button type="button" class="tpill" data-type="government" aria-pressed="false">Government</button>
+              <button type="button" class="tpill" data-type="international" aria-pressed="false">International</button>
+            </div>
+          </div>
+
+          <div class="toolbar-right">
+            <label for="resDestFilter" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Filter by destination</label>
+            <select id="resDestFilter" class="tool-sel">
+              <option value="all">All destinations</option>
+            </select>
+
+            <label for="resSort" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Sort results</label>
+            <select id="resSort" class="tool-sel">
+              <option value="best">Best match</option>
+              <option value="amount">Highest amount</option>
+              <option value="closing">Closing soon</option>
+            </select>
+
+            <button type="button" id="savedToggle" class="saved-toggle" aria-pressed="false">Saved (0)</button>
+          </div>
+        </div>
+
+        <div id="resultsList" class="results-grid"></div>
+        <div id="webResultsList" class="results-grid" style="margin-top:16px" hidden></div>
+
+        <p class="portal-notice">
+          SZ does not take applications or documents. You apply directly on each official website. Always confirm eligibility and deadlines there, as they change every year.
+        </p>
+      </section>
 
       <div class="stats" id="stats">
         <div class="stat">
-          <div class="snum" data-target="1240" data-dec="0" data-comma="1">0</div>
-          <div class="slbl">Sensors deployed</div>
+          <div class="snum" id="statTotal" data-target="20" data-dec="0" data-comma="1">0</div>
+          <div class="slbl">Scholarships listed</div>
         </div>
         <div class="stat">
-          <div class="snum" data-target="38" data-dec="0" data-comma="0">0</div>
-          <div class="slbl">Countries monitored</div>
+          <div class="snum" id="statCountries" data-target="8" data-dec="0" data-comma="0">0</div>
+          <div class="slbl">Countries covered</div>
         </div>
         <div class="stat">
-          <div class="snum" data-target="2.1" data-dec="1" data-comma="0">0.0</div>
-          <div class="slbl">Mt CO₂e verified</div>
+          <div class="snum" id="statFields" data-target="3" data-dec="0" data-comma="0">0</div>
+          <div class="slbl">Fields of study</div>
         </div>
         <div class="stat">
-          <div class="snum" data-target="99.4" data-dec="1" data-comma="0">0.0</div>
-          <div class="slbl">% Data uptime</div>
+          <div class="snum" data-target="100" data-dec="0" data-comma="0">0</div>
+          <div class="slbl">% Official links</div>
         </div>
       </div>
     </section>
@@ -1140,10 +1919,1034 @@ ELEV 842 M</pre>
 
   <script>
     (() => {
+      // Optional Gemini Search Grounding key (empty by default; no UI key input)
+      const GEMINI_API_KEY = '';
+
       const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
       const seg = (p, a, b) => clamp((p - a) / (b - a));
       const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
+      const INCOME_BOUNDS = {
+        'Below 1 lakh': { min: 0, max: 1 },
+        '1–2.5 lakh': { min: 1, max: 2.5 },
+        '2.5–5 lakh': { min: 2.5, max: 5 },
+        '5–8 lakh': { min: 5, max: 8 },
+        'Above 8 lakh': { min: 8, max: Infinity },
+        'Prefer not to say': null
+      };
+
+      // Add more scholarships here. Official URL must be the provider's real website.
+      const SCHOLARSHIPS = [
+        {
+          id: 'nsp',
+          name: 'National Scholarship Portal (NSP)',
+          provider: 'Government of India',
+          type: 'government',
+          destination: 'India',
+          levels: ['Class 10', 'Class 12', 'Diploma', 'Undergraduate', 'Postgraduate', 'PhD'],
+          fields: ['Any'],
+          countriesEligible: ['India'],
+          minPercent: 50,
+          maxIncomeLakh: 6,
+          gender: 'Any',
+          categories: ['Any'],
+          amountTier: 2,
+          amountNote: 'Fee waiver and annual stipend (see official site)',
+          deadlineNote: "Check the official site for this year's dates",
+          summary: 'Central and state government scholarships across school, college and research degrees.',
+          docs: ['Aadhaar or national ID', 'Family income certificate', 'Previous year marksheet', 'Bonafide student certificate', 'Bank passbook copy'],
+          officialUrl: 'https://scholarships.gov.in'
+        },
+        {
+          id: 'aicte',
+          name: 'AICTE Scholarship Schemes',
+          provider: 'All India Council for Technical Education',
+          type: 'government',
+          destination: 'India',
+          levels: ['Diploma', 'Undergraduate'],
+          fields: ['Engineering & Technology', 'Design'],
+          countriesEligible: ['India'],
+          minPercent: 50,
+          maxIncomeLakh: 8,
+          gender: 'Any',
+          categories: ['Any'],
+          amountTier: 2,
+          amountNote: 'Annual tuition and study support (see official site)',
+          deadlineNote: "Check the official site for this year's dates",
+          summary: 'Technical education support including Pragati for women and Saksham for differently abled students.',
+          docs: ['Admission proof in AICTE-approved institute', 'Class 10 / 12 marksheets', 'Family income certificate', 'Category or disability certificate if applicable'],
+          officialUrl: 'https://www.aicte-india.org'
+        },
+        {
+          id: 'inspire',
+          name: 'INSPIRE Scholarship (SHE)',
+          provider: 'Department of Science & Technology',
+          type: 'merit',
+          destination: 'India',
+          levels: ['Undergraduate', 'Postgraduate'],
+          fields: ['Science'],
+          countriesEligible: ['India'],
+          minPercent: 85,
+          maxIncomeLakh: null,
+          gender: 'Any',
+          categories: ['Any'],
+          amountTier: 2,
+          amountNote: 'Annual scholarship and mentorship grant (see official site)',
+          deadlineNote: "Check the official site for this year's dates",
+          summary: 'Merit-based support for top students pursuing natural and basic sciences.',
+          docs: ['Class 12 board marksheet or rank certificate', 'College enrolment certificate in basic sciences', 'Bank account details'],
+          officialUrl: 'https://www.online-inspire.gov.in'
+        },
+        {
+          id: 'buddy4study',
+          name: 'Buddy4Study Verified Listings',
+          provider: 'Buddy4Study Foundation',
+          type: 'need',
+          destination: 'India',
+          levels: ['Class 10', 'Class 12', 'Diploma', 'Undergraduate', 'Postgraduate'],
+          fields: ['Any'],
+          countriesEligible: ['India'],
+          minPercent: 50,
+          maxIncomeLakh: 6,
+          gender: 'Any',
+          categories: ['Any'],
+          amountTier: 1,
+          amountNote: 'Tuition support across CSR and foundation schemes (see official site)',
+          deadlineNote: "Check the official site for this year's dates",
+          summary: 'Need-based and merit corporate-funded scholarships aggregated with verified official portals.',
+          docs: ['Latest marksheet', 'Family income proof', 'Current school or college ID', 'Passport-size photograph'],
+          officialUrl: 'https://www.buddy4study.com'
+        },
+        {
+          id: 'reliance',
+          name: 'Reliance Foundation Scholarships',
+          provider: 'Reliance Foundation',
+          type: 'merit',
+          destination: 'India',
+          levels: ['Undergraduate', 'Postgraduate'],
+          fields: ['Any'],
+          countriesEligible: ['India'],
+          minPercent: 60,
+          maxIncomeLakh: 15,
+          gender: 'Any',
+          categories: ['Any'],
+          amountTier: 2,
+          amountNote: 'Tuition and living grant (see official site)',
+          deadlineNote: "Check the official site for this year's dates",
+          summary: 'Merit-cum-means awards supporting undergraduate and postgraduate students across India.',
+          docs: ['Class 12 or degree marksheets', 'Entrance or aptitude score', 'Household income certificate', 'Two letters of reference (for PG)'],
+          officialUrl: 'https://www.reliancefoundation.org'
+        },
+        {
+          id: 'jntata',
+          name: 'JN Tata Endowment Scholarship',
+          provider: 'Tata Trusts',
+          type: 'merit',
+          destination: 'Global',
+          levels: ['Postgraduate', 'PhD'],
+          fields: ['Any'],
+          countriesEligible: ['India'],
+          minPercent: 60,
+          maxIncomeLakh: null,
+          gender: 'Any',
+          categories: ['Any'],
+          amountTier: 2,
+          amountNote: 'Loan scholarship with travel and gift grant options (see official site)',
+          deadlineNote: "Check the official site for this year's dates",
+          summary: 'Supports Indian graduates pursuing higher studies abroad across all disciplines.',
+          docs: ['Undergraduate transcripts', 'University admission offer or application proof', 'Statement of purpose', 'Resume and test scores'],
+          officialUrl: 'https://www.jntataendowment.org'
+        },
+        {
+          id: 'inlaks',
+          name: 'Inlaks Shivdasani Foundation Scholarship',
+          provider: 'Inlaks Shivdasani Foundation',
+          type: 'international',
+          destination: 'Global',
+          levels: ['Postgraduate'],
+          fields: ['Any'],
+          countriesEligible: ['India'],
+          minPercent: 65,
+          maxIncomeLakh: null,
+          gender: 'Any',
+          categories: ['Any'],
+          amountTier: 3,
+          amountNote: 'Tuition, living and one-way travel support (see official site)',
+          deadlineNote: "Check the official site for this year's dates",
+          summary: 'Full funding for outstanding Indian graduates admitted to top universities abroad.',
+          docs: ['Offer letter from eligible foreign university', 'Academic transcripts', 'Two reference letters', 'Passport copy'],
+          officialUrl: 'https://www.inlaksfoundation.org'
+        },
+        {
+          id: 'fulbright',
+          name: 'Fulbright-Nehru Fellowships',
+          provider: 'USIEF',
+          type: 'international',
+          destination: 'United States',
+          levels: ['Postgraduate', 'PhD'],
+          fields: ['Any'],
+          countriesEligible: ['India'],
+          minPercent: 60,
+          maxIncomeLakh: null,
+          gender: 'Any',
+          categories: ['Any'],
+          amountTier: 3,
+          amountNote: 'Tuition, living stipend, airfare and health cover (see official site)',
+          deadlineNote: "Check the official site for this year's dates",
+          summary: 'Flagship U.S.–India exchange fellowship for master’s and doctoral study in the United States.',
+          docs: ['Bachelor’s/Master’s transcripts', 'Three letters of recommendation', 'Personal and study objectives essays', 'English proficiency score'],
+          officialUrl: 'https://www.usief.org.in'
+        },
+        {
+          id: 'chevening',
+          name: 'Chevening Scholarships',
+          provider: 'UK Foreign, Commonwealth & Development Office',
+          type: 'international',
+          destination: 'United Kingdom',
+          levels: ['Postgraduate'],
+          fields: ['Any'],
+          countriesEligible: ['Any'],
+          minPercent: 60,
+          maxIncomeLakh: null,
+          gender: 'Any',
+          categories: ['Any'],
+          amountTier: 3,
+          amountNote: 'Full tuition, monthly stipend and travel (see official site)',
+          deadlineNote: "Check the official site for this year's dates",
+          summary: 'UK government global award for one-year master’s degrees across British universities.',
+          docs: ['Undergraduate degree certificate & transcripts', 'Two reference letters', 'Work experience verification', 'Unconditional UK university offer'],
+          officialUrl: 'https://www.chevening.org'
+        },
+        {
+          id: 'commonwealth',
+          name: 'Commonwealth Scholarships',
+          provider: 'Commonwealth Scholarship Commission (UK)',
+          type: 'international',
+          destination: 'United Kingdom',
+          levels: ['Postgraduate', 'PhD'],
+          fields: ['Any'],
+          countriesEligible: ['Any'],
+          minPercent: 60,
+          maxIncomeLakh: null,
+          gender: 'Any',
+          categories: ['Any'],
+          amountTier: 3,
+          amountNote: 'Full tuition, airfare and living allowance (see official site)',
+          deadlineNote: "Check the official site for this year's dates",
+          summary: 'Supports talented students from Commonwealth nations for master’s and PhD programmes in the UK.',
+          docs: ['Academic transcripts', 'Citizenship proof', 'Two references', 'Development impact statement'],
+          officialUrl: 'https://cscuk.fcdo.gov.uk'
+        },
+        {
+          id: 'gates-cambridge',
+          name: 'Gates Cambridge Scholarships',
+          provider: 'Gates Cambridge Trust',
+          type: 'international',
+          destination: 'United Kingdom',
+          levels: ['Postgraduate', 'PhD'],
+          fields: ['Any'],
+          countriesEligible: ['Any'],
+          minPercent: 75,
+          maxIncomeLakh: null,
+          gender: 'Any',
+          categories: ['Any'],
+          amountTier: 3,
+          amountNote: 'Full cost of studying at Cambridge plus allowance (see official site)',
+          deadlineNote: "Check the official site for this year's dates",
+          summary: 'Full-cost postgraduate awards at the University of Cambridge for applicants outside the UK.',
+          docs: ['University of Cambridge application', 'Academic transcripts', 'Gates Cambridge statement', 'Research proposal (for PhD)'],
+          officialUrl: 'https://www.gatescambridge.org'
+        },
+        {
+          id: 'rhodes',
+          name: 'Rhodes Scholarship',
+          provider: 'Rhodes Trust (University of Oxford)',
+          type: 'international',
+          destination: 'United Kingdom',
+          levels: ['Postgraduate'],
+          fields: ['Any'],
+          countriesEligible: ['Any'],
+          minPercent: 75,
+          maxIncomeLakh: null,
+          gender: 'Any',
+          categories: ['Any'],
+          amountTier: 3,
+          amountNote: 'Oxford tuition, stipend and settling allowance (see official site)',
+          deadlineNote: "Check the official site for this year's dates",
+          summary: 'Prestigious postgraduate fellowship for full-time study at the University of Oxford.',
+          docs: ['Official academic transcripts', 'Personal statement & CV', 'Four to six reference letters', 'Proof of citizenship & age eligibility'],
+          officialUrl: 'https://www.rhodeshouse.ox.ac.uk'
+        },
+        {
+          id: 'daad',
+          name: 'DAAD Scholarships',
+          provider: 'German Academic Exchange Service',
+          type: 'international',
+          destination: 'Germany',
+          levels: ['Postgraduate', 'PhD'],
+          fields: ['Any'],
+          countriesEligible: ['Any'],
+          minPercent: 60,
+          maxIncomeLakh: null,
+          gender: 'Any',
+          categories: ['Any'],
+          amountTier: 3,
+          amountNote: 'Monthly stipend, travel and insurance (see official site)',
+          deadlineNote: "Check the official site for this year's dates",
+          summary: 'Funding for graduate degrees and research stays at public and state-recognised German universities.',
+          docs: ['Degree certificates & transcripts', 'Motivation letter', 'CV & work experience proof', 'Language certificate (German or English)'],
+          officialUrl: 'https://www.daad.de/en/'
+        },
+        {
+          id: 'erasmus',
+          name: 'Erasmus Mundus Joint Masters',
+          provider: 'European Commission',
+          type: 'international',
+          destination: 'Europe',
+          levels: ['Postgraduate'],
+          fields: ['Any'],
+          countriesEligible: ['Any'],
+          minPercent: 60,
+          maxIncomeLakh: null,
+          gender: 'Any',
+          categories: ['Any'],
+          amountTier: 3,
+          amountNote: 'Tuition waiver, travel and monthly living grant (see official site)',
+          deadlineNote: "Check the official site for this year's dates",
+          summary: 'Study across multiple European universities in an integrated international master’s programme.',
+          docs: ['Bachelor’s diploma & transcripts', 'Motivation letter', 'Two recommendation letters', 'English proficiency proof'],
+          officialUrl: 'https://erasmus-plus.ec.europa.eu'
+        },
+        {
+          id: 'knight-hennessy',
+          name: 'Knight-Hennessy Scholars',
+          provider: 'Stanford University',
+          type: 'international',
+          destination: 'United States',
+          levels: ['Postgraduate', 'PhD'],
+          fields: ['Any'],
+          countriesEligible: ['Any'],
+          minPercent: 75,
+          maxIncomeLakh: null,
+          gender: 'Any',
+          categories: ['Any'],
+          amountTier: 3,
+          amountNote: 'Full tuition, stipend and travel for Stanford graduate degrees (see official site)',
+          deadlineNote: "Check the official site for this year's dates",
+          summary: 'Multidisciplinary graduate fellowship covering any master’s or doctoral degree at Stanford.',
+          docs: ['Stanford graduate programme application', 'Transcripts & test scores', 'Two recommendation letters', 'Short essays & video story'],
+          officialUrl: 'https://knight-hennessy.stanford.edu'
+        },
+        {
+          id: 'mext',
+          name: 'MEXT (Japanese Government Scholarship)',
+          provider: 'Ministry of Education, Culture, Sports, Science & Technology',
+          type: 'government',
+          destination: 'Japan',
+          levels: ['Undergraduate', 'Postgraduate', 'PhD'],
+          fields: ['Any'],
+          countriesEligible: ['Any'],
+          minPercent: 65,
+          maxIncomeLakh: null,
+          gender: 'Any',
+          categories: ['Any'],
+          amountTier: 3,
+          amountNote: 'Tuition exemption, monthly allowance and airfare (see official site)',
+          deadlineNote: "Check the official site for this year's dates",
+          summary: 'Full Japanese government scholarship for undergraduate and research students.',
+          docs: ['Academic transcripts', 'Recommendation letter from school/university', 'Medical certificate', 'Study or research plan'],
+          officialUrl: 'https://www.studyinjapan.go.jp'
+        },
+        {
+          id: 'csc',
+          name: 'Chinese Government Scholarship (CSC)',
+          provider: 'China Scholarship Council',
+          type: 'government',
+          destination: 'China',
+          levels: ['Undergraduate', 'Postgraduate', 'PhD'],
+          fields: ['Any'],
+          countriesEligible: ['Any'],
+          minPercent: 60,
+          maxIncomeLakh: null,
+          gender: 'Any',
+          categories: ['Any'],
+          amountTier: 3,
+          amountNote: 'Tuition, accommodation, stipend and insurance (see official site)',
+          deadlineNote: "Check the official site for this year's dates",
+          summary: 'Bilateral and university-track scholarships for international students across China.',
+          docs: ['Notarised highest diploma & transcripts', 'Study plan or research proposal', 'Two recommendation letters', 'Foreigner physical examination form'],
+          officialUrl: 'https://www.campuschina.org'
+        },
+        {
+          id: 'gks',
+          name: 'Global Korea Scholarship (GKS)',
+          provider: 'NIIED · Government of South Korea',
+          type: 'government',
+          destination: 'South Korea',
+          levels: ['Undergraduate', 'Postgraduate', 'PhD'],
+          fields: ['Any'],
+          countriesEligible: ['Any'],
+          minPercent: 75,
+          maxIncomeLakh: null,
+          gender: 'Any',
+          categories: ['Any'],
+          amountTier: 3,
+          amountNote: 'Full tuition, Korean language year, stipend and airfare (see official site)',
+          deadlineNote: "Check the official site for this year's dates",
+          summary: 'South Korean government funding for undergraduate and graduate degree programmes.',
+          docs: ['Apostilled degree & transcripts', 'Personal statement & study plan', 'Two letters of recommendation', 'Proof of applicant & parent citizenship'],
+          officialUrl: 'https://www.studyinkorea.go.kr'
+        },
+        {
+          id: 'google',
+          name: 'Google Scholarships for Students',
+          provider: 'Google',
+          type: 'merit',
+          destination: 'Global',
+          levels: ['Undergraduate', 'Postgraduate'],
+          fields: ['Engineering & Technology', 'Science'],
+          countriesEligible: ['Any'],
+          minPercent: 65,
+          maxIncomeLakh: null,
+          gender: 'Any',
+          categories: ['Any'],
+          amountTier: 1,
+          amountNote: 'Tuition award for computer science and technology students (see official site)',
+          deadlineNote: "Check the official site for this year's dates",
+          summary: 'Supports students pursuing computer science, engineering and closely related technical fields.',
+          docs: ['Current university transcripts', 'Resume highlighting technical projects', 'Short essay responses', 'Reference letter'],
+          officialUrl: 'https://buildyourfuture.withgoogle.com/scholarships'
+        },
+        {
+          id: 'akf',
+          name: 'Aga Khan Foundation International Scholarship',
+          provider: 'Aga Khan Foundation',
+          type: 'need',
+          destination: 'Global',
+          levels: ['Postgraduate', 'PhD'],
+          fields: ['Any'],
+          countriesEligible: ['Any'],
+          minPercent: 65,
+          maxIncomeLakh: 8,
+          gender: 'Any',
+          categories: ['Any'],
+          amountTier: 3,
+          amountNote: 'Half grant / half loan for tuition and living expenses (see official site)',
+          deadlineNote: "Check the official site for this year's dates",
+          summary: 'Need-based postgraduate support for outstanding students from select developing countries.',
+          docs: ['Admission offer from university', 'Academic transcripts', 'Detailed family financial statement', 'Two academic/professional references'],
+          officialUrl: 'https://www.akdn.org'
+        }
+      ];
+
+      // Computed dataset counts for HUD & Stats
+      const distinctCountries = Array.from(new Set(SCHOLARSHIPS.map(s => s.destination).filter(d => d && d !== 'Global')));
+      const distinctFields = Array.from(new Set(SCHOLARSHIPS.flatMap(s => s.fields).filter(f => f !== 'Any')));
+
+      document.getElementById('hudPre').textContent = `SCHOLARSHIPS  ${SCHOLARSHIPS.length}\nCOUNTRIES  ${distinctCountries.length}\nUPDATED  REGULARLY`;
+      document.getElementById('statTotal').dataset.target = String(SCHOLARSHIPS.length);
+      document.getElementById('statCountries').dataset.target = String(distinctCountries.length);
+      document.getElementById('statFields').dataset.target = String(distinctFields.length);
+
+      // Populate destination filter dropdown
+      const resDestFilter = document.getElementById('resDestFilter');
+      distinctCountries.concat(['Global']).forEach(dest => {
+        const opt = document.createElement('option');
+        opt.value = dest;
+        opt.textContent = dest;
+        resDestFilter.appendChild(opt);
+      });
+
+      // Demo profile used until the student submits #profileForm
+      const DEMO_PROFILE = {
+        citizenship: 'India',
+        currentLevel: 'Undergraduate',
+        field: 'Engineering & Technology',
+        percent: 82,
+        incomeRange: '2.5–5 lakh',
+        category: 'General',
+        gender: 'Female',
+        destination: 'Abroad (any)',
+        applyingFor: 'Postgraduate'
+      };
+
+      let activeProfile = DEMO_PROFILE;
+      let hasSubmitted = false;
+      let currentMatches = [];
+      const savedIds = new Set();
+
+      // Filter state
+      let searchQuery = '';
+      let activeTypes = new Set(); // empty = All
+      let destFilter = 'all';
+      let sortMode = 'best';
+      let savedOnly = false;
+
+      function matchScholarships(profile) {
+        const out = [];
+        const incomeBounds = INCOME_BOUNDS[profile.incomeRange] ?? null;
+
+        for (const s of SCHOLARSHIPS) {
+          if (!s.levels.includes(profile.applyingFor)) continue;
+          if (!s.countriesEligible.includes('Any') && !s.countriesEligible.includes(profile.citizenship)) continue;
+          if (incomeBounds && s.maxIncomeLakh !== null && incomeBounds.min > s.maxIncomeLakh) continue;
+          if (profile.percent !== null && profile.percent < s.minPercent) continue;
+          if (profile.gender !== 'Prefer not to say' && s.gender !== 'Any' && profile.gender !== s.gender) continue;
+          if (profile.category !== 'Prefer not to say' && !s.categories.includes('Any') && !s.categories.includes(profile.category)) continue;
+          if (!s.fields.includes('Any') && !s.fields.includes(profile.field)) continue;
+
+          let score = 0;
+          const whyMatch = [];
+          const checkYourself = [];
+
+          // Level (25)
+          score += 25;
+          whyMatch.push(`${profile.applyingFor} eligible`);
+
+          // Field (20)
+          if (s.fields.includes(profile.field)) {
+            score += 20;
+            whyMatch.push(`${profile.field} focus`);
+          } else {
+            score += 17;
+            whyMatch.push('Open to all fields');
+          }
+
+          // Marks (15)
+          if (profile.percent === null) {
+            score += 7.5;
+            checkYourself.push('Marks requirement to check');
+          } else {
+            score += 15;
+            if (s.minPercent > 0) whyMatch.push(`Meets ${s.minPercent}%+ marks`);
+          }
+
+          // Income (15)
+          if (s.maxIncomeLakh === null) {
+            score += 15;
+          } else if (!incomeBounds) {
+            score += 7.5;
+            checkYourself.push('Income proof needed');
+          } else if (incomeBounds.max <= s.maxIncomeLakh) {
+            score += 15;
+            whyMatch.push(`Income under ₹${s.maxIncomeLakh}L`);
+          } else {
+            score += 10;
+            checkYourself.push(`Check ₹${s.maxIncomeLakh}L income cap`);
+          }
+
+          // Category & Gender (10)
+          if (s.categories.includes('Any')) {
+            score += 5;
+          } else if (profile.category === 'Prefer not to say') {
+            score += 2.5;
+            checkYourself.push('Category proof needed');
+          } else {
+            score += 5;
+            whyMatch.push(`${profile.category} eligible`);
+          }
+
+          if (s.gender === 'Any') {
+            score += 5;
+          } else if (profile.gender === 'Prefer not to say') {
+            score += 2.5;
+            checkYourself.push('Gender criteria to check');
+          } else {
+            score += 5;
+            whyMatch.push(`${s.gender} applicants`);
+          }
+
+          // Destination (15)
+          if (profile.destination === 'India') {
+            if (s.destination === 'India') {
+              score += 15;
+              whyMatch.push('Study in India');
+            } else {
+              score += 5;
+            }
+          } else if (profile.destination === 'Abroad (any)') {
+            if (s.destination !== 'India') {
+              score += 15;
+              whyMatch.push(s.destination === 'Global' ? 'Study abroad' : `Study in ${s.destination}`);
+            } else {
+              score += 5;
+            }
+          } else {
+            if (s.destination === profile.destination || s.destination === 'Global') {
+              score += 15;
+              whyMatch.push(`Destination: ${s.destination}`);
+            } else {
+              score += 5;
+            }
+          }
+
+          out.push({
+            scholarship: s,
+            score: clamp(Math.round(score), 0, 100),
+            whyMatch,
+            checkYourself
+          });
+        }
+
+        out.sort((a, b) => b.score - a.score);
+        return out;
+      }
+
+      // Station sparkline updater from top 8 match scores
+      const cred = document.getElementById('cred');
+      const card = document.getElementById('card');
+      const cNum = document.getElementById('cNum');
+      const topMatchTag = document.getElementById('topMatchTag');
+      const spark = document.getElementById('spark');
+      const spD1 = document.getElementById('spD1');
+      const spD2 = document.getElementById('spD2');
+      const spD3 = document.getElementById('spD3');
+      let sparkLen = spark.getTotalLength();
+
+      function updateStationCard() {
+        const scores = currentMatches.map(m => m.score);
+        const topScore = scores.length ? scores[0] : 0;
+        topMatchTag.textContent = `Top match ${topScore}%`;
+
+        const top8 = scores.slice(0, 8);
+        let pts;
+        if (top8.length === 0) {
+          pts = [{ x: 0, y: 60 }, { x: 214, y: 60 }];
+        } else {
+          const ordered = top8.length > 1 ? [...top8].reverse() : [...top8, ...top8];
+          const minS = Math.min(...ordered);
+          const maxS = Math.max(...ordered);
+          const span = Math.max(10, maxS - minS);
+          pts = ordered.map((sc, i) => ({
+            x: Math.round((i / (ordered.length - 1)) * 214),
+            y: Math.round(60 - ((sc - minS) / span) * 46)
+          }));
+        }
+
+        spark.setAttribute('points', pts.map(p => `${p.x},${p.y}`).join(' '));
+        sparkLen = spark.getTotalLength();
+        spark.style.strokeDasharray = String(sparkLen);
+
+        const d1 = pts[Math.min(pts.length - 1, Math.floor(pts.length * 0.35))];
+        const d2 = pts[Math.min(pts.length - 1, Math.floor(pts.length * 0.7))];
+        const d3 = pts[pts.length - 1];
+        spD1.setAttribute('cx', String(d1.x));
+        spD1.setAttribute('cy', String(d1.y));
+        spD2.setAttribute('cx', String(d2.x));
+        spD2.setAttribute('cy', String(d2.y));
+        spD3.setAttribute('cx', String(d3.x));
+        spD3.setAttribute('cy', String(d3.y));
+      }
+
+      function escapeHtml(str) {
+        return String(str).replace(/[&<>"']/g, ch => ({
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#39;'
+        }[ch]));
+      }
+
+      function getHostname(url) {
+        try {
+          return new URL(url).hostname.replace(/^www\./, '');
+        } catch (_) {
+          return url;
+        }
+      }
+
+      function updateTypePillsUI() {
+        const allBtn = document.querySelector('.tpill[data-type="all"]');
+        const isAll = activeTypes.size === 0;
+        allBtn.setAttribute('aria-pressed', String(isAll));
+        document.querySelectorAll('.tpill[data-type]:not([data-type="all"])').forEach(btn => {
+          btn.setAttribute('aria-pressed', String(activeTypes.has(btn.dataset.type)));
+        });
+      }
+
+      function renderResults() {
+        const listEl = document.getElementById('resultsList');
+        const savedToggle = document.getElementById('savedToggle');
+        savedToggle.textContent = `Saved (${savedIds.size})`;
+        savedToggle.setAttribute('aria-pressed', String(savedOnly));
+
+        let list = [...currentMatches];
+
+        if (savedOnly) {
+          list = list.filter(m => savedIds.has(m.scholarship.id));
+        }
+        if (activeTypes.size > 0) {
+          list = list.filter(m => activeTypes.has(m.scholarship.type));
+        }
+        if (destFilter !== 'all') {
+          list = list.filter(m => m.scholarship.destination === destFilter);
+        }
+        if (searchQuery.trim()) {
+          const q = searchQuery.trim().toLowerCase();
+          list = list.filter(m => {
+            const s = m.scholarship;
+            return (
+              s.name.toLowerCase().includes(q) ||
+              s.provider.toLowerCase().includes(q) ||
+              s.fields.some(f => f.toLowerCase().includes(q)) ||
+              s.summary.toLowerCase().includes(q) ||
+              s.destination.toLowerCase().includes(q)
+            );
+          });
+        }
+
+        if (sortMode === 'amount') {
+          list.sort((a, b) => (b.scholarship.amountTier - a.scholarship.amountTier) || (b.score - a.score));
+        } else if (sortMode === 'closing') {
+          list.sort((a, b) => a.scholarship.name.localeCompare(b.scholarship.name));
+        } else {
+          list.sort((a, b) => b.score - a.score);
+        }
+
+        if (list.length === 0) {
+          listEl.innerHTML = `
+            <div class="empty-box" style="grid-column:1/-1">
+              <p>No exact matches. Try relaxing marks, income or destination.</p>
+              <button type="button" class="clear-btn" id="clearFiltersBtn">Clear filters</button>
+            </div>
+          `;
+          const clr = document.getElementById('clearFiltersBtn');
+          if (clr) {
+            clr.addEventListener('click', () => {
+              searchQuery = '';
+              document.getElementById('resSearch').value = '';
+              activeTypes.clear();
+              updateTypePillsUI();
+              destFilter = 'all';
+              resDestFilter.value = 'all';
+              savedOnly = false;
+              renderResults();
+            });
+          }
+          return;
+        }
+
+        listEl.innerHTML = list.map(m => {
+          const s = m.scholarship;
+          const isSaved = savedIds.has(s.id);
+          const host = getHostname(s.officialUrl);
+          const whyHtml = m.whyMatch.map(w => `<span class="rchip why">${escapeHtml(w)}</span>`).join('');
+          const checkHtml = m.checkYourself.map(c => `<span class="rchip check">${escapeHtml(c)}</span>`).join('');
+          const docsHtml = s.docs.map(d => `<li>${escapeHtml(d)}</li>`).join('');
+
+          return `
+            <article class="rcard">
+              <div class="rcard-top">
+                <div class="rcard-meta-top">
+                  <span class="chip">${m.score}% match</span>
+                  <span class="provider-lbl">${escapeHtml(s.provider)}</span>
+                </div>
+                <button
+                  type="button"
+                  class="save-btn"
+                  data-save-id="${escapeHtml(s.id)}"
+                  aria-pressed="${isSaved ? 'true' : 'false'}"
+                  aria-label="${isSaved ? 'Remove' : 'Save'} ${escapeHtml(s.name)}"
+                >${isSaved ? '♥' : '♡'}</button>
+              </div>
+              <h3>${escapeHtml(s.name)}</h3>
+              <p class="rsum">${escapeHtml(s.summary)}</p>
+              <div class="rtags">
+                <div class="rtag"><span>Level</span><span>${escapeHtml(s.levels.join(', '))}</span></div>
+                <div class="rtag"><span>Country</span><span>${escapeHtml(s.destination)}</span></div>
+                <div class="rtag"><span>Amount</span><span>${escapeHtml(s.amountNote)}</span></div>
+                <div class="rtag"><span>Deadline</span><span>${escapeHtml(s.deadlineNote)}</span></div>
+              </div>
+              <div class="reasons">${whyHtml}${checkHtml}</div>
+              <details class="docs-box">
+                <summary>Documents checklist (${s.docs.length})</summary>
+                <ul>${docsHtml}</ul>
+              </details>
+              <div class="rcard-foot">
+                <a href="${escapeHtml(s.officialUrl)}" target="_blank" rel="noopener noreferrer" class="apply-btn">APPLY ON OFFICIAL SITE ↗</a>
+                <a href="${escapeHtml(s.officialUrl)}" target="_blank" rel="noopener noreferrer" class="domain-link">${escapeHtml(host)}</a>
+              </div>
+            </article>
+          `;
+        }).join('');
+
+        // Wire save buttons and subtle tilt
+        listEl.querySelectorAll('.save-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const id = btn.dataset.saveId;
+            if (savedIds.has(id)) savedIds.delete(id);
+            else savedIds.add(id);
+            renderResults();
+          });
+        });
+
+        listEl.querySelectorAll('.rcard').forEach(rc => {
+          rc.addEventListener('pointermove', e => {
+            const r = rc.getBoundingClientRect();
+            const x = (e.clientX - r.left) / r.width - .5;
+            const y = (e.clientY - r.top) / r.height - .5;
+            rc.style.transform = `perspective(1000px) rotateY(${x * 3}deg) rotateX(${-y * 3}deg)`;
+          });
+          rc.addEventListener('pointerleave', () => {
+            rc.style.transform = '';
+          });
+        });
+      }
+
+      // Initialize matches with demo profile
+      currentMatches = matchScholarships(activeProfile);
+      updateStationCard();
+      renderResults();
+
+      // Browse-by-type cards filter + scroll to #results
+      document.querySelectorAll('.scard').forEach(scard => {
+        scard.addEventListener('pointermove', e => {
+          const r = scard.getBoundingClientRect();
+          const x = (e.clientX - r.left) / r.width - .5;
+          const y = (e.clientY - r.top) / r.height - .5;
+          scard.style.transform = `perspective(1000px) rotateY(${x * 6}deg) rotateX(${-y * 6}deg)`;
+        });
+        scard.addEventListener('pointerleave', () => {
+          scard.style.transform = '';
+        });
+        scard.addEventListener('click', () => {
+          const types = (scard.dataset.filterTypes || '').split(',').filter(Boolean);
+          activeTypes = new Set(types);
+          savedOnly = false;
+          updateTypePillsUI();
+          renderResults();
+          document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+        });
+      });
+
+      // Toolbar controls
+      document.getElementById('resSearch').addEventListener('input', e => {
+        searchQuery = e.target.value;
+        renderResults();
+      });
+
+      document.querySelectorAll('.tpill').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const t = btn.dataset.type;
+          if (t === 'all') {
+            activeTypes.clear();
+          } else {
+            if (activeTypes.has(t)) activeTypes.delete(t);
+            else activeTypes.add(t);
+          }
+          updateTypePillsUI();
+          renderResults();
+        });
+      });
+
+      resDestFilter.addEventListener('change', e => {
+        destFilter = e.target.value;
+        renderResults();
+      });
+
+      document.getElementById('resSort').addEventListener('change', e => {
+        sortMode = e.target.value;
+        renderResults();
+      });
+
+      document.getElementById('savedToggle').addEventListener('click', () => {
+        savedOnly = !savedOnly;
+        renderResults();
+      });
+
+      // Marks mode toggle (Percentage vs 10-pt CGPA x 9.5)
+      let marksMode = 'percent';
+      const modePct = document.getElementById('modePct');
+      const modeCgpa = document.getElementById('modeCgpa');
+      const fMarks = document.getElementById('fMarks');
+      const marksPreview = document.getElementById('marksPreview');
+
+      function updateMarksPreview() {
+        const raw = parseFloat(fMarks.value);
+        if (marksMode === 'cgpa') {
+          if (!Number.isNaN(raw) && raw >= 0 && raw <= 10) {
+            const pct = Math.round(raw * 9.5 * 10) / 10;
+            marksPreview.textContent = `Converted equivalent: ${pct}% (CGPA × 9.5)`;
+          } else {
+            marksPreview.textContent = 'Enter CGPA between 0 and 10 (converted × 9.5)';
+          }
+        } else {
+          marksPreview.textContent = 'Enter percentage between 0 and 100';
+        }
+      }
+
+      modePct.addEventListener('click', () => {
+        marksMode = 'percent';
+        modePct.setAttribute('aria-pressed', 'true');
+        modeCgpa.setAttribute('aria-pressed', 'false');
+        fMarks.max = '100';
+        fMarks.placeholder = 'Enter percentage (0–100)';
+        updateMarksPreview();
+      });
+
+      modeCgpa.addEventListener('click', () => {
+        marksMode = 'cgpa';
+        modePct.setAttribute('aria-pressed', 'false');
+        modeCgpa.setAttribute('aria-pressed', 'true');
+        fMarks.max = '10';
+        fMarks.placeholder = 'Enter CGPA (0–10)';
+        updateMarksPreview();
+      });
+
+      fMarks.addEventListener('input', updateMarksPreview);
+
+      // Form validation & submission (JS memory only)
+      const profileForm = document.getElementById('profileForm');
+      const reqRules = [
+        { id: 'fAge', err: 'err-age', check: v => { const n = Number(v); return v !== '' && !Number.isNaN(n) && n >= 12 && n <= 65 ? '' : 'Enter an age between 12 and 65.'; } },
+        { id: 'fCitizen', err: 'err-citizenship', check: v => v ? '' : 'Select your country of citizenship.' },
+        { id: 'fLevel', err: 'err-currentLevel', check: v => v ? '' : 'Select your current education level.' },
+        { id: 'fApplying', err: 'err-applyingFor', check: v => v ? '' : 'Select the degree you are applying for.' },
+        { id: 'fField', err: 'err-field', check: v => v ? '' : 'Select your course or field of study.' },
+        { id: 'fMarks', err: 'err-marks', check: v => {
+          const n = Number(v);
+          if (v === '' || Number.isNaN(n)) return 'Enter your latest marks.';
+          if (marksMode === 'cgpa' && (n < 0 || n > 10)) return 'Enter a CGPA between 0 and 10.';
+          if (marksMode === 'percent' && (n < 0 || n > 100)) return 'Enter a percentage between 0 and 100.';
+          return '';
+        } },
+        { id: 'fIncome', err: 'err-incomeRange', check: v => v ? '' : 'Select an income range or Prefer not to say.' },
+        { id: 'fCategory', err: 'err-category', check: v => v ? '' : 'Select a category or Prefer not to say.' },
+        { id: 'fGender', err: 'err-gender', check: v => v ? '' : 'Select a gender or Prefer not to say.' },
+        { id: 'fDest', err: 'err-destination', check: v => v ? '' : 'Select where you want to study.' }
+      ];
+
+      reqRules.forEach(rule => {
+        const el = document.getElementById(rule.id);
+        const evt = el.tagName === 'SELECT' ? 'change' : 'input';
+        el.addEventListener(evt, () => {
+          const msg = rule.check(el.value.trim());
+          document.getElementById(rule.err).textContent = msg;
+          el.closest('.field').classList.toggle('invalid', Boolean(msg));
+        });
+      });
+
+      function buildProfileFromForm() {
+        const rawMarks = parseFloat(fMarks.value);
+        const pct = marksMode === 'cgpa' ? Math.round(rawMarks * 9.5 * 10) / 10 : rawMarks;
+        return {
+          name: document.getElementById('fName').value.trim(),
+          age: Number(document.getElementById('fAge').value),
+          citizenship: document.getElementById('fCitizen').value,
+          state: document.getElementById('fState').value.trim(),
+          currentLevel: document.getElementById('fLevel').value,
+          applyingFor: document.getElementById('fApplying').value,
+          field: document.getElementById('fField').value,
+          percent: Number.isNaN(pct) ? null : pct,
+          incomeRange: document.getElementById('fIncome').value,
+          category: document.getElementById('fCategory').value,
+          gender: document.getElementById('fGender').value,
+          disability: document.getElementById('fDisability').value,
+          destination: document.getElementById('fDest').value
+        };
+      }
+
+      profileForm.addEventListener('submit', e => {
+        e.preventDefault();
+        let firstBad = null;
+        for (const rule of reqRules) {
+          const el = document.getElementById(rule.id);
+          const msg = rule.check(el.value.trim());
+          document.getElementById(rule.err).textContent = msg;
+          el.closest('.field').classList.toggle('invalid', Boolean(msg));
+          if (msg && !firstBad) firstBad = el;
+        }
+        if (firstBad) {
+          firstBad.focus();
+          return;
+        }
+
+        activeProfile = buildProfileFromForm();
+        hasSubmitted = true;
+        currentMatches = matchScholarships(activeProfile);
+        updateStationCard();
+        activeTypes.clear();
+        updateTypePillsUI();
+        destFilter = 'all';
+        resDestFilter.value = 'all';
+        savedOnly = false;
+
+        document.getElementById('resModeChip').textContent = 'Matched to your profile';
+        const greet = activeProfile.name ? `for ${activeProfile.name} — ` : 'for ';
+        document.getElementById('resSubtitle').textContent =
+          `Showing ${currentMatches.length} matched scholarship${currentMatches.length === 1 ? '' : 's'} ${greet}${activeProfile.applyingFor} · ${activeProfile.field} · ${activeProfile.destination}.`;
+
+        renderResults();
+        document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+      });
+
+      // Section G: Optional Gemini Grounded Search (hidden when GEMINI_API_KEY is empty)
+      const aiSearchBtn = document.getElementById('aiSearchBtn');
+      const webResultsList = document.getElementById('webResultsList');
+      if (GEMINI_API_KEY && GEMINI_API_KEY.trim()) {
+        aiSearchBtn.hidden = false;
+        document.getElementById('privacyNote').textContent =
+          'Profile matching runs in your browser. Clicking "Search the web for more" sends an anonymous study summary (no name) to Gemini with Google Search.';
+
+        aiSearchBtn.addEventListener('click', async () => {
+          const p = hasSubmitted ? activeProfile : DEMO_PROFILE;
+          aiSearchBtn.disabled = true;
+          aiSearchBtn.textContent = 'SEARCHING THE WEB...';
+          try {
+            const prompt = `Find real official scholarships for a student from ${p.citizenship} applying for ${p.applyingFor} in ${p.field}, destination preference: ${p.destination}. Return brief summaries.`;
+            const resp = await fetch(
+              `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${encodeURIComponent(GEMINI_API_KEY.trim())}`,
+              {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  contents: [{ parts: [{ text: prompt }] }],
+                  tools: [{ google_search: {} }]
+                })
+              }
+            );
+            const data = await resp.json();
+            const chunks = data?.candidates?.[0]?.groundingMetadata?.groundingChunks || [];
+            const validWeb = chunks
+              .map(c => c.web)
+              .filter(w => w && typeof w.uri === 'string' && /^https?:\/\//i.test(w.uri));
+
+            if (validWeb.length > 0) {
+              webResultsList.hidden = false;
+              webResultsList.innerHTML = validWeb.map(w => `
+                <article class="rcard">
+                  <div class="rcard-top">
+                    <div class="rcard-meta-top">
+                      <span class="rchip web">Found on the web — verify on the official site</span>
+                    </div>
+                  </div>
+                  <h3>${escapeHtml(w.title || getHostname(w.uri))}</h3>
+                  <div class="rcard-foot">
+                    <a href="${escapeHtml(w.uri)}" target="_blank" rel="noopener noreferrer" class="apply-btn">APPLY ON OFFICIAL SITE ↗</a>
+                    <a href="${escapeHtml(w.uri)}" target="_blank" rel="noopener noreferrer" class="domain-link">${escapeHtml(getHostname(w.uri))}</a>
+                  </div>
+                </article>
+              `).join('');
+            }
+          } catch (_) {
+            // Silently ignore network errors without breaking local results
+          } finally {
+            aiSearchBtn.disabled = false;
+            aiSearchBtn.textContent = 'SEARCH THE WEB FOR MORE';
+          }
+        });
+      }
+
+      // Smooth scroll for nav links & CTA to #find
+      document.querySelectorAll('.nav a[href="#find"]').forEach(link => {
+        link.addEventListener('click', e => {
+          e.preventDefault();
+          document.getElementById('find').scrollIntoView({ behavior: 'smooth' });
+        });
+      });
+
+      // Scroll story & video controller (unchanged timings, physics, and frame caching)
       const story = document.getElementById('story');
       const cam = document.getElementById('cam');
       const camF = document.getElementById('camF');
@@ -1177,16 +2980,6 @@ ELEV 842 M</pre>
       const acctWords = Array.from(acct.querySelectorAll('.w'));
       const spots = Array.from(document.querySelectorAll('.spot'));
 
-      const cred = document.getElementById('cred');
-      const card = document.getElementById('card');
-      const cNum = document.getElementById('cNum');
-      const spark = document.getElementById('spark');
-      const spD1 = document.getElementById('spD1');
-      const spD2 = document.getElementById('spD2');
-      const spD3 = document.getElementById('spD3');
-      const sparkLen = spark.getTotalLength();
-      spark.style.strokeDasharray = String(sparkLen);
-      spark.style.strokeDashoffset = String(sparkLen);
       const feats = Array.from(document.querySelectorAll('.feat'));
       const rocks = Array.from(document.querySelectorAll('.rock')).map(el => ({
         el,
@@ -1195,7 +2988,6 @@ ELEV 842 M</pre>
         d: parseFloat(el.dataset.d || '1')
       }));
 
-      // Interactive hotspots (one active at a time)
       spots.forEach(spot => {
         spot.addEventListener('click', () => {
           const wasOn = spot.classList.contains('on');
@@ -1204,7 +2996,6 @@ ELEV 842 M</pre>
         });
       });
 
-      // Interactive feature rows (one active at a time)
       feats.forEach(feat => {
         feat.addEventListener('click', () => {
           const wasOn = feat.classList.contains('on');
@@ -1213,30 +3004,6 @@ ELEV 842 M</pre>
         });
       });
 
-      // Nav section jump links
-      document.querySelectorAll('.menu a[data-jump]').forEach(link => {
-        link.addEventListener('click', e => {
-          e.preventDefault();
-          const frac = parseFloat(link.dataset.jump || '0');
-          const top = story.offsetTop + frac * (story.offsetHeight - window.innerHeight);
-          window.scrollTo({ top, behavior: 'smooth' });
-        });
-      });
-
-      // Solution card 3D tilt
-      document.querySelectorAll('.scard').forEach(scard => {
-        scard.addEventListener('pointermove', e => {
-          const r = scard.getBoundingClientRect();
-          const x = (e.clientX - r.left) / r.width - .5;
-          const y = (e.clientY - r.top) / r.height - .5;
-          scard.style.transform = `perspective(1000px) rotateY(${x * 6}deg) rotateX(${-y * 6}deg)`;
-        });
-        scard.addEventListener('pointerleave', () => {
-          scard.style.transform = '';
-        });
-      });
-
-      // Hero layout placement
       function layoutHero() {
         const W = window.innerWidth;
         const H = window.innerHeight;
@@ -1260,7 +3027,6 @@ ELEV 842 M</pre>
         heroCopy.style.top = (fernTop + 0.5 * fs - blockHeight) + 'px';
       }
 
-      // Canvas sizing
       function sizeCanvas() {
         const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
         const w = Math.max(1, Math.round(cv.clientWidth * dpr));
@@ -1273,7 +3039,6 @@ ELEV 842 M</pre>
         }
       }
 
-      // Video frame cache & scrubbing
       const FPS = 24;
       let NF = 121;
       let frames = new Array(NF);
@@ -1412,10 +3177,27 @@ ELEV 842 M</pre>
         settled: () => !busy && nearest(want) === shown
       };
 
-      // Pointer & scroll state
       let mx = 0, my = 0, sx = 0, sy = 0;
       let sp = 0;
-      let lastT = performance.now();
+
+      // Constant-speed scroll cap on fast wheel/trackpad bursts inside the story
+      const MAX_SCROLL_PX_PER_MS = 0.85;
+      let lastWheelT = 0;
+      window.addEventListener('wheel', e => {
+        if (e.ctrlKey) return;
+        const dy = e.deltaMode === 1 ? e.deltaY * 16 : e.deltaY;
+        if (!dy) return;
+        const storyEnd = story.offsetTop + story.offsetHeight - window.innerHeight;
+        if (window.scrollY < storyEnd && !(window.scrollY <= 0 && dy < 0)) {
+          e.preventDefault();
+          const now = performance.now();
+          const dt = Math.min(48, Math.max(8, now - lastWheelT));
+          lastWheelT = now;
+          const maxStep = dt * MAX_SCROLL_PX_PER_MS;
+          const step = Math.sign(dy) * Math.min(Math.abs(dy), maxStep);
+          window.scrollBy(0, step);
+        }
+      }, { passive: false });
 
       let hasMoved = false;
       window.addEventListener('pointermove', e => {
@@ -1425,11 +3207,10 @@ ELEV 842 M</pre>
         my = e.clientY / window.innerHeight - .5;
       }, { passive: true });
 
-      // Solutions stats count-up
-      const sol = document.getElementById('sol');
+      const statsEl = document.getElementById('stats');
       const statEls = Array.from(document.querySelectorAll('.snum')).map(el => ({
         el,
-        target: parseFloat(el.dataset.target || '0'),
+        get target() { return parseFloat(el.dataset.target || '0'); },
         dec: parseInt(el.dataset.dec || '0', 10),
         comma: el.dataset.comma === '1'
       }));
@@ -1446,7 +3227,7 @@ ELEV 842 M</pre>
 
       function tickStats(now) {
         if (!statsStarted) {
-          if (sol.getBoundingClientRect().top <= window.innerHeight * 0.6) {
+          if (statsEl.getBoundingClientRect().top <= window.innerHeight * 0.92) {
             statsStarted = true;
             statsStartT = now;
           }
@@ -1461,28 +3242,22 @@ ELEV 842 M</pre>
       }
 
       function tick(now) {
-        const dt = Math.min(64, Math.max(1, now - lastT));
-        lastT = now;
-
         const denom = Math.max(1, story.offsetHeight - window.innerHeight);
-        const p = clamp(-story.getBoundingClientRect().top / denom);
-        sp += (p - sp) * (1 - Math.pow(.86, dt / 16.7));
-        if (Math.abs(p - sp) < .0002) sp = p;
+        // Lockstep progress: stops immediately when scrolling stops, no trailing inertia
+        sp = clamp(-story.getBoundingClientRect().top / denom);
 
         sx += (mx - sx) * .06;
         sy += (my - sy) * .06;
 
-        // Video scrub
-        const vp = ease(seg(sp, .05, .70));
+        // Constant linear speed during fly-in (no mid-flight acceleration spike)
+        const vp = seg(sp, .05, .70);
         want = Math.round(vp * (NF - 1));
         drawWant();
 
-        // Camera parallax + descent
         const camT = `translate3d(${-sx * 18}px, ${-sy * 12 + (1 - vp) * window.innerHeight * .06}px, 0) scale(${1 + .02 * (1 - vp)})`;
         cam.style.transform = camT;
         camF.style.transform = camT;
 
-        // Hand-off between high-res plates and canvas frame 0
         const ho = shown < 0 ? 0 : (shown === 0 ? seg(sp, .06, .105) : 1);
         const hoOp = 1 - ho;
         plate.style.opacity = String(hoOp);
@@ -1490,7 +3265,6 @@ ELEV 842 M</pre>
         camF.style.opacity = String(hoOp);
         camF.style.visibility = hoOp <= 0 ? 'hidden' : 'visible';
 
-        // Floating rock sprites fly past
         const fp = seg(sp, .02, .2);
         const fe = fp * fp;
         for (let i = 0; i < rocks.length; i++) {
@@ -1504,7 +3278,6 @@ ELEV 842 M</pre>
           }
         }
 
-        // Fog bank
         const fg = ease(seg(sp, .38, .47));
         if (fg <= 0) {
           fog.style.visibility = 'hidden';
@@ -1515,7 +3288,6 @@ ELEV 842 M</pre>
           fog.style.transform = `translate3d(${(fg - 1) * 18 + sx * -10}vw, ${sy * -6}px, 0)`;
         }
 
-        // L0 & L1 Hero
         const h = seg(sp, .02, .1);
         if (h >= 1) {
           l0.style.visibility = 'hidden';
@@ -1535,7 +3307,6 @@ ELEV 842 M</pre>
           hint.style.opacity = capOp;
         }
 
-        // L2 Vision
         const vIn = seg(sp, .16, .27);
         const vOut = seg(sp, .34, .42);
         if (vIn <= 0 || vOut >= 1) {
@@ -1557,7 +3328,6 @@ ELEV 842 M</pre>
           visP.style.transform = subT;
         }
 
-        // L3 Accounting & hotspots
         const aIn = seg(sp, .45, .55);
         const aOut = seg(sp, .63, .68);
         if (aIn <= 0 || aOut >= 1) {
@@ -1577,7 +3347,6 @@ ELEV 842 M</pre>
           }
         }
 
-        // L4 Station
         const sIn = seg(sp, .72, .82);
         const cIn = ease(seg(sp, .74, .86));
         if (sIn <= 0 && cIn <= 0) {
@@ -1591,11 +3360,11 @@ ELEV 842 M</pre>
           card.style.opacity = String(cIn);
           card.style.transform = `perspective(800px) translate3d(${sx * -14}px, ${(1 - cIn) * 60 + sy * -10}px, 0) rotateY(${sx * 8}deg) rotateX(${-sy * 8}deg)`;
 
-          cNum.textContent = String(Math.round(24 * seg(sp, .76, .9)));
+          cNum.textContent = String(Math.round(currentMatches.length * seg(sp, .76, .9)));
           const spT = seg(sp, .77, .92);
           spark.style.strokeDashoffset = String(sparkLen * (1 - spT));
-          spD1.setAttribute('opacity', String(clamp((spT - 0.38) / 0.1)));
-          spD2.setAttribute('opacity', String(clamp((spT - 0.66) / 0.1)));
+          spD1.setAttribute('opacity', String(clamp((spT - 0.35) / 0.1)));
+          spD2.setAttribute('opacity', String(clamp((spT - 0.70) / 0.1)));
           spD3.setAttribute('opacity', String(clamp((spT - 0.92) / 0.08)));
 
           for (let i = 0; i < feats.length; i++) {
@@ -1605,7 +3374,6 @@ ELEV 842 M</pre>
           }
         }
 
-        // Progress bar & stats
         progBar.style.transform = `scaleX(${sp})`;
         tickStats(now);
 

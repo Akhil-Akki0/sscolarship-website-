@@ -2,35 +2,67 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
   SCHOLARSHIPS,
-  distinctCountriesCount,
+  distinctRegionsCount,
   distinctFieldsCount,
   convertCgpaToPercent,
+  getScholarshipStatus,
+  toDirectoryEntries,
   matchScholarships,
+  searchScholarships,
   buildSparklineGeometry,
   type StudentProfile,
-} from './scholarships';
+} from './scholarships.ts';
 
-const demoProfile: StudentProfile = {
+const refDate = new Date('2026-11-20T00:00:00Z');
+
+const karnatakaProfile: StudentProfile = {
   citizenship: 'India',
-  currentLevel: 'Undergraduate',
+  state: 'Karnataka',
+  currentLevel: 'Class 12',
   field: 'Engineering & Technology',
-  percent: 82,
-  incomeRange: '2.5–5 lakh',
-  category: 'General',
+  percent: 84,
+  incomeRange: '1–2.5 lakh',
+  category: 'OBC',
   gender: 'Female',
-  destination: 'Abroad (any)',
-  applyingFor: 'Postgraduate',
+  destination: 'Karnataka (State & Central)',
+  applyingFor: 'Undergraduate',
 };
 
-test('dataset contains 20 valid official URLs with no placeholders', () => {
-  assert.equal(SCHOLARSHIPS.length, 20);
+test('catalog focuses on Karnataka & India with minimal Asia entries and zero fake URLs', () => {
+  assert.ok(SCHOLARSHIPS.length >= 20);
+  const kaCount = SCHOLARSHIPS.filter(s => s.region === 'Karnataka').length;
+  const inCount = SCHOLARSHIPS.filter(s => s.region === 'India').length;
+  const asiaCount = SCHOLARSHIPS.filter(s => s.region === 'Asia').length;
+
+  assert.ok(kaCount >= 10, 'Expected strong Karnataka scholarship coverage');
+  assert.ok(inCount >= 6, 'Expected All-India scholarship coverage');
+  assert.ok(asiaCount <= 4 && asiaCount >= 2, 'Expected compact Asia scholarship coverage');
+
   for (const s of SCHOLARSHIPS) {
     assert.ok(s.officialUrl.startsWith('https://'), `${s.id} must use https://`);
     assert.ok(!s.officialUrl.includes('#'), `${s.id} must not contain #`);
-    assert.ok(s.docs.length > 0, `${s.id} must have docs`);
+    assert.ok(!s.officialUrl.includes('buddy4study'), `${s.id} should use direct official portals`);
+    assert.match(s.deadlineDate, /^\d{4}-\d{2}-\d{2}$/, `${s.id} must have ISO deadlineDate`);
+    assert.ok(s.deadlineText.length > 3, `${s.id} must have human-readable deadlineText`);
+    assert.ok(s.docs.length > 0, `${s.id} must have docs checklist`);
   }
-  assert.ok(distinctCountriesCount(SCHOLARSHIPS) >= 6);
+  assert.ok(distinctRegionsCount(SCHOLARSHIPS) >= 4);
   assert.ok(distinctFieldsCount(SCHOLARSHIPS) >= 3);
+});
+
+test('getScholarshipStatus separates live vs pre_stopped schemes against current date', () => {
+  const ssp = SCHOLARSHIPS.find(s => s.id === 'ka-ssp-postmatric')!;
+  const vidyadhan = SCHOLARSHIPS.find(s => s.id === 'ka-vidyadhan')!;
+
+  const sspStatus = getScholarshipStatus(ssp, refDate);
+  assert.equal(sspStatus.status, 'live');
+  assert.ok((sspStatus.daysLeft ?? -1) > 0);
+  assert.match(sspStatus.badgeText, /^LIVE TO APPLY/);
+
+  const vidyadhanStatus = getScholarshipStatus(vidyadhan, refDate);
+  assert.equal(vidyadhanStatus.status, 'pre_stopped');
+  assert.ok((vidyadhanStatus.daysLeft ?? 0) < 0);
+  assert.match(vidyadhanStatus.badgeText, /^PRE-STOPPED/);
 });
 
 test('CGPA conversion multiplies by 9.5', () => {
@@ -38,43 +70,52 @@ test('CGPA conversion multiplies by 9.5', () => {
   assert.equal(convertCgpaToPercent(10), 95);
 });
 
-test('matcher enforces hard filters and ranks destination & field matches higher', () => {
-  const matches = matchScholarships(demoProfile);
-  assert.ok(matches.length >= 10);
-  // Scores sorted descending
-  for (let i = 1; i < matches.length; i++) {
-    assert.ok(matches[i - 1].score >= matches[i].score);
+test('matcher ranks Live Karnataka schemes above Pre-Stopped and respects eligibility', () => {
+  const matches = matchScholarships(karnatakaProfile, SCHOLARSHIPS, refDate);
+  assert.ok(matches.length >= 6);
+
+  // All live items appear before any pre_stopped item
+  let seenPreStopped = false;
+  for (const m of matches) {
+    if (m.status === 'pre_stopped') seenPreStopped = true;
+    if (seenPreStopped) {
+      assert.equal(m.status, 'pre_stopped', 'Live items must always sort ahead of pre-stopped');
+    }
   }
-  // Google scholarship (Engineering & Technology, Global, PG) should outrank India-only NSP for Abroad destination
-  const google = matches.find(m => m.scholarship.id === 'google');
-  const nsp = matches.find(m => m.scholarship.id === 'nsp');
-  assert.ok(google && nsp);
-  assert.ok(google.score > nsp.score);
 
-  // INSPIRE requires Science; Engineering & Technology student must be excluded
-  assert.equal(matches.find(m => m.scholarship.id === 'inspire'), undefined);
+  // Karnataka SSP & Vidyasiri & AICTE Pragati & FFE should match this OBC female Engineering UG profile
+  assert.ok(matches.some(m => m.scholarship.id === 'ka-ssp-postmatric' && m.status === 'live'));
+  assert.ok(matches.some(m => m.scholarship.id === 'ka-vidyasiri' && m.status === 'live'));
+  assert.ok(matches.some(m => m.scholarship.id === 'in-aicte-pragati' && m.status === 'live'));
+  assert.ok(matches.some(m => m.scholarship.id === 'in-ffe' && m.status === 'live'));
+
+  // SC/ST only prize money should not match OBC profile
+  assert.equal(matches.find(m => m.scholarship.id === 'ka-swd-prize'), undefined);
 });
 
-test('Prefer not to say does not exclude and adds Check yourself chip', () => {
-  const privateProfile: StudentProfile = {
-    ...demoProfile,
-    incomeRange: 'Prefer not to say',
-    category: 'Prefer not to say',
-    gender: 'Prefer not to say',
+test('Non-Karnataka Indian state excludes Karnataka-only domicile schemes', () => {
+  const mhProfile: StudentProfile = {
+    ...karnatakaProfile,
+    state: 'Maharashtra',
+    destination: 'All India',
   };
-  const matches = matchScholarships(privateProfile);
-  const nsp = matches.find(m => m.scholarship.id === 'nsp');
-  assert.ok(nsp);
-  assert.ok(nsp.checkYourself.includes('Income proof needed'));
+  const matches = matchScholarships(mhProfile, SCHOLARSHIPS, refDate);
+  assert.equal(matches.find(m => m.scholarship.id === 'ka-vidyasiri'), undefined);
+  assert.ok(matches.some(m => m.scholarship.id === 'in-aicte-pragati'));
 });
 
-test('low marks excludes high-cutoff merit scholarships', () => {
-  const lowMarks: StudentProfile = {
-    ...demoProfile,
-    percent: 45,
-  };
-  const matches = matchScholarships(lowMarks);
-  assert.equal(matches.length, 0);
+test('searchScholarships returns direct matches, related scholarships, and related queries', () => {
+  const dir = toDirectoryEntries(SCHOLARSHIPS, refDate);
+  const res = searchScholarships(dir, 'vidyasiri');
+
+  assert.ok(res.directMatches.some(m => m.scholarship.id === 'ka-vidyasiri'));
+  assert.ok(res.relatedScholarships.length >= 1, 'Expected related scholarships alongside direct match');
+  assert.ok(
+    res.relatedScholarships.every(m => m.scholarship.id !== 'ka-vidyasiri'),
+    'Related scholarships should not duplicate direct matches'
+  );
+  assert.ok(res.relatedQueries.length >= 3);
+  assert.ok(res.relatedQueries.some(q => q.toLowerCase().includes('karnataka')));
 });
 
 test('sparkline geometry rescales top 8 scores into 220x70 SVG coordinates', () => {

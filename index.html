@@ -1346,6 +1346,204 @@
       color:#5a6b5f;
     }
 
+    /* Live / Pre-stopped status badges & animations */
+    .status-pill{
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      height:22px;
+      padding:0 9px;
+      border-radius:3px;
+      font-family:var(--mono);
+      font-size:10px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      font-weight:500;
+    }
+    .status-pill.live{
+      background:#e7f9c2;
+      color:#143813;
+      border:1px solid rgba(79,138,18,.25);
+    }
+    .status-pill.pre_stopped{
+      background:#ecefee;
+      color:#4b574f;
+      border:1px solid rgba(16,41,26,.14);
+    }
+    .live-dot{
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      background:#2e8b16;
+      position:relative;
+      flex-shrink:0;
+      animation:livePulse 1.8s ease-out infinite;
+    }
+    @keyframes livePulse{
+      0%{box-shadow:0 0 0 0 rgba(46,139,22,.65)}
+      70%{box-shadow:0 0 0 8px rgba(46,139,22,0)}
+      100%{box-shadow:0 0 0 0 rgba(46,139,22,0)}
+    }
+
+    .status-tabs{
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+      align-items:center;
+    }
+    .stab{
+      height:34px;
+      padding:0 12px;
+      border-radius:6px;
+      border:1px solid rgba(16,41,26,.14);
+      background:#fff;
+      color:var(--ink2);
+      font-family:var(--mono);
+      font-size:10.5px;
+      letter-spacing:.11em;
+      text-transform:uppercase;
+      cursor:pointer;
+      transition:background .2s,border-color .2s,color .2s,transform .18s;
+    }
+    .stab:hover{transform:translateY(-1px)}
+    .stab[aria-pressed="true"]{
+      background:var(--ink);
+      border-color:var(--ink);
+      color:var(--lime);
+    }
+
+    .related-bar{
+      display:flex;
+      flex-wrap:wrap;
+      align-items:center;
+      gap:8px;
+      margin:-10px 0 22px;
+      padding:10px 14px;
+      border-radius:10px;
+      background:var(--paper);
+      border:1px solid #e3e8e3;
+    }
+    .related-lbl{
+      font-family:var(--mono);
+      font-size:10px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:#4a5a4f;
+      margin-right:4px;
+    }
+    .rquery-btn{
+      height:28px;
+      padding:0 11px;
+      border-radius:4px;
+      border:1px solid rgba(16,41,26,.16);
+      background:#fff;
+      color:var(--ink);
+      font-family:var(--mono);
+      font-size:10.5px;
+      letter-spacing:.08em;
+      cursor:pointer;
+      opacity:0;
+      transform:translateY(6px);
+      animation:chipPop .35s cubic-bezier(.2,.8,.2,1) forwards;
+      animation-delay:calc(var(--ci, 0) * 40ms);
+      transition:background .2s,border-color .2s,transform .2s;
+    }
+    .rquery-btn:hover{
+      background:var(--lime);
+      border-color:var(--lime2);
+      transform:translateY(-1px);
+    }
+    @keyframes chipPop{
+      to{opacity:1;transform:none}
+    }
+
+    .rcard{
+      opacity:0;
+      transform:translateY(14px);
+      animation:cardRise .48s cubic-bezier(.2,.8,.2,1) forwards;
+      animation-delay:calc(var(--i, 0) * 45ms);
+    }
+    .rcard.is-stopped{
+      background:#fbfcfa;
+      border-color:#dde2dd;
+    }
+    @keyframes cardRise{
+      to{opacity:1;transform:translateY(0)}
+    }
+
+    .related-section{
+      margin-top:34px;
+      padding-top:26px;
+      border-top:1px solid #e0e5e0;
+    }
+    .related-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:16px;
+      flex-wrap:wrap;
+    }
+    .related-head h3{
+      font-size:20px;
+      font-weight:500;
+      letter-spacing:-.025em;
+    }
+
+    .web-panel{
+      margin-top:22px;
+      padding:20px 22px;
+      border-radius:12px;
+      border:1px solid rgba(16,41,26,.16);
+      background:var(--paper);
+      animation:cardRise .4s cubic-bezier(.2,.8,.2,1) forwards;
+    }
+    .web-panel-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:10px;
+    }
+    .web-summary{
+      font-size:14px;
+      line-height:1.55;
+      color:var(--ink2);
+      white-space:pre-line;
+      margin-bottom:14px;
+    }
+    .web-error{
+      font-size:13.5px;
+      color:#9f1239;
+      background:#fff1f2;
+      border:1px solid #fecdd3;
+      border-radius:8px;
+      padding:12px 14px;
+    }
+
+    .skel-card{
+      height:260px;
+      border-radius:12px;
+      border:1px solid #e0e5e0;
+      background:linear-gradient(100deg,#f6f7f4 25%,#e9ede9 45%,#f6f7f4 65%);
+      background-size:200% 100%;
+      animation:shimmer 1.2s linear infinite;
+    }
+    @keyframes shimmer{
+      to{background-position:-200% 0}
+    }
+
+    .reveal-anim{
+      opacity:0;
+      transform:translateY(22px);
+      transition:opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1);
+    }
+    .reveal-anim.in{
+      opacity:1;
+      transform:none;
+    }
+
     .stats{
       display:grid;
       grid-template-columns:repeat(4,1fr);
@@ -1560,20 +1758,20 @@ UPDATED  REGULARLY</pre>
           </div>
 
           <div class="card" id="card">
-            <h4>Scholarships matched<br />for you</h4>
-            <p class="note">Your profile · live</p>
+            <h4 id="cardTitle">Live scholarships<br />ready to apply</h4>
+            <p class="note" id="cardNote">Karnataka · India · Asia</p>
             <div class="num-row">
               <span id="cNum">0</span>
-              <span class="unit">matches</span>
+              <span class="unit">live</span>
             </div>
-            <span class="chip tag" id="topMatchTag">Top match 96%</span>
-            <svg width="220" height="70" viewBox="0 0 220 70" aria-label="Top 8 match scores sparkline">
+            <span class="chip tag" id="topMatchTag">Live directory</span>
+            <svg width="220" height="70" viewBox="0 0 220 70" aria-label="Scholarship match scores sparkline">
               <polyline id="spark" points="0,60 30,55 60,57 90,44 120,46 150,30 180,24 214,10" fill="none" stroke="#c6f35c" stroke-width="1.6" />
               <circle id="spD1" cx="90" cy="44" r="2.4" fill="#fff" opacity="0" />
               <circle id="spD2" cx="150" cy="30" r="2.4" fill="#fff" opacity="0" />
               <circle id="spD3" cx="214" cy="10" r="3.4" fill="#c6f35c" opacity="0" />
             </svg>
-            <p class="qtr">Top 8 matches</p>
+            <p class="qtr">Top 8 schemes</p>
           </div>
 
           <div class="feats" id="feats">
@@ -1584,12 +1782,12 @@ UPDATED  REGULARLY</pre>
             </button>
             <button type="button" class="feat">
               <span>02</span>
-              <span>Smart eligibility matching</span>
+              <span>Karnataka, India &amp; Asia matching</span>
               <span aria-hidden="true">→</span>
             </button>
             <button type="button" class="feat">
               <span>03</span>
-              <span>Deadline and document checklist</span>
+              <span>Live deadlines &amp; pre-stopped tracking</span>
               <span aria-hidden="true">→</span>
             </button>
             <button type="button" class="feat">
@@ -1599,7 +1797,7 @@ UPDATED  REGULARLY</pre>
             </button>
             <button type="button" class="feat">
               <span>05</span>
-              <span>Save and compare scholarships</span>
+              <span>Related search &amp; saved shortlist</span>
               <span aria-hidden="true">→</span>
             </button>
           </div>
@@ -1610,25 +1808,25 @@ UPDATED  REGULARLY</pre>
     </section>
 
     <section id="sol" aria-label="Scholarships and student matcher">
-      <div class="sol-head">
+      <div class="sol-head reveal-anim">
         <div>
-          <span class="chip">Browse by type</span>
-          <h2>Scholarships for every kind of student</h2>
+          <span class="chip">Karnataka &amp; Regional Focus</span>
+          <h2>Scholarships with verified deadlines</h2>
         </div>
-        <p>Merit, need-based, government and study-abroad funding in one place — each with the official source behind it, so you always apply on the real website.</p>
+        <p>Focused on Karnataka state portals, All-India central/trust schemes, and select Asia fellowships — showing live windows, exact deadlines, pre-stopped schemes, and official portals only.</p>
       </div>
 
-      <div class="cards">
+      <div class="cards reveal-anim">
         <button type="button" class="scard" data-filter-types="merit">
           <div class="bg" style="background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 800'%3E%3Cdefs%3E%3ClinearGradient id='g1' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23233b2b'/%3E%3Cstop offset='.55' stop-color='%23162a1d'/%3E%3Cstop offset='1' stop-color='%230d1911'/%3E%3C/linearGradient%3E%3CradialGradient id='l1' cx='.25' cy='.18' r='.7'%3E%3Cstop offset='0' stop-color='%23e7ebe8' stop-opacity='.38'/%3E%3Cstop offset='1' stop-color='%23162a1d' stop-opacity='0'/%3E%3C/radialGradient%3E%3ClinearGradient id='pg' x1='0' y1='0' x2='1' y2='0'%3E%3Cstop offset='0' stop-color='%23f6f7f4'/%3E%3Cstop offset='1' stop-color='%23d7ddd8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='800' height='800' fill='url(%23g1)'/%3E%3Crect width='800' height='800' fill='url(%23l1)'/%3E%3Cg opacity='.16'%3E%3Crect x='40' y='40' width='210' height='340' rx='6' fill='%23dfe3e0'/%3E%3Crect x='270' y='40' width='210' height='340' rx='6' fill='%23dfe3e0'/%3E%3C/g%3E%3Crect x='0' y='610' width='800' height='190' fill='%23111f16'/%3E%3Cellipse cx='400' cy='615' rx='260' ry='22' fill='%2309120c' opacity='.7'/%3E%3Cg transform='translate(175 195)'%3E%3Crect x='20' y='355' width='410' height='62' rx='8' fill='%232c4434'/%3E%3Crect x='28' y='365' width='388' height='42' rx='4' fill='url(%23pg)'/%3E%3Crect x='20' y='355' width='410' height='12' rx='4' fill='%233d5c47'/%3E%3Crect x='42' y='286' width='368' height='68' rx='7' fill='%238c5a3c'/%3E%3Crect x='50' y='296' width='344' height='48' rx='3' fill='url(%23pg)'/%3E%3Crect x='42' y='286' width='368' height='12' rx='4' fill='%23a66d4b'/%3E%3Crect x='64' y='224' width='326' height='61' rx='7' fill='%231d3927'/%3E%3Crect x='74' y='234' width='302' height='41' rx='3' fill='url(%23pg)'/%3E%3Crect x='64' y='224' width='326' height='11' rx='4' fill='%23c6f35c' opacity='.85'/%3E%3Crect x='82' y='162' width='290' height='61' rx='7' fill='%234b6352'/%3E%3Crect x='92' y='172' width='268' height='41' rx='3' fill='url(%23pg)'/%3E%3Crect x='82' y='162' width='290' height='11' rx='4' fill='%2363826c'/%3E%3Crect x='102' y='108' width='246' height='53' rx='6' fill='%2310291a'/%3E%3Crect x='112' y='117' width='224' height='35' rx='3' fill='url(%23pg)'/%3E%3Crect x='102' y='108' width='246' height='10' rx='4' fill='%23a9dd3a'/%3E%3Cpath d='M255 150v75l-12-10-12 10v-75z' fill='%23c6f35c'/%3E%3C/g%3E%3Cg transform='translate(470 500) rotate(-6)'%3E%3Crect width='185' height='118' rx='6' fill='%23f6f7f4'/%3E%3Cline x1='92' y1='6' x2='92' y2='112' stroke='%23c5cec7' stroke-width='2'/%3E%3Cpath d='M18 28h58M18 44h52M18 60h58M18 76h42M110 28h56M110 44h50M110 60h56M110 76h40' stroke='%239aa89e' stroke-width='3' stroke-linecap='round'/%3E%3C/g%3E%3C/svg%3E&quot;);background-position:center;background-size:cover"></div>
           <div class="ov"></div>
           <div class="top">
-            <span class="mono">[Merit &amp; talent]</span>
+            <span class="mono">[Merit &amp; rank awards]</span>
             <span class="arr" aria-hidden="true">→</span>
           </div>
           <div class="bot">
             <h3>Merit and<br />achievement awards</h3>
-            <p>For students with strong marks, test scores or special talents. Match by percentage and field.</p>
+            <p>Karnataka DCE, SWD Prize Money, FFE, and DST INSPIRE schemes based on marks and rank.</p>
           </div>
         </button>
 
@@ -1636,12 +1834,12 @@ UPDATED  REGULARLY</pre>
           <div class="bg" style="background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 800'%3E%3Cdefs%3E%3ClinearGradient id='bg2' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23284231'/%3E%3Cstop offset='.6' stop-color='%23182b1f'/%3E%3Cstop offset='1' stop-color='%230d1911'/%3E%3C/linearGradient%3E%3ClinearGradient id='ray' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23f6f7f4' stop-opacity='.34'/%3E%3Cstop offset='1' stop-color='%23f6f7f4' stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='800' height='800' fill='url(%23bg2)'/%3E%3Cpath d='M120 70h560v540H120z' fill='%23132419' stroke='%2333523e' stroke-width='8'/%3E%3Crect x='120' y='215' width='560' height='14' fill='%23385743'/%3E%3Crect x='120' y='370' width='560' height='14' fill='%23385743'/%3E%3Crect x='120' y='525' width='560' height='14' fill='%23385743'/%3E%3Cg%3E%3Crect x='145' y='95' width='34' height='120' rx='3' fill='%234c7058'/%3E%3Crect x='183' y='110' width='28' height='105' rx='3' fill='%23c6f35c'/%3E%3Crect x='215' y='88' width='38' height='127' rx='3' fill='%238c5a3c'/%3E%3Crect x='258' y='105' width='30' height='110' rx='3' fill='%23d7ddd8'/%3E%3Crect x='293' y='92' width='36' height='123' rx='3' fill='%232c4434'/%3E%3Crect x='345' y='108' width='32' height='107' rx='3' fill='%2363826c' transform='rotate(-8 345 215)'/%3E%3Crect x='430' y='96' width='35' height='119' rx='3' fill='%23a9dd3a'/%3E%3Crect x='470' y='86' width='40' height='129' rx='3' fill='%233d5c47'/%3E%3Crect x='516' y='104' width='30' height='111' rx='3' fill='%23e7ebe8'/%3E%3Crect x='552' y='92' width='38' height='123' rx='3' fill='%237a5238'/%3E%3Crect x='596' y='102' width='34' height='113' rx='3' fill='%234c7058'/%3E%3Crect x='150' y='246' width='38' height='124' rx='3' fill='%23d7ddd8'/%3E%3Crect x='194' y='262' width='30' height='108' rx='3' fill='%232c4434'/%3E%3Crect x='230' y='240' width='40' height='130' rx='3' fill='%23597d64'/%3E%3Crect x='276' y='258' width='32' height='112' rx='3' fill='%23c6f35c'/%3E%3Crect x='314' y='248' width='36' height='122' rx='3' fill='%238c5a3c'/%3E%3Crect x='385' y='255' width='32' height='115' rx='3' fill='%234b6352'/%3E%3Crect x='423' y='242' width='38' height='128' rx='3' fill='%23e7ebe8'/%3E%3Crect x='467' y='260' width='30' height='110' rx='3' fill='%233d5c47'/%3E%3Crect x='503' y='245' width='42' height='125' rx='3' fill='%23a9dd3a'/%3E%3Crect x='551' y='258' width='34' height='112' rx='3' fill='%2363826c'/%3E%3Crect x='591' y='242' width='36' height='128' rx='3' fill='%237a5238'/%3E%3Crect x='152' y='405' width='42' height='120' rx='3' fill='%233d5c47'/%3E%3Crect x='200' y='396' width='34' height='129' rx='3' fill='%238c5a3c'/%3E%3Crect x='240' y='412' width='32' height='113' rx='3' fill='%23d7ddd8'/%3E%3Crect x='278' y='398' width='38' height='127' rx='3' fill='%23c6f35c'/%3E%3Crect x='445' y='404' width='36' height='121' rx='3' fill='%234c7058'/%3E%3Crect x='487' y='394' width='40' height='131' rx='3' fill='%23e7ebe8'/%3E%3Crect x='533' y='410' width='34' height='115' rx='3' fill='%232c4434'/%3E%3Crect x='573' y='400' width='38' height='125' rx='3' fill='%23a9dd3a'/%3E%3C/g%3E%3Cpolygon points='80,0 440,0 760,640 240,640' fill='url(%23ray)'/%3E%3Crect x='0' y='608' width='800' height='192' fill='%230d1911'/%3E%3Crect x='245' y='562' width='310' height='46' rx='6' fill='%23c6f35c'/%3E%3Crect x='255' y='570' width='288' height='30' rx='3' fill='%23f6f7f4'/%3E%3C/svg%3E&quot;);background-position:center;background-size:cover"></div>
           <div class="ov"></div>
           <div class="top">
-            <span class="mono">[Need-based &amp; government]</span>
+            <span class="mono">[Karnataka &amp; Govt. aid]</span>
             <span class="arr" aria-hidden="true">→</span>
           </div>
           <div class="bot">
-            <h3>Government and<br />need-based aid</h3>
-            <p>Fee waivers and stipends based on family income and category. Starts from the official national portal.</p>
+            <h3>Karnataka SSP &amp;<br />need-based aid</h3>
+            <p>SSP Post-Matric, Vidyasiri hostel aid, Raitha Vidya Nidhi, KLWB, DOM, and NSP fee support.</p>
           </div>
         </button>
 
@@ -1649,23 +1847,23 @@ UPDATED  REGULARLY</pre>
           <div class="bg" style="background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 800'%3E%3Cdefs%3E%3ClinearGradient id='sky3' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23c5cec7'/%3E%3Cstop offset='.55' stop-color='%2356705d'/%3E%3Cstop offset='1' stop-color='%2310291a'/%3E%3C/linearGradient%3E%3ClinearGradient id='pg3' x1='0' y1='0' x2='1' y2='0'%3E%3Cstop offset='0' stop-color='%23f6f7f4'/%3E%3Cstop offset='1' stop-color='%23d7ddd8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='800' height='800' fill='url(%23sky3)'/%3E%3Cpath d='M0 560h800v240H0z' fill='%2314261a'/%3E%3Cpath d='M90 120a170 170 0 0 1 340 0v320H90z' fill='%23e7ebe8' opacity='.22'/%3E%3Cpath d='M430 140a150 150 0 0 1 300 0v300H430z' fill='%23e7ebe8' opacity='.16'/%3E%3Cg transform='translate(465 250)'%3E%3Ccircle cx='120' cy='120' r='105' fill='%232c4434' stroke='%23c6f35c' stroke-width='5'/%3E%3Cellipse cx='120' cy='120' rx='52' ry='105' fill='none' stroke='%23a9dd3a' stroke-width='3' opacity='.7'/%3E%3Cellipse cx='120' cy='120' rx='105' ry='42' fill='none' stroke='%23a9dd3a' stroke-width='3' opacity='.7'/%3E%3Cline x1='15' y1='120' x2='225' y2='120' stroke='%23e7ebe8' stroke-width='2.5' opacity='.65'/%3E%3Cpath d='M120 225v48M78 273h84' stroke='%23c6f35c' stroke-width='6' stroke-linecap='round'/%3E%3C/g%3E%3Cg transform='translate(110 335)'%3E%3Crect x='0' y='175' width='355' height='54' rx='7' fill='%232c4434'/%3E%3Crect x='10' y='184' width='334' height='36' rx='3' fill='url(%23pg3)'/%3E%3Crect x='0' y='175' width='355' height='11' rx='4' fill='%234c7058'/%3E%3Crect x='22' y='118' width='310' height='56' rx='7' fill='%238c5a3c'/%3E%3Crect x='32' y='127' width='290' height='38' rx='3' fill='url(%23pg3)'/%3E%3Crect x='22' y='118' width='310' height='11' rx='4' fill='%23a66d4b'/%3E%3Crect x='46' y='62' width='264' height='55' rx='7' fill='%2310291a'/%3E%3Crect x='56' y='71' width='242' height='37' rx='3' fill='url(%23pg3)'/%3E%3Crect x='46' y='62' width='264' height='11' rx='4' fill='%23c6f35c'/%3E%3Crect x='76' y='12' width='204' height='49' rx='6' fill='%233d5c47'/%3E%3Crect x='86' y='20' width='184' height='33' rx='3' fill='url(%23pg3)'/%3E%3Crect x='76' y='12' width='204' height='10' rx='4' fill='%23a9dd3a'/%3E%3C/g%3E%3C/svg%3E&quot;);background-position:center;background-size:cover"></div>
           <div class="ov"></div>
           <div class="top">
-            <span class="mono">[Study abroad]</span>
+            <span class="mono">[Asia fellowships]</span>
             <span class="arr" aria-hidden="true">→</span>
           </div>
           <div class="bot">
-            <h3>International<br />scholarships</h3>
-            <p>Fully and partly funded programmes across countries. Filter by destination and degree level.</p>
+            <h3>Select Asia<br />scholarships</h3>
+            <p>Focused regional fellowships in Singapore, South Korea, and Japan alongside Karnataka aid.</p>
           </div>
         </button>
       </div>
 
       <!-- D. Student Profile Form -->
-      <section id="find" aria-label="Student profile form">
+      <section id="find" class="reveal-anim" aria-label="Student profile form">
         <div class="sec-head">
           <div>
             <span class="chip">Step 01 · Your profile</span>
-            <h2>Tell us about you</h2>
-            <p class="sec-sub">Only used to match. Nothing is stored or sent anywhere.</p>
+            <h2>Enter your details for live scholarships</h2>
+            <p class="sec-sub">Matched on the SZ backend to show live schemes you can apply for now, deadlines, and pre-stopped cycles.</p>
           </div>
         </div>
 
@@ -1673,37 +1871,32 @@ UPDATED  REGULARLY</pre>
           <div class="form-grid">
             <div class="field">
               <label for="fName">Name <span class="opt">(Optional)</span></label>
-              <input id="fName" name="name" type="text" placeholder="e.g. Ananya Sharma" autocomplete="off" />
+              <input id="fName" name="name" type="text" placeholder="e.g. Kavya Gowda" autocomplete="off" />
               <span class="ferr" id="err-name"></span>
             </div>
 
             <div class="field" data-req="age">
               <label for="fAge">Age</label>
-              <input id="fAge" name="age" type="number" min="12" max="65" placeholder="e.g. 20" required />
+              <input id="fAge" name="age" type="number" min="12" max="65" placeholder="e.g. 19" required />
               <span class="ferr" id="err-age"></span>
             </div>
 
             <div class="field" data-req="citizenship">
               <label for="fCitizen">Country of citizenship</label>
               <select id="fCitizen" name="citizenship" required>
-                <option value="">Select citizenship</option>
-                <option value="India">India</option>
-                <option value="United States">United States</option>
-                <option value="United Kingdom">United Kingdom</option>
-                <option value="Germany">Germany</option>
-                <option value="Japan">Japan</option>
-                <option value="China">China</option>
-                <option value="South Korea">South Korea</option>
-                <option value="Canada">Canada</option>
-                <option value="Australia">Australia</option>
+                <option value="India" selected>India</option>
                 <option value="Other">Other</option>
               </select>
               <span class="ferr" id="err-citizenship"></span>
             </div>
 
             <div class="field">
-              <label for="fState">State / region <span class="opt">(Optional)</span></label>
-              <input id="fState" name="state" type="text" placeholder="e.g. Maharashtra" autocomplete="off" />
+              <label for="fState">State / region</label>
+              <select id="fState" name="state">
+                <option value="Karnataka" selected>Karnataka (Primary Focus)</option>
+                <option value="Other Indian State">Other Indian State</option>
+                <option value="Outside India">Outside India</option>
+              </select>
               <span class="ferr" id="err-state"></span>
             </div>
 
@@ -1711,9 +1904,9 @@ UPDATED  REGULARLY</pre>
               <label for="fLevel">Current education level</label>
               <select id="fLevel" name="currentLevel" required>
                 <option value="">Select current level</option>
-                <option value="Class 10">Class 10</option>
-                <option value="Class 12">Class 12</option>
-                <option value="Diploma">Diploma</option>
+                <option value="Class 10">Class 10 (SSLC)</option>
+                <option value="Class 12">Class 12 (2nd PUC)</option>
+                <option value="Diploma">Diploma / ITI</option>
                 <option value="Undergraduate">Undergraduate</option>
                 <option value="Postgraduate">Postgraduate</option>
                 <option value="PhD">PhD</option>
@@ -1725,12 +1918,12 @@ UPDATED  REGULARLY</pre>
               <label for="fApplying">Degree you are applying for</label>
               <select id="fApplying" name="applyingFor" required>
                 <option value="">Select target degree</option>
-                <option value="Class 10">Class 10</option>
-                <option value="Class 12">Class 12</option>
-                <option value="Diploma">Diploma</option>
-                <option value="Undergraduate">Undergraduate</option>
-                <option value="Postgraduate">Postgraduate</option>
-                <option value="PhD">PhD</option>
+                <option value="Class 10">Class 10 (SSLC)</option>
+                <option value="Class 12">Class 12 (PUC)</option>
+                <option value="Diploma">Diploma / Polytechnic</option>
+                <option value="Undergraduate">Undergraduate (BE / BSc / BA / BCom / MBBS)</option>
+                <option value="Postgraduate">Postgraduate (ME / MTech / MSc / MA / MBA)</option>
+                <option value="PhD">PhD / Research</option>
               </select>
               <span class="ferr" id="err-applyingFor"></span>
             </div>
@@ -1769,11 +1962,11 @@ UPDATED  REGULARLY</pre>
               <label for="fIncome">Annual family income range</label>
               <select id="fIncome" name="incomeRange" required>
                 <option value="">Select income range</option>
-                <option value="Below 1 lakh">Below ₹1 lakh (~under $1,200 USD)</option>
-                <option value="1–2.5 lakh">₹1–2.5 lakh (~$1,200–$3,000 USD)</option>
-                <option value="2.5–5 lakh">₹2.5–5 lakh (~$3,000–$6,000 USD)</option>
-                <option value="5–8 lakh">₹5–8 lakh (~$6,000–$9,600 USD)</option>
-                <option value="Above 8 lakh">Above ₹8 lakh (~$9,600+ USD)</option>
+                <option value="Below 1 lakh">Below ₹1 lakh</option>
+                <option value="1–2.5 lakh">₹1–2.5 lakh</option>
+                <option value="2.5–5 lakh">₹2.5–5 lakh</option>
+                <option value="5–8 lakh">₹5–8 lakh</option>
+                <option value="Above 8 lakh">Above ₹8 lakh</option>
                 <option value="Prefer not to say">Prefer not to say</option>
               </select>
               <span class="ferr" id="err-incomeRange"></span>
@@ -1784,7 +1977,7 @@ UPDATED  REGULARLY</pre>
               <select id="fCategory" name="category" required>
                 <option value="">Select category</option>
                 <option value="General">General</option>
-                <option value="OBC">OBC</option>
+                <option value="OBC">OBC (Cat-1 / 2A / 2B / 3A / 3B)</option>
                 <option value="SC">SC</option>
                 <option value="ST">ST</option>
                 <option value="EWS">EWS</option>
@@ -1810,7 +2003,7 @@ UPDATED  REGULARLY</pre>
               <label for="fDisability">Person with disability <span class="opt">(Optional)</span></label>
               <select id="fDisability" name="disability">
                 <option value="No">No</option>
-                <option value="Yes">Yes</option>
+                <option value="Yes">Yes (40%+ UDID)</option>
                 <option value="Prefer not to say">Prefer not to say</option>
               </select>
               <span class="ferr" id="err-disability"></span>
@@ -1819,95 +2012,113 @@ UPDATED  REGULARLY</pre>
             <div class="field" data-req="destination" style="grid-column:1/-1">
               <label for="fDest">Where do you want to study</label>
               <select id="fDest" name="destination" required>
-                <option value="">Select destination</option>
-                <option value="India">India</option>
-                <option value="Abroad (any)">Abroad (any)</option>
-                <option value="United States">United States</option>
-                <option value="United Kingdom">United Kingdom</option>
-                <option value="Germany">Germany</option>
-                <option value="Europe">Europe</option>
-                <option value="Japan">Japan</option>
-                <option value="China">China</option>
-                <option value="South Korea">South Korea</option>
+                <option value="Karnataka (State & Central)" selected>Karnataka (State &amp; Central Schemes)</option>
+                <option value="All India">All India</option>
+                <option value="Asia (Japan / Korea / Singapore)">Asia (Japan / South Korea / Singapore)</option>
+                <option value="Japan (Asia)">Japan (Asia)</option>
+                <option value="South Korea (Asia)">South Korea (Asia)</option>
+                <option value="Singapore (Asia)">Singapore (Asia)</option>
               </select>
               <span class="ferr" id="err-destination"></span>
             </div>
           </div>
 
           <div class="form-actions">
-            <button type="submit" class="submit-btn">
-              <span>FIND MY SCHOLARSHIPS</span>
+            <button type="submit" class="submit-btn" id="submitProfileBtn">
+              <span>FIND LIVE SCHOLARSHIPS</span>
               <span class="sq" aria-hidden="true">›</span>
             </button>
-            <button type="button" id="aiSearchBtn" class="ai-btn" hidden>SEARCH THE WEB FOR MORE</button>
+            <button type="button" id="aiSearchBtn" class="ai-btn">CHECK LIVE WEB UPDATES</button>
           </div>
           <p class="privacy-note" id="privacyNote">
-            Your answers stay in memory on this page only. Nothing is saved or sent anywhere.
+            Processed on the SZ backend against official Karnataka, India, and Asia portals. Zero fake reviews, ratings, or middleman links.
           </p>
         </form>
       </section>
 
       <!-- E. Results -->
-      <section id="results" aria-label="Matched scholarships">
+      <section id="results" class="reveal-anim" aria-label="Matched scholarships">
         <div class="sec-head">
           <div>
-            <span class="chip" id="resModeChip">Sample matches</span>
-            <h2>Your matched scholarships</h2>
-            <p class="sec-sub" id="resSubtitle">Showing sample matches for an Undergraduate Engineering student — submit your profile above to personalise.</p>
+            <span class="chip" id="resModeChip">Verified directory</span>
+            <h2>Live &amp; pre-stopped scholarships</h2>
+            <p class="sec-sub" id="resSubtitle">Loading verified Karnataka, India &amp; Asia schemes with deadlines from backend...</p>
+          </div>
+          <div class="status-tabs" role="group" aria-label="Filter by application window status">
+            <button type="button" class="stab" data-status="all" id="stAll" aria-pressed="true">All (0)</button>
+            <button type="button" class="stab" data-status="live" id="stLive" aria-pressed="false">Live to Apply (0)</button>
+            <button type="button" class="stab" data-status="pre_stopped" id="stStopped" aria-pressed="false">Pre-Stopped (0)</button>
           </div>
         </div>
 
         <div class="toolbar">
           <div class="toolbar-left">
             <label for="resSearch" class="mono" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Search scholarships</label>
-            <input id="resSearch" class="search-in" type="search" placeholder="Search name, provider or field..." />
+            <input id="resSearch" class="search-in" type="search" placeholder="Search SSP, Vidyasiri, OBC, Engineering..." />
 
             <div class="type-pills" role="group" aria-label="Filter by scholarship type">
               <button type="button" class="tpill" data-type="all" aria-pressed="true">All</button>
+              <button type="button" class="tpill" data-type="government" aria-pressed="false">Government</button>
               <button type="button" class="tpill" data-type="merit" aria-pressed="false">Merit</button>
               <button type="button" class="tpill" data-type="need" aria-pressed="false">Need-based</button>
-              <button type="button" class="tpill" data-type="government" aria-pressed="false">Government</button>
-              <button type="button" class="tpill" data-type="international" aria-pressed="false">International</button>
+              <button type="button" class="tpill" data-type="international" aria-pressed="false">Asia</button>
             </div>
           </div>
 
           <div class="toolbar-right">
-            <label for="resDestFilter" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Filter by destination</label>
+            <label for="resDestFilter" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Filter by region</label>
             <select id="resDestFilter" class="tool-sel">
-              <option value="all">All destinations</option>
+              <option value="all">All regions</option>
+              <option value="Karnataka">Karnataka</option>
+              <option value="India">India (National)</option>
+              <option value="Asia">Asia (Regional)</option>
             </select>
 
             <label for="resSort" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Sort results</label>
             <select id="resSort" class="tool-sel">
-              <option value="best">Best match</option>
-              <option value="amount">Highest amount</option>
-              <option value="closing">Closing soon</option>
+              <option value="best">Live &amp; Best Match</option>
+              <option value="closing">Closing Soonest</option>
+              <option value="amount">Highest Grant Tier</option>
             </select>
 
             <button type="button" id="savedToggle" class="saved-toggle" aria-pressed="false">Saved (0)</button>
           </div>
         </div>
 
+        <div class="related-bar" id="relatedQueryBar" aria-label="Related searches">
+          <span class="related-lbl">Related searches:</span>
+          <div id="relatedQueryChips" style="display:flex;flex-wrap:wrap;gap:6px"></div>
+        </div>
+
         <div id="resultsList" class="results-grid"></div>
-        <div id="webResultsList" class="results-grid" style="margin-top:16px" hidden></div>
+
+        <div id="relatedSection" class="related-section" hidden>
+          <div class="related-head">
+            <h3>Related scholarships for your search</h3>
+            <span class="chip" id="relatedCountChip">0 related</span>
+          </div>
+          <div id="relatedResultsList" class="results-grid"></div>
+        </div>
+
+        <div id="webResultsPanel" class="web-panel" hidden></div>
 
         <p class="portal-notice">
-          SZ does not take applications or documents. You apply directly on each official website. Always confirm eligibility and deadlines there, as they change every year.
+          SZ does not collect fees, applications, or fake reviews. You apply directly on each official Karnataka, Indian government, or foundation portal and confirm exact annual dates there.
         </p>
       </section>
 
       <div class="stats" id="stats">
         <div class="stat">
-          <div class="snum" id="statTotal" data-target="20" data-dec="0" data-comma="1">0</div>
-          <div class="slbl">Scholarships listed</div>
+          <div class="snum" id="statTotal" data-target="23" data-dec="0" data-comma="1">0</div>
+          <div class="slbl">Verified schemes</div>
         </div>
         <div class="stat">
-          <div class="snum" id="statCountries" data-target="8" data-dec="0" data-comma="0">0</div>
-          <div class="slbl">Countries covered</div>
+          <div class="snum" id="statLive" data-target="17" data-dec="0" data-comma="0">0</div>
+          <div class="slbl">Live to apply</div>
         </div>
         <div class="stat">
-          <div class="snum" id="statFields" data-target="3" data-dec="0" data-comma="0">0</div>
-          <div class="slbl">Fields of study</div>
+          <div class="snum" id="statKarnataka" data-target="12" data-dec="0" data-comma="0">0</div>
+          <div class="slbl">Karnataka schemes</div>
         </div>
         <div class="stat">
           <div class="snum" data-target="100" data-dec="0" data-comma="0">0</div>
@@ -1919,583 +2130,33 @@ UPDATED  REGULARLY</pre>
 
   <script>
     (() => {
-      // Optional Gemini Search Grounding key (empty by default; no UI key input)
-      const GEMINI_API_KEY = '';
-
       const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
       const seg = (p, a, b) => clamp((p - a) / (b - a));
       const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
-      const INCOME_BOUNDS = {
-        'Below 1 lakh': { min: 0, max: 1 },
-        '1–2.5 lakh': { min: 1, max: 2.5 },
-        '2.5–5 lakh': { min: 2.5, max: 5 },
-        '5–8 lakh': { min: 5, max: 8 },
-        'Above 8 lakh': { min: 8, max: Infinity },
-        'Prefer not to say': null
-      };
-
-      // Add more scholarships here. Official URL must be the provider's real website.
-      const SCHOLARSHIPS = [
-        {
-          id: 'nsp',
-          name: 'National Scholarship Portal (NSP)',
-          provider: 'Government of India',
-          type: 'government',
-          destination: 'India',
-          levels: ['Class 10', 'Class 12', 'Diploma', 'Undergraduate', 'Postgraduate', 'PhD'],
-          fields: ['Any'],
-          countriesEligible: ['India'],
-          minPercent: 50,
-          maxIncomeLakh: 6,
-          gender: 'Any',
-          categories: ['Any'],
-          amountTier: 2,
-          amountNote: 'Fee waiver and annual stipend (see official site)',
-          deadlineNote: "Check the official site for this year's dates",
-          summary: 'Central and state government scholarships across school, college and research degrees.',
-          docs: ['Aadhaar or national ID', 'Family income certificate', 'Previous year marksheet', 'Bonafide student certificate', 'Bank passbook copy'],
-          officialUrl: 'https://scholarships.gov.in'
-        },
-        {
-          id: 'aicte',
-          name: 'AICTE Scholarship Schemes',
-          provider: 'All India Council for Technical Education',
-          type: 'government',
-          destination: 'India',
-          levels: ['Diploma', 'Undergraduate'],
-          fields: ['Engineering & Technology', 'Design'],
-          countriesEligible: ['India'],
-          minPercent: 50,
-          maxIncomeLakh: 8,
-          gender: 'Any',
-          categories: ['Any'],
-          amountTier: 2,
-          amountNote: 'Annual tuition and study support (see official site)',
-          deadlineNote: "Check the official site for this year's dates",
-          summary: 'Technical education support including Pragati for women and Saksham for differently abled students.',
-          docs: ['Admission proof in AICTE-approved institute', 'Class 10 / 12 marksheets', 'Family income certificate', 'Category or disability certificate if applicable'],
-          officialUrl: 'https://www.aicte-india.org'
-        },
-        {
-          id: 'inspire',
-          name: 'INSPIRE Scholarship (SHE)',
-          provider: 'Department of Science & Technology',
-          type: 'merit',
-          destination: 'India',
-          levels: ['Undergraduate', 'Postgraduate'],
-          fields: ['Science'],
-          countriesEligible: ['India'],
-          minPercent: 85,
-          maxIncomeLakh: null,
-          gender: 'Any',
-          categories: ['Any'],
-          amountTier: 2,
-          amountNote: 'Annual scholarship and mentorship grant (see official site)',
-          deadlineNote: "Check the official site for this year's dates",
-          summary: 'Merit-based support for top students pursuing natural and basic sciences.',
-          docs: ['Class 12 board marksheet or rank certificate', 'College enrolment certificate in basic sciences', 'Bank account details'],
-          officialUrl: 'https://www.online-inspire.gov.in'
-        },
-        {
-          id: 'buddy4study',
-          name: 'Buddy4Study Verified Listings',
-          provider: 'Buddy4Study Foundation',
-          type: 'need',
-          destination: 'India',
-          levels: ['Class 10', 'Class 12', 'Diploma', 'Undergraduate', 'Postgraduate'],
-          fields: ['Any'],
-          countriesEligible: ['India'],
-          minPercent: 50,
-          maxIncomeLakh: 6,
-          gender: 'Any',
-          categories: ['Any'],
-          amountTier: 1,
-          amountNote: 'Tuition support across CSR and foundation schemes (see official site)',
-          deadlineNote: "Check the official site for this year's dates",
-          summary: 'Need-based and merit corporate-funded scholarships aggregated with verified official portals.',
-          docs: ['Latest marksheet', 'Family income proof', 'Current school or college ID', 'Passport-size photograph'],
-          officialUrl: 'https://www.buddy4study.com'
-        },
-        {
-          id: 'reliance',
-          name: 'Reliance Foundation Scholarships',
-          provider: 'Reliance Foundation',
-          type: 'merit',
-          destination: 'India',
-          levels: ['Undergraduate', 'Postgraduate'],
-          fields: ['Any'],
-          countriesEligible: ['India'],
-          minPercent: 60,
-          maxIncomeLakh: 15,
-          gender: 'Any',
-          categories: ['Any'],
-          amountTier: 2,
-          amountNote: 'Tuition and living grant (see official site)',
-          deadlineNote: "Check the official site for this year's dates",
-          summary: 'Merit-cum-means awards supporting undergraduate and postgraduate students across India.',
-          docs: ['Class 12 or degree marksheets', 'Entrance or aptitude score', 'Household income certificate', 'Two letters of reference (for PG)'],
-          officialUrl: 'https://www.reliancefoundation.org'
-        },
-        {
-          id: 'jntata',
-          name: 'JN Tata Endowment Scholarship',
-          provider: 'Tata Trusts',
-          type: 'merit',
-          destination: 'Global',
-          levels: ['Postgraduate', 'PhD'],
-          fields: ['Any'],
-          countriesEligible: ['India'],
-          minPercent: 60,
-          maxIncomeLakh: null,
-          gender: 'Any',
-          categories: ['Any'],
-          amountTier: 2,
-          amountNote: 'Loan scholarship with travel and gift grant options (see official site)',
-          deadlineNote: "Check the official site for this year's dates",
-          summary: 'Supports Indian graduates pursuing higher studies abroad across all disciplines.',
-          docs: ['Undergraduate transcripts', 'University admission offer or application proof', 'Statement of purpose', 'Resume and test scores'],
-          officialUrl: 'https://www.jntataendowment.org'
-        },
-        {
-          id: 'inlaks',
-          name: 'Inlaks Shivdasani Foundation Scholarship',
-          provider: 'Inlaks Shivdasani Foundation',
-          type: 'international',
-          destination: 'Global',
-          levels: ['Postgraduate'],
-          fields: ['Any'],
-          countriesEligible: ['India'],
-          minPercent: 65,
-          maxIncomeLakh: null,
-          gender: 'Any',
-          categories: ['Any'],
-          amountTier: 3,
-          amountNote: 'Tuition, living and one-way travel support (see official site)',
-          deadlineNote: "Check the official site for this year's dates",
-          summary: 'Full funding for outstanding Indian graduates admitted to top universities abroad.',
-          docs: ['Offer letter from eligible foreign university', 'Academic transcripts', 'Two reference letters', 'Passport copy'],
-          officialUrl: 'https://www.inlaksfoundation.org'
-        },
-        {
-          id: 'fulbright',
-          name: 'Fulbright-Nehru Fellowships',
-          provider: 'USIEF',
-          type: 'international',
-          destination: 'United States',
-          levels: ['Postgraduate', 'PhD'],
-          fields: ['Any'],
-          countriesEligible: ['India'],
-          minPercent: 60,
-          maxIncomeLakh: null,
-          gender: 'Any',
-          categories: ['Any'],
-          amountTier: 3,
-          amountNote: 'Tuition, living stipend, airfare and health cover (see official site)',
-          deadlineNote: "Check the official site for this year's dates",
-          summary: 'Flagship U.S.–India exchange fellowship for master’s and doctoral study in the United States.',
-          docs: ['Bachelor’s/Master’s transcripts', 'Three letters of recommendation', 'Personal and study objectives essays', 'English proficiency score'],
-          officialUrl: 'https://www.usief.org.in'
-        },
-        {
-          id: 'chevening',
-          name: 'Chevening Scholarships',
-          provider: 'UK Foreign, Commonwealth & Development Office',
-          type: 'international',
-          destination: 'United Kingdom',
-          levels: ['Postgraduate'],
-          fields: ['Any'],
-          countriesEligible: ['Any'],
-          minPercent: 60,
-          maxIncomeLakh: null,
-          gender: 'Any',
-          categories: ['Any'],
-          amountTier: 3,
-          amountNote: 'Full tuition, monthly stipend and travel (see official site)',
-          deadlineNote: "Check the official site for this year's dates",
-          summary: 'UK government global award for one-year master’s degrees across British universities.',
-          docs: ['Undergraduate degree certificate & transcripts', 'Two reference letters', 'Work experience verification', 'Unconditional UK university offer'],
-          officialUrl: 'https://www.chevening.org'
-        },
-        {
-          id: 'commonwealth',
-          name: 'Commonwealth Scholarships',
-          provider: 'Commonwealth Scholarship Commission (UK)',
-          type: 'international',
-          destination: 'United Kingdom',
-          levels: ['Postgraduate', 'PhD'],
-          fields: ['Any'],
-          countriesEligible: ['Any'],
-          minPercent: 60,
-          maxIncomeLakh: null,
-          gender: 'Any',
-          categories: ['Any'],
-          amountTier: 3,
-          amountNote: 'Full tuition, airfare and living allowance (see official site)',
-          deadlineNote: "Check the official site for this year's dates",
-          summary: 'Supports talented students from Commonwealth nations for master’s and PhD programmes in the UK.',
-          docs: ['Academic transcripts', 'Citizenship proof', 'Two references', 'Development impact statement'],
-          officialUrl: 'https://cscuk.fcdo.gov.uk'
-        },
-        {
-          id: 'gates-cambridge',
-          name: 'Gates Cambridge Scholarships',
-          provider: 'Gates Cambridge Trust',
-          type: 'international',
-          destination: 'United Kingdom',
-          levels: ['Postgraduate', 'PhD'],
-          fields: ['Any'],
-          countriesEligible: ['Any'],
-          minPercent: 75,
-          maxIncomeLakh: null,
-          gender: 'Any',
-          categories: ['Any'],
-          amountTier: 3,
-          amountNote: 'Full cost of studying at Cambridge plus allowance (see official site)',
-          deadlineNote: "Check the official site for this year's dates",
-          summary: 'Full-cost postgraduate awards at the University of Cambridge for applicants outside the UK.',
-          docs: ['University of Cambridge application', 'Academic transcripts', 'Gates Cambridge statement', 'Research proposal (for PhD)'],
-          officialUrl: 'https://www.gatescambridge.org'
-        },
-        {
-          id: 'rhodes',
-          name: 'Rhodes Scholarship',
-          provider: 'Rhodes Trust (University of Oxford)',
-          type: 'international',
-          destination: 'United Kingdom',
-          levels: ['Postgraduate'],
-          fields: ['Any'],
-          countriesEligible: ['Any'],
-          minPercent: 75,
-          maxIncomeLakh: null,
-          gender: 'Any',
-          categories: ['Any'],
-          amountTier: 3,
-          amountNote: 'Oxford tuition, stipend and settling allowance (see official site)',
-          deadlineNote: "Check the official site for this year's dates",
-          summary: 'Prestigious postgraduate fellowship for full-time study at the University of Oxford.',
-          docs: ['Official academic transcripts', 'Personal statement & CV', 'Four to six reference letters', 'Proof of citizenship & age eligibility'],
-          officialUrl: 'https://www.rhodeshouse.ox.ac.uk'
-        },
-        {
-          id: 'daad',
-          name: 'DAAD Scholarships',
-          provider: 'German Academic Exchange Service',
-          type: 'international',
-          destination: 'Germany',
-          levels: ['Postgraduate', 'PhD'],
-          fields: ['Any'],
-          countriesEligible: ['Any'],
-          minPercent: 60,
-          maxIncomeLakh: null,
-          gender: 'Any',
-          categories: ['Any'],
-          amountTier: 3,
-          amountNote: 'Monthly stipend, travel and insurance (see official site)',
-          deadlineNote: "Check the official site for this year's dates",
-          summary: 'Funding for graduate degrees and research stays at public and state-recognised German universities.',
-          docs: ['Degree certificates & transcripts', 'Motivation letter', 'CV & work experience proof', 'Language certificate (German or English)'],
-          officialUrl: 'https://www.daad.de/en/'
-        },
-        {
-          id: 'erasmus',
-          name: 'Erasmus Mundus Joint Masters',
-          provider: 'European Commission',
-          type: 'international',
-          destination: 'Europe',
-          levels: ['Postgraduate'],
-          fields: ['Any'],
-          countriesEligible: ['Any'],
-          minPercent: 60,
-          maxIncomeLakh: null,
-          gender: 'Any',
-          categories: ['Any'],
-          amountTier: 3,
-          amountNote: 'Tuition waiver, travel and monthly living grant (see official site)',
-          deadlineNote: "Check the official site for this year's dates",
-          summary: 'Study across multiple European universities in an integrated international master’s programme.',
-          docs: ['Bachelor’s diploma & transcripts', 'Motivation letter', 'Two recommendation letters', 'English proficiency proof'],
-          officialUrl: 'https://erasmus-plus.ec.europa.eu'
-        },
-        {
-          id: 'knight-hennessy',
-          name: 'Knight-Hennessy Scholars',
-          provider: 'Stanford University',
-          type: 'international',
-          destination: 'United States',
-          levels: ['Postgraduate', 'PhD'],
-          fields: ['Any'],
-          countriesEligible: ['Any'],
-          minPercent: 75,
-          maxIncomeLakh: null,
-          gender: 'Any',
-          categories: ['Any'],
-          amountTier: 3,
-          amountNote: 'Full tuition, stipend and travel for Stanford graduate degrees (see official site)',
-          deadlineNote: "Check the official site for this year's dates",
-          summary: 'Multidisciplinary graduate fellowship covering any master’s or doctoral degree at Stanford.',
-          docs: ['Stanford graduate programme application', 'Transcripts & test scores', 'Two recommendation letters', 'Short essays & video story'],
-          officialUrl: 'https://knight-hennessy.stanford.edu'
-        },
-        {
-          id: 'mext',
-          name: 'MEXT (Japanese Government Scholarship)',
-          provider: 'Ministry of Education, Culture, Sports, Science & Technology',
-          type: 'government',
-          destination: 'Japan',
-          levels: ['Undergraduate', 'Postgraduate', 'PhD'],
-          fields: ['Any'],
-          countriesEligible: ['Any'],
-          minPercent: 65,
-          maxIncomeLakh: null,
-          gender: 'Any',
-          categories: ['Any'],
-          amountTier: 3,
-          amountNote: 'Tuition exemption, monthly allowance and airfare (see official site)',
-          deadlineNote: "Check the official site for this year's dates",
-          summary: 'Full Japanese government scholarship for undergraduate and research students.',
-          docs: ['Academic transcripts', 'Recommendation letter from school/university', 'Medical certificate', 'Study or research plan'],
-          officialUrl: 'https://www.studyinjapan.go.jp'
-        },
-        {
-          id: 'csc',
-          name: 'Chinese Government Scholarship (CSC)',
-          provider: 'China Scholarship Council',
-          type: 'government',
-          destination: 'China',
-          levels: ['Undergraduate', 'Postgraduate', 'PhD'],
-          fields: ['Any'],
-          countriesEligible: ['Any'],
-          minPercent: 60,
-          maxIncomeLakh: null,
-          gender: 'Any',
-          categories: ['Any'],
-          amountTier: 3,
-          amountNote: 'Tuition, accommodation, stipend and insurance (see official site)',
-          deadlineNote: "Check the official site for this year's dates",
-          summary: 'Bilateral and university-track scholarships for international students across China.',
-          docs: ['Notarised highest diploma & transcripts', 'Study plan or research proposal', 'Two recommendation letters', 'Foreigner physical examination form'],
-          officialUrl: 'https://www.campuschina.org'
-        },
-        {
-          id: 'gks',
-          name: 'Global Korea Scholarship (GKS)',
-          provider: 'NIIED · Government of South Korea',
-          type: 'government',
-          destination: 'South Korea',
-          levels: ['Undergraduate', 'Postgraduate', 'PhD'],
-          fields: ['Any'],
-          countriesEligible: ['Any'],
-          minPercent: 75,
-          maxIncomeLakh: null,
-          gender: 'Any',
-          categories: ['Any'],
-          amountTier: 3,
-          amountNote: 'Full tuition, Korean language year, stipend and airfare (see official site)',
-          deadlineNote: "Check the official site for this year's dates",
-          summary: 'South Korean government funding for undergraduate and graduate degree programmes.',
-          docs: ['Apostilled degree & transcripts', 'Personal statement & study plan', 'Two letters of recommendation', 'Proof of applicant & parent citizenship'],
-          officialUrl: 'https://www.studyinkorea.go.kr'
-        },
-        {
-          id: 'google',
-          name: 'Google Scholarships for Students',
-          provider: 'Google',
-          type: 'merit',
-          destination: 'Global',
-          levels: ['Undergraduate', 'Postgraduate'],
-          fields: ['Engineering & Technology', 'Science'],
-          countriesEligible: ['Any'],
-          minPercent: 65,
-          maxIncomeLakh: null,
-          gender: 'Any',
-          categories: ['Any'],
-          amountTier: 1,
-          amountNote: 'Tuition award for computer science and technology students (see official site)',
-          deadlineNote: "Check the official site for this year's dates",
-          summary: 'Supports students pursuing computer science, engineering and closely related technical fields.',
-          docs: ['Current university transcripts', 'Resume highlighting technical projects', 'Short essay responses', 'Reference letter'],
-          officialUrl: 'https://buildyourfuture.withgoogle.com/scholarships'
-        },
-        {
-          id: 'akf',
-          name: 'Aga Khan Foundation International Scholarship',
-          provider: 'Aga Khan Foundation',
-          type: 'need',
-          destination: 'Global',
-          levels: ['Postgraduate', 'PhD'],
-          fields: ['Any'],
-          countriesEligible: ['Any'],
-          minPercent: 65,
-          maxIncomeLakh: 8,
-          gender: 'Any',
-          categories: ['Any'],
-          amountTier: 3,
-          amountNote: 'Half grant / half loan for tuition and living expenses (see official site)',
-          deadlineNote: "Check the official site for this year's dates",
-          summary: 'Need-based postgraduate support for outstanding students from select developing countries.',
-          docs: ['Admission offer from university', 'Academic transcripts', 'Detailed family financial statement', 'Two academic/professional references'],
-          officialUrl: 'https://www.akdn.org'
-        }
-      ];
-
-      // Computed dataset counts for HUD & Stats
-      const distinctCountries = Array.from(new Set(SCHOLARSHIPS.map(s => s.destination).filter(d => d && d !== 'Global')));
-      const distinctFields = Array.from(new Set(SCHOLARSHIPS.flatMap(s => s.fields).filter(f => f !== 'Any')));
-
-      document.getElementById('hudPre').textContent = `SCHOLARSHIPS  ${SCHOLARSHIPS.length}\nCOUNTRIES  ${distinctCountries.length}\nUPDATED  REGULARLY`;
-      document.getElementById('statTotal').dataset.target = String(SCHOLARSHIPS.length);
-      document.getElementById('statCountries').dataset.target = String(distinctCountries.length);
-      document.getElementById('statFields').dataset.target = String(distinctFields.length);
-
-      // Populate destination filter dropdown
-      const resDestFilter = document.getElementById('resDestFilter');
-      distinctCountries.concat(['Global']).forEach(dest => {
-        const opt = document.createElement('option');
-        opt.value = dest;
-        opt.textContent = dest;
-        resDestFilter.appendChild(opt);
-      });
-
-      // Demo profile used until the student submits #profileForm
-      const DEMO_PROFILE = {
-        citizenship: 'India',
-        currentLevel: 'Undergraduate',
-        field: 'Engineering & Technology',
-        percent: 82,
-        incomeRange: '2.5–5 lakh',
-        category: 'General',
-        gender: 'Female',
-        destination: 'Abroad (any)',
-        applyingFor: 'Postgraduate'
-      };
-
-      let activeProfile = DEMO_PROFILE;
-      let hasSubmitted = false;
+      // Live backend-driven application state (no fake reviews or hardcoded sample profile)
+      let allItems = [];
       let currentMatches = [];
-      const savedIds = new Set();
+      let relatedScholarships = [];
+      let relatedQueries = [];
+      let activeProfile = null;
+      let hasSubmitted = false;
+      let isLoading = false;
+      let stationCountTarget = 0;
 
-      // Filter state
+      const savedIds = new Set();
       let searchQuery = '';
-      let activeTypes = new Set(); // empty = All
-      let destFilter = 'all';
+      let activeTypes = new Set();
+      let statusFilter = 'all'; // 'all' | 'live' | 'pre_stopped'
+      let regionFilter = 'all';
       let sortMode = 'best';
       let savedOnly = false;
 
-      function matchScholarships(profile) {
-        const out = [];
-        const incomeBounds = INCOME_BOUNDS[profile.incomeRange] ?? null;
-
-        for (const s of SCHOLARSHIPS) {
-          if (!s.levels.includes(profile.applyingFor)) continue;
-          if (!s.countriesEligible.includes('Any') && !s.countriesEligible.includes(profile.citizenship)) continue;
-          if (incomeBounds && s.maxIncomeLakh !== null && incomeBounds.min > s.maxIncomeLakh) continue;
-          if (profile.percent !== null && profile.percent < s.minPercent) continue;
-          if (profile.gender !== 'Prefer not to say' && s.gender !== 'Any' && profile.gender !== s.gender) continue;
-          if (profile.category !== 'Prefer not to say' && !s.categories.includes('Any') && !s.categories.includes(profile.category)) continue;
-          if (!s.fields.includes('Any') && !s.fields.includes(profile.field)) continue;
-
-          let score = 0;
-          const whyMatch = [];
-          const checkYourself = [];
-
-          // Level (25)
-          score += 25;
-          whyMatch.push(`${profile.applyingFor} eligible`);
-
-          // Field (20)
-          if (s.fields.includes(profile.field)) {
-            score += 20;
-            whyMatch.push(`${profile.field} focus`);
-          } else {
-            score += 17;
-            whyMatch.push('Open to all fields');
-          }
-
-          // Marks (15)
-          if (profile.percent === null) {
-            score += 7.5;
-            checkYourself.push('Marks requirement to check');
-          } else {
-            score += 15;
-            if (s.minPercent > 0) whyMatch.push(`Meets ${s.minPercent}%+ marks`);
-          }
-
-          // Income (15)
-          if (s.maxIncomeLakh === null) {
-            score += 15;
-          } else if (!incomeBounds) {
-            score += 7.5;
-            checkYourself.push('Income proof needed');
-          } else if (incomeBounds.max <= s.maxIncomeLakh) {
-            score += 15;
-            whyMatch.push(`Income under ₹${s.maxIncomeLakh}L`);
-          } else {
-            score += 10;
-            checkYourself.push(`Check ₹${s.maxIncomeLakh}L income cap`);
-          }
-
-          // Category & Gender (10)
-          if (s.categories.includes('Any')) {
-            score += 5;
-          } else if (profile.category === 'Prefer not to say') {
-            score += 2.5;
-            checkYourself.push('Category proof needed');
-          } else {
-            score += 5;
-            whyMatch.push(`${profile.category} eligible`);
-          }
-
-          if (s.gender === 'Any') {
-            score += 5;
-          } else if (profile.gender === 'Prefer not to say') {
-            score += 2.5;
-            checkYourself.push('Gender criteria to check');
-          } else {
-            score += 5;
-            whyMatch.push(`${s.gender} applicants`);
-          }
-
-          // Destination (15)
-          if (profile.destination === 'India') {
-            if (s.destination === 'India') {
-              score += 15;
-              whyMatch.push('Study in India');
-            } else {
-              score += 5;
-            }
-          } else if (profile.destination === 'Abroad (any)') {
-            if (s.destination !== 'India') {
-              score += 15;
-              whyMatch.push(s.destination === 'Global' ? 'Study abroad' : `Study in ${s.destination}`);
-            } else {
-              score += 5;
-            }
-          } else {
-            if (s.destination === profile.destination || s.destination === 'Global') {
-              score += 15;
-              whyMatch.push(`Destination: ${s.destination}`);
-            } else {
-              score += 5;
-            }
-          }
-
-          out.push({
-            scholarship: s,
-            score: clamp(Math.round(score), 0, 100),
-            whyMatch,
-            checkYourself
-          });
-        }
-
-        out.sort((a, b) => b.score - a.score);
-        return out;
-      }
-
-      // Station sparkline updater from top 8 match scores
       const cred = document.getElementById('cred');
       const card = document.getElementById('card');
       const cNum = document.getElementById('cNum');
+      const cardTitle = document.getElementById('cardTitle');
+      const cardNote = document.getElementById('cardNote');
       const topMatchTag = document.getElementById('topMatchTag');
       const spark = document.getElementById('spark');
       const spD1 = document.getElementById('spD1');
@@ -2503,11 +2164,40 @@ UPDATED  REGULARLY</pre>
       const spD3 = document.getElementById('spD3');
       let sparkLen = spark.getTotalLength();
 
-      function updateStationCard() {
-        const scores = currentMatches.map(m => m.score);
-        const topScore = scores.length ? scores[0] : 0;
-        topMatchTag.textContent = `Top match ${topScore}%`;
+      function escapeHtml(str) {
+        return String(str).replace(/[&<>"']/g, ch => ({
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#39;'
+        }[ch]));
+      }
 
+      function getHostname(url) {
+        try {
+          return new URL(url).hostname.replace(/^www\./, '');
+        } catch (_) {
+          return url;
+        }
+      }
+
+      function updateStationCard() {
+        const liveMatches = currentMatches.filter(m => m.status === 'live');
+        stationCountTarget = liveMatches.length;
+
+        if (hasSubmitted) {
+          cardTitle.innerHTML = 'Scholarships matched<br />for you';
+          cardNote.textContent = `${liveMatches.length} live · ${currentMatches.length - liveMatches.length} pre-stopped`;
+          const topScore = currentMatches.length ? currentMatches[0].score : 0;
+          topMatchTag.textContent = `Top match ${topScore}%`;
+        } else {
+          cardTitle.innerHTML = 'Live scholarships<br />ready to apply';
+          cardNote.textContent = 'Karnataka · India · Asia';
+          topMatchTag.textContent = `${liveMatches.length} live now`;
+        }
+
+        const scores = currentMatches.map(m => m.score);
         const top8 = scores.slice(0, 8);
         let pts;
         if (top8.length === 0) {
@@ -2538,24 +2228,6 @@ UPDATED  REGULARLY</pre>
         spD3.setAttribute('cy', String(d3.y));
       }
 
-      function escapeHtml(str) {
-        return String(str).replace(/[&<>"']/g, ch => ({
-          '&': '&amp;',
-          '<': '&lt;',
-          '>': '&gt;',
-          '"': '&quot;',
-          "'": '&#39;'
-        }[ch]));
-      }
-
-      function getHostname(url) {
-        try {
-          return new URL(url).hostname.replace(/^www\./, '');
-        } catch (_) {
-          return url;
-        }
-      }
-
       function updateTypePillsUI() {
         const allBtn = document.querySelector('.tpill[data-type="all"]');
         const isAll = activeTypes.size === 0;
@@ -2565,114 +2237,98 @@ UPDATED  REGULARLY</pre>
         });
       }
 
-      function renderResults() {
-        const listEl = document.getElementById('resultsList');
-        const savedToggle = document.getElementById('savedToggle');
-        savedToggle.textContent = `Saved (${savedIds.size})`;
-        savedToggle.setAttribute('aria-pressed', String(savedOnly));
+      function updateStatusTabsUI(pool) {
+        const liveCount = pool.filter(m => m.status === 'live').length;
+        const stoppedCount = pool.filter(m => m.status === 'pre_stopped').length;
+        const stAll = document.getElementById('stAll');
+        const stLive = document.getElementById('stLive');
+        const stStopped = document.getElementById('stStopped');
 
-        let list = [...currentMatches];
+        stAll.textContent = `All (${pool.length})`;
+        stLive.textContent = `Live to Apply (${liveCount})`;
+        stStopped.textContent = `Pre-Stopped (${stoppedCount})`;
 
-        if (savedOnly) {
-          list = list.filter(m => savedIds.has(m.scholarship.id));
-        }
-        if (activeTypes.size > 0) {
-          list = list.filter(m => activeTypes.has(m.scholarship.type));
-        }
-        if (destFilter !== 'all') {
-          list = list.filter(m => m.scholarship.destination === destFilter);
-        }
-        if (searchQuery.trim()) {
-          const q = searchQuery.trim().toLowerCase();
-          list = list.filter(m => {
-            const s = m.scholarship;
-            return (
-              s.name.toLowerCase().includes(q) ||
-              s.provider.toLowerCase().includes(q) ||
-              s.fields.some(f => f.toLowerCase().includes(q)) ||
-              s.summary.toLowerCase().includes(q) ||
-              s.destination.toLowerCase().includes(q)
-            );
+        stAll.setAttribute('aria-pressed', String(statusFilter === 'all'));
+        stLive.setAttribute('aria-pressed', String(statusFilter === 'live'));
+        stStopped.setAttribute('aria-pressed', String(statusFilter === 'pre_stopped'));
+      }
+
+      function renderRelatedQueryBar() {
+        const wrap = document.getElementById('relatedQueryChips');
+        wrap.innerHTML = relatedQueries.map((q, idx) => `
+          <button type="button" class="rquery-btn" style="--ci:${idx}" data-rel-query="${escapeHtml(q)}">${escapeHtml(q)}</button>
+        `).join('');
+
+        wrap.querySelectorAll('.rquery-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const q = btn.dataset.relQuery || '';
+            searchQuery = q;
+            document.getElementById('resSearch').value = q;
+            runBackendSearch(q);
           });
-        }
+        });
+      }
 
-        if (sortMode === 'amount') {
-          list.sort((a, b) => (b.scholarship.amountTier - a.scholarship.amountTier) || (b.score - a.score));
-        } else if (sortMode === 'closing') {
-          list.sort((a, b) => a.scholarship.name.localeCompare(b.scholarship.name));
-        } else {
-          list.sort((a, b) => b.score - a.score);
-        }
+      function buildCardHtml(m, index) {
+        const s = m.scholarship;
+        const isSaved = savedIds.has(s.id);
+        const host = getHostname(s.officialUrl);
+        const isLive = m.status === 'live';
 
-        if (list.length === 0) {
-          listEl.innerHTML = `
-            <div class="empty-box" style="grid-column:1/-1">
-              <p>No exact matches. Try relaxing marks, income or destination.</p>
-              <button type="button" class="clear-btn" id="clearFiltersBtn">Clear filters</button>
+        const statusHtml = isLive
+          ? `<span class="status-pill live"><span class="live-dot" aria-hidden="true"></span>${escapeHtml(m.statusBadge)}</span>`
+          : `<span class="status-pill pre_stopped">${escapeHtml(m.statusBadge)}</span>`;
+
+        const whyHtml = (m.whyMatch || []).map(w => `<span class="rchip why">${escapeHtml(w)}</span>`).join('');
+        const checkHtml = (m.checkYourself || []).map(c => `<span class="rchip check">${escapeHtml(c)}</span>`).join('');
+        const docsHtml = s.docs.map(d => `<li>${escapeHtml(d)}</li>`).join('');
+        const matchPill = hasSubmitted
+          ? `<span class="chip">${m.score}% match</span>`
+          : `<span class="chip">${escapeHtml(s.region)}</span>`;
+
+        return `
+          <article class="rcard ${isLive ? '' : 'is-stopped'}" style="--i:${index}">
+            <div class="rcard-top">
+              <div class="rcard-meta-top">
+                ${statusHtml}
+                ${matchPill}
+              </div>
+              <button
+                type="button"
+                class="save-btn"
+                data-save-id="${escapeHtml(s.id)}"
+                aria-pressed="${isSaved ? 'true' : 'false'}"
+                aria-label="${isSaved ? 'Remove' : 'Save'} ${escapeHtml(s.name)}"
+              >${isSaved ? '♥' : '♡'}</button>
             </div>
-          `;
-          const clr = document.getElementById('clearFiltersBtn');
-          if (clr) {
-            clr.addEventListener('click', () => {
-              searchQuery = '';
-              document.getElementById('resSearch').value = '';
-              activeTypes.clear();
-              updateTypePillsUI();
-              destFilter = 'all';
-              resDestFilter.value = 'all';
-              savedOnly = false;
-              renderResults();
-            });
-          }
-          return;
-        }
-
-        listEl.innerHTML = list.map(m => {
-          const s = m.scholarship;
-          const isSaved = savedIds.has(s.id);
-          const host = getHostname(s.officialUrl);
-          const whyHtml = m.whyMatch.map(w => `<span class="rchip why">${escapeHtml(w)}</span>`).join('');
-          const checkHtml = m.checkYourself.map(c => `<span class="rchip check">${escapeHtml(c)}</span>`).join('');
-          const docsHtml = s.docs.map(d => `<li>${escapeHtml(d)}</li>`).join('');
-
-          return `
-            <article class="rcard">
-              <div class="rcard-top">
-                <div class="rcard-meta-top">
-                  <span class="chip">${m.score}% match</span>
-                  <span class="provider-lbl">${escapeHtml(s.provider)}</span>
-                </div>
-                <button
-                  type="button"
-                  class="save-btn"
-                  data-save-id="${escapeHtml(s.id)}"
-                  aria-pressed="${isSaved ? 'true' : 'false'}"
-                  aria-label="${isSaved ? 'Remove' : 'Save'} ${escapeHtml(s.name)}"
-                >${isSaved ? '♥' : '♡'}</button>
-              </div>
+            <div>
+              <div class="provider-lbl" style="margin-bottom:5px">${escapeHtml(s.provider)}</div>
               <h3>${escapeHtml(s.name)}</h3>
-              <p class="rsum">${escapeHtml(s.summary)}</p>
-              <div class="rtags">
-                <div class="rtag"><span>Level</span><span>${escapeHtml(s.levels.join(', '))}</span></div>
-                <div class="rtag"><span>Country</span><span>${escapeHtml(s.destination)}</span></div>
-                <div class="rtag"><span>Amount</span><span>${escapeHtml(s.amountNote)}</span></div>
-                <div class="rtag"><span>Deadline</span><span>${escapeHtml(s.deadlineNote)}</span></div>
-              </div>
-              <div class="reasons">${whyHtml}${checkHtml}</div>
-              <details class="docs-box">
-                <summary>Documents checklist (${s.docs.length})</summary>
-                <ul>${docsHtml}</ul>
-              </details>
-              <div class="rcard-foot">
-                <a href="${escapeHtml(s.officialUrl)}" target="_blank" rel="noopener noreferrer" class="apply-btn">APPLY ON OFFICIAL SITE ↗</a>
-                <a href="${escapeHtml(s.officialUrl)}" target="_blank" rel="noopener noreferrer" class="domain-link">${escapeHtml(host)}</a>
-              </div>
-            </article>
-          `;
-        }).join('');
+            </div>
+            <p class="rsum">${escapeHtml(s.summary)}</p>
+            <div class="rtags">
+              <div class="rtag"><span>Deadline</span><span>${escapeHtml(s.deadlineText)}</span></div>
+              <div class="rtag"><span>Region</span><span>${escapeHtml(s.destination)}</span></div>
+              <div class="rtag"><span>Levels</span><span>${escapeHtml(s.levels.join(', '))}</span></div>
+              <div class="rtag"><span>Support</span><span>${escapeHtml(s.amountNote)}</span></div>
+            </div>
+            <div class="reasons">${whyHtml}${checkHtml}</div>
+            <details class="docs-box">
+              <summary>Documents checklist (${s.docs.length})</summary>
+              <ul>${docsHtml}</ul>
+            </details>
+            <div class="rcard-foot">
+              <a href="${escapeHtml(s.officialUrl)}" target="_blank" rel="noopener noreferrer" class="apply-btn">
+                ${isLive ? 'APPLY ON OFFICIAL SITE ↗' : 'VIEW OFFICIAL CYCLE ↗'}
+              </a>
+              <a href="${escapeHtml(s.officialUrl)}" target="_blank" rel="noopener noreferrer" class="domain-link">${escapeHtml(host)}</a>
+            </div>
+          </article>
+        `;
+      }
 
-        // Wire save buttons and subtle tilt
-        listEl.querySelectorAll('.save-btn').forEach(btn => {
+      function wireCardInteractions(container) {
+        container.querySelectorAll('.save-btn').forEach(btn => {
           btn.addEventListener('click', () => {
             const id = btn.dataset.saveId;
             if (savedIds.has(id)) savedIds.delete(id);
@@ -2681,7 +2337,7 @@ UPDATED  REGULARLY</pre>
           });
         });
 
-        listEl.querySelectorAll('.rcard').forEach(rc => {
+        container.querySelectorAll('.rcard').forEach(rc => {
           rc.addEventListener('pointermove', e => {
             const r = rc.getBoundingClientRect();
             const x = (e.clientX - r.left) / r.width - .5;
@@ -2694,10 +2350,150 @@ UPDATED  REGULARLY</pre>
         });
       }
 
-      // Initialize matches with demo profile
-      currentMatches = matchScholarships(activeProfile);
-      updateStationCard();
-      renderResults();
+      function renderLoadingSkeletons() {
+        const listEl = document.getElementById('resultsList');
+        listEl.innerHTML = Array.from({ length: 4 }, () => `<div class="skel-card" aria-hidden="true"></div>`).join('');
+      }
+
+      function applySubFilters(list) {
+        let out = [...list];
+        if (savedOnly) {
+          out = out.filter(m => savedIds.has(m.scholarship.id));
+        }
+        if (statusFilter !== 'all') {
+          out = out.filter(m => m.status === statusFilter);
+        }
+        if (activeTypes.size > 0) {
+          out = out.filter(m => activeTypes.has(m.scholarship.type));
+        }
+        if (regionFilter !== 'all') {
+          out = out.filter(m => m.scholarship.region === regionFilter);
+        }
+
+        if (sortMode === 'amount') {
+          out.sort((a, b) => (b.scholarship.amountTier - a.scholarship.amountTier) || (b.score - a.score));
+        } else if (sortMode === 'closing') {
+          out.sort((a, b) => {
+            if (a.status !== b.status) return a.status === 'live' ? -1 : 1;
+            return (a.daysLeft ?? 999) - (b.daysLeft ?? 999);
+          });
+        } else {
+          out.sort((a, b) => {
+            if (a.status !== b.status) return a.status === 'live' ? -1 : 1;
+            return b.score - a.score;
+          });
+        }
+        return out;
+      }
+
+      function renderResults() {
+        if (isLoading) {
+          renderLoadingSkeletons();
+          return;
+        }
+
+        const listEl = document.getElementById('resultsList');
+        const savedToggle = document.getElementById('savedToggle');
+        savedToggle.textContent = `Saved (${savedIds.size})`;
+        savedToggle.setAttribute('aria-pressed', String(savedOnly));
+
+        updateStatusTabsUI(currentMatches);
+        const list = applySubFilters(currentMatches);
+
+        if (list.length === 0) {
+          listEl.innerHTML = `
+            <div class="empty-box" style="grid-column:1/-1">
+              <p>No matching scholarships for the current filters. Try clearing filters or checking Pre-Stopped cycles.</p>
+              <button type="button" class="clear-btn" id="clearFiltersBtn">Reset filters</button>
+            </div>
+          `;
+          const clr = document.getElementById('clearFiltersBtn');
+          if (clr) {
+            clr.addEventListener('click', () => {
+              searchQuery = '';
+              document.getElementById('resSearch').value = '';
+              activeTypes.clear();
+              updateTypePillsUI();
+              statusFilter = 'all';
+              regionFilter = 'all';
+              document.getElementById('resDestFilter').value = 'all';
+              savedOnly = false;
+              runBackendSearch('');
+            });
+          }
+        } else {
+          listEl.innerHTML = list.map((m, idx) => buildCardHtml(m, idx)).join('');
+          wireCardInteractions(listEl);
+        }
+
+        // Render Related Scholarships when searching
+        const relatedSec = document.getElementById('relatedSection');
+        const relatedListEl = document.getElementById('relatedResultsList');
+        const relatedChip = document.getElementById('relatedCountChip');
+        if (searchQuery.trim() && relatedScholarships.length > 0) {
+          relatedSec.hidden = false;
+          relatedChip.textContent = `${relatedScholarships.length} related`;
+          relatedListEl.innerHTML = relatedScholarships.map((m, idx) => buildCardHtml(m, idx)).join('');
+          wireCardInteractions(relatedListEl);
+        } else {
+          relatedSec.hidden = true;
+          relatedListEl.innerHTML = '';
+        }
+      }
+
+      // Backend API calls
+      async function loadInitialDirectory() {
+        isLoading = true;
+        renderResults();
+        try {
+          const resp = await fetch('/api/scholarships');
+          const data = await resp.json();
+          allItems = data.items || [];
+          currentMatches = [...allItems];
+          relatedScholarships = [];
+          relatedQueries = data.relatedQueries || [];
+
+          document.getElementById('hudPre').textContent =
+            `SCHOLARSHIPS  ${data.total}\nLIVE TO APPLY  ${data.liveCount}\nKARNATAKA + INDIA + ASIA`;
+
+          document.getElementById('statTotal').dataset.target = String(data.total || 0);
+          document.getElementById('statLive').dataset.target = String(data.liveCount || 0);
+          const kaCount = allItems.filter(i => i.scholarship.region === 'Karnataka').length;
+          document.getElementById('statKarnataka').dataset.target = String(kaCount);
+
+          document.getElementById('resSubtitle').textContent =
+            `Showing ${data.liveCount} live-to-apply and ${data.preStoppedCount} pre-stopped official schemes across Karnataka, India, and Asia — submit your profile above to filter for your eligibility.`;
+
+          renderRelatedQueryBar();
+          updateStationCard();
+        } catch (err) {
+          document.getElementById('resSubtitle').textContent = 'Could not load scholarships from backend.';
+        } finally {
+          isLoading = false;
+          renderResults();
+        }
+      }
+
+      async function runBackendSearch(query) {
+        try {
+          const resp = await fetch('/api/scholarships/search', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              query,
+              profile: hasSubmitted ? activeProfile : null
+            })
+          });
+          const data = await resp.json();
+          currentMatches = data.directMatches || [];
+          relatedScholarships = data.relatedScholarships || [];
+          relatedQueries = data.relatedQueries || [];
+          renderRelatedQueryBar();
+          renderResults();
+        } catch (_) {
+          renderResults();
+        }
+      }
 
       // Browse-by-type cards filter + scroll to #results
       document.querySelectorAll('.scard').forEach(scard => {
@@ -2720,10 +2516,22 @@ UPDATED  REGULARLY</pre>
         });
       });
 
-      // Toolbar controls
+      // Status tabs
+      document.querySelectorAll('.stab').forEach(btn => {
+        btn.addEventListener('click', () => {
+          statusFilter = btn.dataset.status || 'all';
+          renderResults();
+        });
+      });
+
+      // Toolbar controls (debounced backend search + related search)
+      let searchTimer = null;
       document.getElementById('resSearch').addEventListener('input', e => {
         searchQuery = e.target.value;
-        renderResults();
+        clearTimeout(searchTimer);
+        searchTimer = setTimeout(() => {
+          runBackendSearch(searchQuery);
+        }, 160);
       });
 
       document.querySelectorAll('.tpill').forEach(btn => {
@@ -2740,8 +2548,8 @@ UPDATED  REGULARLY</pre>
         });
       });
 
-      resDestFilter.addEventListener('change', e => {
-        destFilter = e.target.value;
+      document.getElementById('resDestFilter').addEventListener('change', e => {
+        regionFilter = e.target.value;
         renderResults();
       });
 
@@ -2796,7 +2604,7 @@ UPDATED  REGULARLY</pre>
 
       fMarks.addEventListener('input', updateMarksPreview);
 
-      // Form validation & submission (JS memory only)
+      // Form validation & backend submission
       const profileForm = document.getElementById('profileForm');
       const reqRules = [
         { id: 'fAge', err: 'err-age', check: v => { const n = Number(v); return v !== '' && !Number.isNaN(n) && n >= 12 && n <= 65 ? '' : 'Enter an age between 12 and 65.'; } },
@@ -2834,7 +2642,7 @@ UPDATED  REGULARLY</pre>
           name: document.getElementById('fName').value.trim(),
           age: Number(document.getElementById('fAge').value),
           citizenship: document.getElementById('fCitizen').value,
-          state: document.getElementById('fState').value.trim(),
+          state: document.getElementById('fState').value,
           currentLevel: document.getElementById('fLevel').value,
           applyingFor: document.getElementById('fApplying').value,
           field: document.getElementById('fField').value,
@@ -2847,7 +2655,7 @@ UPDATED  REGULARLY</pre>
         };
       }
 
-      profileForm.addEventListener('submit', e => {
+      profileForm.addEventListener('submit', async e => {
         e.preventDefault();
         let firstBad = null;
         for (const rule of reqRules) {
@@ -2862,81 +2670,125 @@ UPDATED  REGULARLY</pre>
           return;
         }
 
-        activeProfile = buildProfileFromForm();
-        hasSubmitted = true;
-        currentMatches = matchScholarships(activeProfile);
-        updateStationCard();
-        activeTypes.clear();
-        updateTypePillsUI();
-        destFilter = 'all';
-        resDestFilter.value = 'all';
-        savedOnly = false;
-
-        document.getElementById('resModeChip').textContent = 'Matched to your profile';
-        const greet = activeProfile.name ? `for ${activeProfile.name} — ` : 'for ';
-        document.getElementById('resSubtitle').textContent =
-          `Showing ${currentMatches.length} matched scholarship${currentMatches.length === 1 ? '' : 's'} ${greet}${activeProfile.applyingFor} · ${activeProfile.field} · ${activeProfile.destination}.`;
-
+        const profile = buildProfileFromForm();
+        const submitBtn = document.getElementById('submitProfileBtn');
+        submitBtn.disabled = true;
+        isLoading = true;
         renderResults();
         document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+
+        try {
+          const resp = await fetch('/api/scholarships/match', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(profile)
+          });
+          const data = await resp.json();
+          if (!resp.ok) throw new Error(data.error || 'Matching failed');
+
+          activeProfile = data.profile;
+          hasSubmitted = true;
+          currentMatches = data.matches || [];
+          relatedScholarships = [];
+          relatedQueries = data.relatedQueries || [];
+          searchQuery = '';
+          document.getElementById('resSearch').value = '';
+          activeTypes.clear();
+          updateTypePillsUI();
+          statusFilter = 'all';
+          regionFilter = 'all';
+          document.getElementById('resDestFilter').value = 'all';
+          savedOnly = false;
+
+          document.getElementById('resModeChip').textContent = `Matched · ${activeProfile.state || 'Karnataka'}`;
+          const greet = activeProfile.name ? `for ${activeProfile.name} — ` : 'for ';
+          document.getElementById('resSubtitle').textContent =
+            `Found ${data.liveCount} live-to-apply and ${data.preStoppedCount} pre-stopped scholarships ${greet}${activeProfile.applyingFor} · ${activeProfile.field} · ${activeProfile.state}.`;
+
+          renderRelatedQueryBar();
+          updateStationCard();
+        } catch (err) {
+          document.getElementById('resSubtitle').textContent = err instanceof Error ? err.message : 'Unable to match scholarships.';
+        } finally {
+          submitBtn.disabled = false;
+          isLoading = false;
+          renderResults();
+        }
       });
 
-      // Section G: Optional Gemini Grounded Search (hidden when GEMINI_API_KEY is empty)
+      // Server-side Live Web Grounding Search (/api/scholarships/live-web)
       const aiSearchBtn = document.getElementById('aiSearchBtn');
-      const webResultsList = document.getElementById('webResultsList');
-      if (GEMINI_API_KEY && GEMINI_API_KEY.trim()) {
-        aiSearchBtn.hidden = false;
-        document.getElementById('privacyNote').textContent =
-          'Profile matching runs in your browser. Clicking "Search the web for more" sends an anonymous study summary (no name) to Gemini with Google Search.';
+      const webResultsPanel = document.getElementById('webResultsPanel');
 
-        aiSearchBtn.addEventListener('click', async () => {
-          const p = hasSubmitted ? activeProfile : DEMO_PROFILE;
-          aiSearchBtn.disabled = true;
-          aiSearchBtn.textContent = 'SEARCHING THE WEB...';
-          try {
-            const prompt = `Find real official scholarships for a student from ${p.citizenship} applying for ${p.applyingFor} in ${p.field}, destination preference: ${p.destination}. Return brief summaries.`;
-            const resp = await fetch(
-              `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${encodeURIComponent(GEMINI_API_KEY.trim())}`,
-              {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                  contents: [{ parts: [{ text: prompt }] }],
-                  tools: [{ google_search: {} }]
-                })
-              }
-            );
-            const data = await resp.json();
-            const chunks = data?.candidates?.[0]?.groundingMetadata?.groundingChunks || [];
-            const validWeb = chunks
-              .map(c => c.web)
-              .filter(w => w && typeof w.uri === 'string' && /^https?:\/\//i.test(w.uri));
+      aiSearchBtn.addEventListener('click', async () => {
+        const p = hasSubmitted ? activeProfile : buildProfileFromForm();
+        aiSearchBtn.disabled = true;
+        aiSearchBtn.textContent = 'CHECKING LIVE WEB...';
+        webResultsPanel.hidden = false;
+        webResultsPanel.innerHTML = `<p class="mono">Checking live official Karnataka &amp; India portals via Gemini Search...</p>`;
 
-            if (validWeb.length > 0) {
-              webResultsList.hidden = false;
-              webResultsList.innerHTML = validWeb.map(w => `
-                <article class="rcard">
+        try {
+          const resp = await fetch('/api/scholarships/live-web', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              query: searchQuery,
+              profile: p
+            })
+          });
+          const data = await resp.json();
+          if (!resp.ok) {
+            webResultsPanel.innerHTML = `<div class="web-error">${escapeHtml(data.error || 'Live web verification failed.')}</div>`;
+            return;
+          }
+
+          const sourcesHtml = (data.sources || []).length
+            ? `<div class="results-grid">${data.sources.map((w, idx) => `
+                <article class="rcard" style="--i:${idx}">
                   <div class="rcard-top">
-                    <div class="rcard-meta-top">
-                      <span class="rchip web">Found on the web — verify on the official site</span>
-                    </div>
+                    <span class="rchip web">Live Web Source · Verify on Portal</span>
                   </div>
                   <h3>${escapeHtml(w.title || getHostname(w.uri))}</h3>
                   <div class="rcard-foot">
-                    <a href="${escapeHtml(w.uri)}" target="_blank" rel="noopener noreferrer" class="apply-btn">APPLY ON OFFICIAL SITE ↗</a>
+                    <a href="${escapeHtml(w.uri)}" target="_blank" rel="noopener noreferrer" class="apply-btn">OPEN OFFICIAL SOURCE ↗</a>
                     <a href="${escapeHtml(w.uri)}" target="_blank" rel="noopener noreferrer" class="domain-link">${escapeHtml(getHostname(w.uri))}</a>
                   </div>
                 </article>
-              `).join('');
+              `).join('')}</div>`
+            : '<p class="sec-sub">No external URLs returned for this query.</p>';
+
+          webResultsPanel.innerHTML = `
+            <div class="web-panel-head">
+              <span class="chip">Live Web Verification · ${escapeHtml(data.checkedAt || '')}</span>
+              <span class="mono" style="color:#4a5a4f">Google Search Grounded</span>
+            </div>
+            <div class="web-summary">${escapeHtml(data.summaryText || '')}</div>
+            ${sourcesHtml}
+          `;
+        } catch (err) {
+          webResultsPanel.innerHTML = `<div class="web-error">Unable to reach backend live-web service.</div>`;
+        } finally {
+          aiSearchBtn.disabled = false;
+          aiSearchBtn.textContent = 'CHECK LIVE WEB UPDATES';
+        }
+      });
+
+      // Scroll-in section animations via IntersectionObserver
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in');
+              io.unobserve(entry.target);
             }
-          } catch (_) {
-            // Silently ignore network errors without breaking local results
-          } finally {
-            aiSearchBtn.disabled = false;
-            aiSearchBtn.textContent = 'SEARCH THE WEB FOR MORE';
-          }
-        });
+          });
+        }, { threshold: 0.08 });
+        document.querySelectorAll('.reveal-anim').forEach(el => io.observe(el));
+      } else {
+        document.querySelectorAll('.reveal-anim').forEach(el => el.classList.add('in'));
       }
+
+      loadInitialDirectory();
 
       // Smooth scroll for nav links & CTA to #find
       document.querySelectorAll('.nav a[href="#find"]').forEach(link => {
@@ -3346,7 +3198,7 @@ UPDATED  REGULARLY</pre>
           card.style.opacity = String(cIn);
           card.style.transform = `perspective(800px) translate3d(${sx * -14}px, ${(1 - cIn) * 60 + sy * -10}px, 0) rotateY(${sx * 8}deg) rotateX(${-sy * 8}deg)`;
 
-          cNum.textContent = String(Math.round(currentMatches.length * seg(sp, .76, .9)));
+          cNum.textContent = String(Math.round(stationCountTarget * seg(sp, .76, .9)));
           const spT = seg(sp, .77, .92);
           spark.style.strokeDashoffset = String(sparkLen * (1 - spT));
           spD1.setAttribute('opacity', String(clamp((spT - 0.35) / 0.1)));

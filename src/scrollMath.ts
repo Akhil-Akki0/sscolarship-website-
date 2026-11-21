@@ -17,6 +17,78 @@ export function capWheelDelta(deltaY: number, dtMs = 16, maxPxPerMs = 0.85): num
   return Math.sign(deltaY) * Math.min(Math.abs(deltaY), maxStep);
 }
 
+export function normalizeWheelDelta(deltaY: number, deltaMode: number, pageHeight = 900): number {
+  if (!Number.isFinite(deltaY) || deltaY === 0) return 0;
+  if (deltaMode === 1) return deltaY * 40;
+  if (deltaMode === 2) return deltaY * Math.max(300, pageHeight);
+  return deltaY;
+}
+
+export function computeStory1xSpeed(
+  storyHeight: number,
+  viewportHeight: number,
+  videoDurationSec = 5.04
+): number {
+  const denom = Math.max(1, storyHeight - viewportHeight);
+  const flyInDistance = 0.65 * denom;
+  const durationMs = Math.max(1000, videoDurationSec * 1000);
+  return clamp(flyInDistance / durationMs, 0.55, 0.95);
+}
+
+export interface WheelStepOptions {
+  deltaY: number;
+  deltaMode: number;
+  dtMs: number;
+  scrollY: number;
+  storyBottom: number;
+  viewportHeight: number;
+  story1xPxPerMs: number;
+}
+
+export function computeWheelStep(opts: WheelStepOptions): number {
+  const norm = normalizeWheelDelta(opts.deltaY, opts.deltaMode, opts.viewportHeight);
+  if (norm === 0) return 0;
+
+  const inStory = opts.scrollY < opts.storyBottom;
+  const speed = inStory
+    ? opts.story1xPxPerMs
+    : Math.max(1.05, opts.story1xPxPerMs * 1.6);
+  const isIsolatedStandardNotch = opts.dtMs > 80 && Math.abs(norm) <= 125;
+  const maxDt = inStory ? (isIsolatedStandardNotch ? 120 : 48) : 100;
+  const clampedDt = Math.min(maxDt, Math.max(8, opts.dtMs));
+  const maxStep = clampedDt * speed;
+  let step = Math.sign(norm) * Math.min(Math.abs(norm), maxStep);
+
+  // Prevent a large downward/upward step from blowing deep across the story boundary in one tick
+  if (inStory && step > 0 && opts.scrollY + step > opts.storyBottom) {
+    const storyRemaining = opts.storyBottom - opts.scrollY;
+    step = Math.min(step, storyRemaining + 48);
+  } else if (!inStory && step < 0 && opts.scrollY + step < opts.storyBottom) {
+    const distToBoundary = opts.scrollY - opts.storyBottom;
+    const maxInsideStory = Math.min(48, Math.max(8, opts.dtMs)) * opts.story1xPxPerMs;
+    step = -Math.min(Math.abs(step), distToBoundary + maxInsideStory);
+  }
+
+  return step;
+}
+
+export function computeFrameWindow(
+  want: number,
+  totalFrames: number,
+  behind = 4,
+  ahead = 8
+): number[] {
+  if (totalFrames <= 0) return [];
+  const center = clamp(Math.round(want), 0, totalFrames - 1);
+  const order: number[] = [center];
+  const maxDist = Math.max(behind, ahead);
+  for (let d = 1; d <= maxDist; d++) {
+    if (d <= ahead && center + d < totalFrames) order.push(center + d);
+    if (d <= behind && center - d >= 0) order.push(center - d);
+  }
+  return order;
+}
+
 export function linearFlyIn(sp: number): number {
   return seg(sp, 0.05, 0.70);
 }

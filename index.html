@@ -140,6 +140,7 @@
       height:100vh;
       overflow:hidden;
       background:#dfe3e0;
+      contain:layout paint style;
     }
 
     .cam{
@@ -177,7 +178,8 @@
       position:absolute;
       width:2px;
       height:2px;
-      opacity:0;
+      opacity:.001;
+      z-index:-1;
       pointer-events:none;
     }
 
@@ -205,24 +207,35 @@
     .fog .f0{
       position:absolute;
       inset:0;
-      background:radial-gradient(60% 55% at 40% 45%,#d9dddd,#cfd4d4 60%,#c9cfcf);
-      filter:blur(10px);
+      background:radial-gradient(62% 56% at 42% 46%,rgba(222,228,227,.95),rgba(207,214,214,.72) 58%,transparent 92%);
     }
     .fog .f1{
       position:absolute;
-      inset:-20%;
-      opacity:.55;
-      filter:blur(14px);
-      background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='700' height='460'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.006 0.014' numOctaves='3' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 .74 0 0 0 0 .78 0 0 0 0 .79 1.4 0 0 0 -.7'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E") center/cover;
+      inset:-14%;
+      opacity:.65;
+      background:
+        radial-gradient(48% 42% at 32% 44%,rgba(216,223,223,.85),transparent 72%),
+        radial-gradient(44% 38% at 62% 54%,rgba(200,208,208,.75),transparent 74%);
       animation:fogA 26s ease-in-out infinite alternate;
+      animation-play-state:paused;
     }
     .fog .f2{
       position:absolute;
-      inset:-20%;
-      opacity:.9;
-      filter:blur(8px);
-      background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='700' height='460'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.004 0.009' numOctaves='4' seed='11'/%3E%3CfeColorMatrix values='0 0 0 0 .9 0 0 0 0 .92 0 0 0 0 .92 1.6 0 0 0 -.55'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E") center/cover;
+      inset:-14%;
+      opacity:.8;
+      background:
+        radial-gradient(50% 44% at 48% 38%,rgba(232,237,236,.82),transparent 70%),
+        radial-gradient(40% 36% at 28% 60%,rgba(220,226,225,.72),transparent 72%);
       animation:fogB 19s ease-in-out infinite alternate;
+      animation-play-state:paused;
+    }
+    .fog.active .f1,
+    .fog.active .f2{
+      animation-play-state:running;
+    }
+    .stage.story-offscreen .mist,
+    .stage.story-offscreen .rock .bob{
+      animation-play-state:paused;
     }
     @keyframes fogA{
       to{transform:translate3d(6%,3%,0) scale(1.08)}
@@ -450,13 +463,11 @@
     }
     .vision h2 .w{
       display:inline-block;
-      will-change:transform,opacity,filter;
     }
     .vision p{
       font-size:16px;
       line-height:1.45;
       text-shadow:0 1px 14px rgba(10,30,15,.7);
-      will-change:transform,opacity;
     }
 
     /* Accounting & hotspots L3 */
@@ -474,7 +485,6 @@
     }
     .acct .w{
       display:inline-block;
-      will-change:opacity,filter;
     }
 
     .spot{
@@ -758,7 +768,23 @@
       display:block;
       width:100%;
       transform-style:preserve-3d;
-      transition:transform .25s ease-out;
+      transition:transform .28s cubic-bezier(.2,.8,.2,1),box-shadow .32s cubic-bezier(.2,.8,.2,1);
+    }
+    .cards .scard{
+      opacity:0;
+      transform:translate3d(0,26px,0) scale(.98);
+    }
+    .cards.in .scard{
+      animation:scardEnter .65s cubic-bezier(.16,1,.3,1) forwards;
+    }
+    .cards.in .scard:nth-child(2){animation-delay:90ms}
+    .cards.in .scard:nth-child(3){animation-delay:180ms}
+    @keyframes scardEnter{
+      from{opacity:0;transform:translate3d(0,26px,0) scale(.98)}
+      to{opacity:1;transform:translate3d(0,0,0) scale(1)}
+    }
+    .scard:hover{
+      box-shadow:0 24px 48px rgba(16,41,26,.18);
     }
     .scard .bg{
       position:absolute;
@@ -873,6 +899,31 @@
       display:flex;
       flex-direction:column;
       gap:7px;
+      transition:transform .25s cubic-bezier(.2,.8,.2,1);
+    }
+    #find .form-grid .field{
+      opacity:0;
+      transform:translate3d(0,14px,0);
+    }
+    #find.in .form-grid .field{
+      animation:fieldEnter .48s cubic-bezier(.16,1,.3,1) forwards;
+    }
+    #find.in .form-grid .field:nth-child(1){animation-delay:30ms}
+    #find.in .form-grid .field:nth-child(2){animation-delay:60ms}
+    #find.in .form-grid .field:nth-child(3){animation-delay:90ms}
+    #find.in .form-grid .field:nth-child(4){animation-delay:120ms}
+    #find.in .form-grid .field:nth-child(5){animation-delay:150ms}
+    #find.in .form-grid .field:nth-child(6){animation-delay:180ms}
+    #find.in .form-grid .field:nth-child(7){animation-delay:210ms}
+    #find.in .form-grid .field:nth-child(8){animation-delay:240ms}
+    #find.in .form-grid .field:nth-child(9){animation-delay:270ms}
+    #find.in .form-grid .field:nth-child(10){animation-delay:300ms}
+    #find.in .form-grid .field:nth-child(11){animation-delay:330ms}
+    #find.in .form-grid .field:nth-child(12){animation-delay:360ms}
+    #find.in .form-grid .field:nth-child(13){animation-delay:390ms}
+    @keyframes fieldEnter{
+      from{opacity:0;transform:translate3d(0,14px,0)}
+      to{opacity:1;transform:translate3d(0,0,0)}
     }
     .field label,
     .field .flabel{
@@ -885,6 +936,10 @@
       justify-content:space-between;
       align-items:center;
       gap:8px;
+      transition:color .22s ease,transform .22s ease;
+    }
+    .field:focus-within label{
+      color:#2d6a16;
     }
     .field .opt{
       font-size:9.5px;
@@ -901,13 +956,26 @@
       border-radius:6px;
       font-family:var(--sans);
       font-size:14.5px;
-      transition:border-color .2s,box-shadow .2s;
+      transition:border-color .22s ease,box-shadow .25s ease,transform .22s cubic-bezier(.2,.8,.2,1),background-color .22s ease;
+    }
+    .field input::placeholder{
+      color:#76867b;
+      transition:opacity .22s ease,transform .22s ease;
+    }
+    .field input:hover,
+    .field select:hover{
+      border-color:rgba(16,41,26,.3);
     }
     .field input:focus,
     .field select:focus{
       outline:none;
       border-color:var(--lime2);
-      box-shadow:0 0 0 3px rgba(169,221,58,.35);
+      box-shadow:0 0 0 3px rgba(169,221,58,.38),0 8px 20px rgba(16,41,26,.06);
+      transform:translateY(-1px);
+    }
+    .field input:focus::placeholder{
+      opacity:.48;
+      transform:translateX(3px);
     }
     .field.invalid input,
     .field.invalid select{
@@ -969,6 +1037,8 @@
       gap:14px;
     }
     .submit-btn{
+      position:relative;
+      overflow:hidden;
       display:inline-flex;
       align-items:center;
       gap:12px;
@@ -984,9 +1054,24 @@
       letter-spacing:.15em;
       text-transform:uppercase;
       cursor:pointer;
-      transition:background .2s,transform .2s;
+      transition:background .22s,transform .22s cubic-bezier(.2,.8,.2,1),box-shadow .25s ease;
     }
-    .submit-btn:hover{background:var(--lime2)}
+    .submit-btn::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(110deg,transparent 25%,rgba(255,255,255,.45) 50%,transparent 75%);
+      transform:translateX(-120%);
+      transition:transform .55s cubic-bezier(.2,.8,.2,1);
+      pointer-events:none;
+    }
+    .submit-btn:hover{
+      background:var(--lime2);
+      transform:translateY(-1px);
+      box-shadow:0 10px 24px rgba(16,41,26,.14);
+    }
+    .submit-btn:hover::after{transform:translateX(120%)}
+    .submit-btn:active{transform:translateY(0) scale(.985)}
     .submit-btn .sq{
       width:20px;
       height:20px;
@@ -997,7 +1082,7 @@
       align-items:center;
       justify-content:center;
       font-size:14px;
-      transition:transform .25s;
+      transition:transform .25s cubic-bezier(.2,.8,.2,1);
     }
     .submit-btn:hover .sq{transform:translateX(3px)}
 
@@ -1013,9 +1098,15 @@
       letter-spacing:.14em;
       text-transform:uppercase;
       cursor:pointer;
-      transition:border-color .2s,background .2s;
+      transition:border-color .2s,background .2s,transform .22s cubic-bezier(.2,.8,.2,1),box-shadow .22s ease;
     }
-    .ai-btn:hover{border-color:var(--ink);background:var(--paper)}
+    .ai-btn:hover{
+      border-color:var(--ink);
+      background:var(--paper);
+      transform:translateY(-1px);
+      box-shadow:0 8px 18px rgba(16,41,26,.08);
+    }
+    .ai-btn:active{transform:translateY(0) scale(.985)}
     .privacy-note{
       font-size:12.5px;
       color:#4a5a4f;
@@ -1088,8 +1179,10 @@
       letter-spacing:.12em;
       text-transform:uppercase;
       cursor:pointer;
-      transition:background .2s,border-color .2s,color .2s;
+      transition:background .2s,border-color .2s,color .2s,transform .18s ease;
     }
+    .tpill:hover{transform:translateY(-1px)}
+    .tpill:active{transform:scale(.97)}
     .tpill[aria-pressed="true"]{
       background:var(--lime);
       border-color:var(--lime2);
@@ -1179,11 +1272,18 @@
       justify-content:center;
       cursor:pointer;
       flex-shrink:0;
-      transition:background .2s,border-color .2s;
+      transition:background .2s,border-color .2s,transform .18s cubic-bezier(.2,.8,.2,1);
     }
+    .save-btn:hover{transform:scale(1.06)}
     .save-btn[aria-pressed="true"]{
       background:var(--lime);
       border-color:var(--lime2);
+      animation:heartPop .32s cubic-bezier(.2,.8,.2,1);
+    }
+    @keyframes heartPop{
+      0%{transform:scale(1)}
+      45%{transform:scale(1.22)}
+      100%{transform:scale(1)}
     }
 
     .rcard h3{
@@ -1301,9 +1401,13 @@
       font-weight:500;
       letter-spacing:.14em;
       text-transform:uppercase;
-      transition:background .2s;
+      transition:background .2s,transform .2s cubic-bezier(.2,.8,.2,1),box-shadow .2s ease;
     }
-    .apply-btn:hover{background:var(--lime2)}
+    .apply-btn:hover{
+      background:var(--lime2);
+      transform:translateY(-1px);
+      box-shadow:0 8px 18px rgba(16,41,26,.12);
+    }
     .domain-link{
       font-family:var(--mono);
       font-size:10.5px;
@@ -1536,12 +1640,19 @@
 
     .reveal-anim{
       opacity:0;
-      transform:translateY(22px);
-      transition:opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1);
+      transform:translate3d(0,22px,0);
+      transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);
     }
     .reveal-anim.in{
       opacity:1;
       transform:none;
+    }
+    .reveal-anim.in .chip{
+      animation:chipSlideIn .5s cubic-bezier(.16,1,.3,1) both;
+    }
+    @keyframes chipSlideIn{
+      from{opacity:0;transform:translate3d(-10px,0,0)}
+      to{opacity:1;transform:translate3d(0,0,0)}
     }
 
     .stats{
@@ -1552,8 +1663,32 @@
       border-top:1px solid #e0e5e0;
     }
     .stat{
+      position:relative;
       padding-top:22px;
+      opacity:0;
+      transform:translate3d(0,16px,0);
+      transition:opacity .55s cubic-bezier(.16,1,.3,1),transform .55s cubic-bezier(.16,1,.3,1);
     }
+    .stat::before{
+      content:"";
+      position:absolute;
+      top:-1px;
+      left:0;
+      width:34px;
+      height:2px;
+      background:var(--lime2);
+      transform:scaleX(0);
+      transform-origin:left center;
+      transition:transform .5s cubic-bezier(.16,1,.3,1);
+    }
+    .stats.in .stat{opacity:1;transform:none}
+    .stats.in .stat::before{transform:scaleX(1)}
+    .stats.in .stat:nth-child(2){transition-delay:70ms}
+    .stats.in .stat:nth-child(2)::before{transition-delay:120ms}
+    .stats.in .stat:nth-child(3){transition-delay:140ms}
+    .stats.in .stat:nth-child(3)::before{transition-delay:190ms}
+    .stats.in .stat:nth-child(4){transition-delay:210ms}
+    .stats.in .stat:nth-child(4)::before{transition-delay:260ms}
     .snum{
       font-size:44px;
       font-weight:500;
@@ -1567,6 +1702,18 @@
       text-transform:uppercase;
       color:#6a7a6f;
       margin-top:10px;
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .cards .scard,#find .form-grid .field,.stat,.reveal-anim,.rcard,.rquery-btn{
+        opacity:1 !important;
+        transform:none !important;
+        animation:none !important;
+        transition:none !important;
+      }
+      .live-dot,.skel-card,.cam .mist{
+        animation:none !important;
+      }
     }
 
     /* Accessible focus outlines */
@@ -1871,7 +2018,7 @@ UPDATED  REGULARLY</pre>
           <div class="form-grid">
             <div class="field">
               <label for="fName">Name <span class="opt">(Optional)</span></label>
-              <input id="fName" name="name" type="text" placeholder="e.g. Kavya Gowda" autocomplete="off" />
+              <input id="fName" name="name" type="text" placeholder="Enter your name" autocomplete="off" />
               <span class="ferr" id="err-name"></span>
             </div>
 
@@ -2107,7 +2254,7 @@ UPDATED  REGULARLY</pre>
         </p>
       </section>
 
-      <div class="stats" id="stats">
+      <div class="stats reveal-anim" id="stats">
         <div class="stat">
           <div class="snum" id="statTotal" data-target="23" data-dec="0" data-comma="1">0</div>
           <div class="slbl">Verified schemes</div>
@@ -2128,11 +2275,20 @@ UPDATED  REGULARLY</pre>
     </section>
   </main>
 
-  <script>
+  <script type="module">
+    import {
+      clamp,
+      seg,
+      ease,
+      computeStory1xSpeed,
+      computeWheelStep,
+      findNearestFrame,
+      formatStatValue,
+    } from './src/scrollMath.ts';
+
     (() => {
-      const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
-      const seg = (p, a, b) => clamp((p - a) / (b - a));
-      const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+      let isActivelyScrolling = false;
+      let scrollIdleTimer = null;
 
       // Live backend-driven application state (no fake reviews or hardcoded sample profile)
       let allItems = [];
@@ -2339,6 +2495,7 @@ UPDATED  REGULARLY</pre>
 
         container.querySelectorAll('.rcard').forEach(rc => {
           rc.addEventListener('pointermove', e => {
+            if (isActivelyScrolling) return;
             const r = rc.getBoundingClientRect();
             const x = (e.clientX - r.left) / r.width - .5;
             const y = (e.clientY - r.top) / r.height - .5;
@@ -2498,6 +2655,7 @@ UPDATED  REGULARLY</pre>
       // Browse-by-type cards filter + scroll to #results
       document.querySelectorAll('.scard').forEach(scard => {
         scard.addEventListener('pointermove', e => {
+          if (isActivelyScrolling) return;
           const r = scard.getBoundingClientRect();
           const x = (e.clientX - r.left) / r.width - .5;
           const y = (e.clientY - r.top) / r.height - .5;
@@ -2879,8 +3037,10 @@ UPDATED  REGULARLY</pre>
         heroCopy.style.top = (fernTop + 0.5 * fs - blockHeight) + 'px';
       }
 
+      const stage = document.querySelector('.stage');
+
       function sizeCanvas() {
-        const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+        const dpr = Math.min(window.devicePixelRatio || 1, 1.25);
         const w = Math.max(1, Math.round(cv.clientWidth * dpr));
         const h = Math.max(1, Math.round(cv.clientHeight * dpr));
         if (cv.width !== w || cv.height !== h) {
@@ -2891,73 +3051,96 @@ UPDATED  REGULARLY</pre>
         }
       }
 
-      const FPS = 24;
-      let NF = 121;
+      const FPS = 16;
+      let NF = 81;
       let frames = new Array(NF);
       let cached = 0;
       let want = 0;
       let shown = -1;
-      let busy = false;
       let cacheStarted = false;
 
       const grab = document.createElement('canvas');
-      grab.width = 1600;
-      grab.height = 900;
-      const gctx = grab.getContext('2d');
+      grab.width = 960;
+      grab.height = 540;
+      const gctx = grab.getContext('2d', { alpha: false });
 
-      function nearest(target) {
-        if (!frames.length) return -1;
-        const t = clamp(Math.round(target), 0, NF - 1);
-        if (frames[t]) return t;
-        for (let k = 1; k < NF; k++) {
-          if (t - k >= 0 && frames[t - k]) return t - k;
-          if (t + k < NF && frames[t + k]) return t + k;
-        }
-        return -1;
+      function paintBitmap(bmp, idx) {
+        const s = Math.max(cv.width / bmp.width, cv.height / bmp.height);
+        const dw = bmp.width * s;
+        const dh = bmp.height * s;
+        ctx.drawImage(bmp, (cv.width - dw) / 2, (cv.height - dh) / 2, dw, dh);
+        shown = idx;
       }
 
       function drawWant() {
-        if (busy) return;
-        const idx = nearest(want);
+        const idx = findNearestFrame(frames, want);
         if (idx < 0 || idx === shown) return;
-        const blob = frames[idx];
-        if (!blob) return;
-        busy = true;
-        createImageBitmap(blob).then(bmp => {
-          const s = Math.max(cv.width / bmp.width, cv.height / bmp.height);
-          const dw = bmp.width * s;
-          const dh = bmp.height * s;
-          ctx.clearRect(0, 0, cv.width, cv.height);
-          ctx.drawImage(bmp, (cv.width - dw) / 2, (cv.height - dh) / 2, dw, dh);
-          shown = idx;
-          bmp.close();
-          busy = false;
-          if (nearest(want) !== shown) drawWant();
-        }).catch(() => {
-          busy = false;
-        });
+        const bmp = frames[idx];
+        if (bmp) {
+          paintBitmap(bmp, idx);
+        }
+      }
+
+      let capturingSet = new Set();
+      function captureCurrentVideoFrame(idx) {
+        if (idx < 0 || idx >= NF || frames[idx] || capturingSet.has(idx)) return;
+        capturingSet.add(idx);
+        try {
+          gctx.drawImage(push, 0, 0, grab.width, grab.height);
+          createImageBitmap(grab).then(bmp => {
+            capturingSet.delete(idx);
+            if (!frames[idx]) {
+              frames[idx] = bmp;
+              cached++;
+              if (idx === want || shown < 0 || Math.abs(idx - want) <= 2) {
+                drawWant();
+                requestTick();
+              }
+              if (cached >= NF - 2) {
+                try { push.pause(); } catch (_) {}
+              }
+            } else {
+              try { bmp.close(); } catch (_) {}
+            }
+          }).catch(() => {
+            capturingSet.delete(idx);
+          });
+        } catch (_) {
+          capturingSet.delete(idx);
+        }
       }
 
       function startSeekFallback() {
         let i = 0;
         const step = () => {
           while (i < NF && frames[i]) i++;
-          if (i >= NF) return;
-          push.currentTime = Math.min(i / FPS, Math.max(0, push.duration - 0.01));
+          if (i >= NF) {
+            try { push.pause(); } catch (_) {}
+            return;
+          }
+          push.currentTime = Math.min(i / FPS, Math.max(0, (push.duration || 5.04) - 0.01));
         };
         push.addEventListener('seeked', () => {
           if (i < NF && !frames[i]) {
             try {
-              gctx.drawImage(push, 0, 0, 1600, 900);
-              grab.toBlob(b => {
-                if (b) {
-                  if (!frames[i]) cached++;
-                  frames[i] = b;
-                  if (i === want) drawWant();
+              gctx.drawImage(push, 0, 0, grab.width, grab.height);
+              createImageBitmap(grab).then(bmp => {
+                if (!frames[i]) {
+                  frames[i] = bmp;
+                  cached++;
+                  if (i === want || shown < 0) {
+                    drawWant();
+                    requestTick();
+                  }
+                } else {
+                  try { bmp.close(); } catch (_) {}
                 }
                 i++;
                 step();
-              }, 'image/jpeg', i === 0 ? 0.9 : 0.86);
+              }).catch(() => {
+                i++;
+                step();
+              });
               return;
             } catch (_) {}
           }
@@ -2973,41 +3156,26 @@ UPDATED  REGULARLY</pre>
         NF = Math.max(2, Math.round((push.duration || 5.04) * FPS));
         frames = new Array(NF);
 
-        try {
-          gctx.drawImage(push, 0, 0, 1600, 900);
-          grab.toBlob(b => {
-            if (b) {
-              if (!frames[0]) cached++;
-              frames[0] = b;
-              if (want === 0) drawWant();
-            }
-          }, 'image/jpeg', 0.9);
-        } catch (_) {}
-
+        captureCurrentVideoFrame(0);
         drawWant();
+
+        push.muted = true;
+        push.playbackRate = 2.0;
 
         if (typeof push.requestVideoFrameCallback === 'function') {
           const onFrame = (_now, meta) => {
             const i = Math.min(NF - 1, Math.round(meta.mediaTime * FPS));
             if (i > 0 && !frames[i]) {
-              try {
-                gctx.drawImage(push, 0, 0, 1600, 900);
-                grab.toBlob(b => {
-                  if (b) {
-                    if (!frames[i]) cached++;
-                    frames[i] = b;
-                    if (i === want) drawWant();
-                  }
-                }, 'image/jpeg', 0.86);
-              } catch (_) {}
+              captureCurrentVideoFrame(i);
             }
-            if (!push.ended) {
+            if (!push.ended && cached < NF - 2) {
               push.requestVideoFrameCallback(onFrame);
             }
           };
           push.requestVideoFrameCallback(onFrame);
           push.addEventListener('ended', () => {
             if (cached < NF - 2) startSeekFallback();
+            else try { push.pause(); } catch (_) {}
           }, { once: true });
           const pPlay = push.play();
           if (pPlay && typeof pPlay.catch === 'function') {
@@ -3024,22 +3192,41 @@ UPDATED  REGULARLY</pre>
         push.addEventListener('loadeddata', initVideoCache, { once: true });
       }
 
-      window.__hero = {
-        ready: () => cached >= NF - 2,
-        settled: () => !busy && nearest(want) === shown
-      };
-
       let mx = 0, my = 0, sx = 0, sy = 0;
       let sp = 0;
-      let lastT = performance.now();
+      let lastRenderedSp = -1;
+      let lastRenderedSx = 999;
+      let lastRenderedSy = 999;
+      let lastRenderedShown = -999;
+      let rafId = 0;
+      let scrollDirty = true;
 
-      let hasMoved = false;
-      window.addEventListener('pointermove', e => {
-        if (!hasMoved && e.clientX === 0 && e.clientY === 0) return;
-        hasMoved = true;
-        mx = e.clientX / window.innerWidth - .5;
-        my = e.clientY / window.innerHeight - .5;
-      }, { passive: true });
+      // Cached layout metrics (zero getBoundingClientRect inside tick!)
+      let cachedWinW = window.innerWidth;
+      let cachedWinH = window.innerHeight;
+      let cachedStoryTop = 0;
+      let cachedStoryDenom = Math.max(1, story.offsetHeight - window.innerHeight);
+      let cachedStoryBottom = cachedStoryTop + cachedStoryDenom;
+      let cachedStatsTop = 0;
+      let story1xPxPerMs = computeStory1xSpeed(story.offsetHeight, window.innerHeight, 5.04);
+
+      function measureLayout() {
+        cachedWinW = window.innerWidth;
+        cachedWinH = window.innerHeight;
+        const scrollY = window.scrollY;
+        cachedStoryTop = story.getBoundingClientRect().top + scrollY;
+        cachedStoryDenom = Math.max(1, story.offsetHeight - cachedWinH);
+        cachedStoryBottom = cachedStoryTop + cachedStoryDenom;
+        cachedStatsTop = statsEl.getBoundingClientRect().top + scrollY;
+        story1xPxPerMs = computeStory1xSpeed(story.offsetHeight, cachedWinH, push.duration || 5.04);
+      }
+
+      window.__hero = {
+        ready: () => cached >= NF - 2,
+        settled: () => capturingSet.size === 0 && findNearestFrame(frames, want) === shown,
+        progress: () => sp,
+        speedPxPerMs: () => story1xPxPerMs,
+      };
 
       const statsEl = document.getElementById('stats');
       const statEls = Array.from(document.querySelectorAll('.snum')).map(el => ({
@@ -3049,19 +3236,13 @@ UPDATED  REGULARLY</pre>
         comma: el.dataset.comma === '1'
       }));
       let statsStarted = false;
+      let statsFinished = false;
       let statsStartT = 0;
 
-      function formatStat(val, dec, comma) {
-        const fixed = val.toFixed(dec);
-        if (!comma) return fixed;
-        const parts = fixed.split('.');
-        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-        return parts.join('.');
-      }
-
-      function tickStats(now) {
+      function tickStats(now, scrollY) {
+        if (statsFinished) return false;
         if (!statsStarted) {
-          if (statsEl.getBoundingClientRect().top <= window.innerHeight * 0.92) {
+          if (cachedStatsTop - scrollY <= cachedWinH * 0.92) {
             statsStarted = true;
             statsStartT = now;
           }
@@ -3069,30 +3250,35 @@ UPDATED  REGULARLY</pre>
         if (statsStarted) {
           const t = clamp((now - statsStartT) / 1600);
           const e = ease(t);
-          statEls.forEach(s => {
-            s.el.textContent = formatStat(s.target * e, s.dec, s.comma);
-          });
+          for (let i = 0; i < statEls.length; i++) {
+            const s = statEls[i];
+            s.el.textContent = formatStatValue(s.target * e, s.dec, s.comma);
+          }
+          if (t >= 1) {
+            statsFinished = true;
+            return false;
+          }
+          return true;
         }
+        return false;
       }
 
-      function tick(now) {
-        const dt = Math.min(64, Math.max(1, now - lastT));
-        lastT = now;
-
-        const denom = Math.max(1, story.offsetHeight - window.innerHeight);
-        const p = clamp(-story.getBoundingClientRect().top / denom);
-        // Aggressive lerp factor (~0.45 per 60fps frame) for tight, responsive scroll coupling
-        sp += (p - sp) * (1 - Math.pow(0.55, dt / 16.7));
-        if (Math.abs(p - sp) < 0.0002) sp = p;
-
-        sx += (mx - sx) * .06;
-        sy += (my - sy) * .06;
-
+      function renderStory(p) {
+        // Exact 1:1 coupling — stops instantaneously the moment scrolling stops
+        sp = p;
         const vp = seg(sp, .05, .70);
         want = Math.round(vp * (NF - 1));
         drawWant();
 
-        const camT = `translate3d(${-sx * 18}px, ${-sy * 12 + (1 - vp) * window.innerHeight * .06}px, 0) scale(${1 + .02 * (1 - vp)})`;
+        const offscreen = sp >= 1 && lastRenderedSp >= 1;
+        if (stage) {
+          stage.classList.toggle('story-offscreen', sp >= 1);
+        }
+        if (offscreen) {
+          return;
+        }
+
+        const camT = `translate3d(${-sx * 18}px, ${-sy * 12 + (1 - vp) * cachedWinH * .06}px, 0) scale(${1 + .02 * (1 - vp)})`;
         cam.style.transform = camT;
         camF.style.transform = camT;
 
@@ -3112,18 +3298,21 @@ UPDATED  REGULARLY</pre>
           } else {
             r.el.style.visibility = 'visible';
             r.el.style.transform = `translate3d(calc(${r.x * fp * 70 + sx * -24 * r.d}vw), calc(${r.y * fp * 60 + sy * -16 * r.d}vh), 0) scale(${1 + fe * 1.6 * r.d})`;
-            r.el.style.filter = `blur(${fe * 5 * r.d}px)`;
+            const rBlur = Math.round(fe * 4 * r.d * 2) / 2;
+            r.el.style.filter = rBlur > 0.2 ? `blur(${rBlur}px)` : 'none';
           }
         }
 
         const fg = ease(seg(sp, .38, .47));
-        if (fg <= 0) {
+        if (fg <= 0 || sp >= 0.78) {
           fog.style.visibility = 'hidden';
           fog.style.opacity = '0';
+          fog.classList.remove('active');
         } else {
           fog.style.visibility = 'visible';
           fog.style.opacity = String(fg);
           fog.style.transform = `translate3d(${(fg - 1) * 18 + sx * -10}vw, ${sy * -6}px, 0)`;
+          fog.classList.add('active');
         }
 
         const h = seg(sp, .02, .1);
@@ -3134,7 +3323,8 @@ UPDATED  REGULARLY</pre>
           l0.style.visibility = 'visible';
           l1.style.visibility = 'visible';
           heroCopy.style.transform = `translate3d(${-sx * 10}px, ${-h * 80 - sy * 6}px, 0) scale(${1 + h * .12})`;
-          heroCopy.style.filter = `blur(${h * 14}px)`;
+          const hBlur = Math.round(h * 10 * 2) / 2;
+          heroCopy.style.filter = hBlur > 0.2 ? `blur(${hBlur}px)` : 'none';
           heroCopy.style.opacity = String(1 - h);
 
           hud.style.transform = `translate3d(${sx * 26}px, ${sy * 18 - h * 40}px, 0)`;
@@ -3155,7 +3345,6 @@ UPDATED  REGULARLY</pre>
             const k = clamp(vIn * 1.6 - i * .08);
             const w = visWords[i];
             w.style.transform = `translate3d(0, ${(1 - k) * 30 - vOut * 60}px, 0)`;
-            w.style.filter = `blur(${(1 - k) * 12 + vOut * 14}px)`;
             w.style.opacity = String(k * (1 - vOut));
           }
           const subOp = String(clamp(vIn * 2 - .6) * (1 - vOut));
@@ -3177,7 +3366,7 @@ UPDATED  REGULARLY</pre>
             const k = clamp(aIn * 2.2 - (i / count) * 1.2);
             const w = acctWords[i];
             w.style.opacity = String((.15 + .85 * k) * (1 - aOut));
-            w.style.filter = `blur(${(1 - k) * 6 + aOut * 10}px)`;
+            w.style.transform = `translate3d(0, ${(1 - k) * 8 + aOut * -14}px, 0)`;
           }
           for (let i = 0; i < spots.length; i++) {
             const k = seg(sp, .49 + i * .02, .53 + i * .02);
@@ -3193,7 +3382,8 @@ UPDATED  REGULARLY</pre>
           l4.style.visibility = 'visible';
           cred.style.opacity = String(sIn);
           cred.style.transform = `translate3d(0, ${(1 - sIn) * 30}px, 0)`;
-          cred.style.filter = `blur(${(1 - sIn) * 8}px)`;
+          const cBlur = Math.round((1 - sIn) * 6 * 2) / 2;
+          cred.style.filter = cBlur > 0.2 ? `blur(${cBlur}px)` : 'none';
 
           card.style.opacity = String(cIn);
           card.style.transform = `perspective(800px) translate3d(${sx * -14}px, ${(1 - cIn) * 60 + sy * -10}px, 0) rotateY(${sx * 8}deg) rotateX(${-sy * 8}deg)`;
@@ -3213,23 +3403,135 @@ UPDATED  REGULARLY</pre>
         }
 
         progBar.style.transform = `scaleX(${sp})`;
-        tickStats(now);
-
-        requestAnimationFrame(tick);
+        lastRenderedSp = sp;
       }
+
+      function tick(now) {
+        rafId = 0;
+        const scrollY = window.scrollY;
+        const p = clamp((scrollY - cachedStoryTop) / cachedStoryDenom);
+
+        let parallaxMoving = false;
+        if (p < 1) {
+          const dx = mx - sx;
+          const dy = my - sy;
+          if (Math.abs(dx) > 0.0005 || Math.abs(dy) > 0.0005) {
+            sx += dx * 0.14;
+            sy += dy * 0.14;
+            parallaxMoving = true;
+          } else {
+            sx = mx;
+            sy = my;
+          }
+        }
+
+        const changed =
+          scrollDirty ||
+          p !== lastRenderedSp ||
+          (p < 1 && (sx !== lastRenderedSx || sy !== lastRenderedSy)) ||
+          shown !== lastRenderedShown;
+
+        if (changed) {
+          scrollDirty = false;
+          renderStory(p);
+          lastRenderedSx = sx;
+          lastRenderedSy = sy;
+          lastRenderedShown = shown;
+        }
+
+        const statsAnimating = tickStats(now, scrollY);
+
+        if (parallaxMoving || statsAnimating || scrollDirty) {
+          requestTick();
+        }
+      }
+
+      function requestTick() {
+        if (!rafId) {
+          rafId = requestAnimationFrame(tick);
+        }
+      }
+
+      function markActiveScroll() {
+        isActivelyScrolling = true;
+        clearTimeout(scrollIdleTimer);
+        scrollIdleTimer = setTimeout(() => {
+          isActivelyScrolling = false;
+        }, 120);
+      }
+
+      // 1X Scroll Speed Governor: caps fast trackpad/wheel bursts to 1X, passes slow 1:1, stops dead when stopped
+      let lastWheelTs = performance.now();
+      window.addEventListener('wheel', e => {
+        if (e.ctrlKey || e.metaKey || e.deltaY === 0) return;
+        const now = performance.now();
+        const dt = now - lastWheelTs;
+        lastWheelTs = now;
+
+        const step = computeWheelStep({
+          deltaY: e.deltaY,
+          deltaMode: e.deltaMode,
+          dtMs: dt,
+          scrollY: window.scrollY,
+          storyBottom: cachedStoryBottom,
+          viewportHeight: cachedWinH,
+          story1xPxPerMs,
+        });
+
+        e.preventDefault();
+        if (step !== 0) {
+          window.scrollBy({ top: step, left: 0, behavior: 'auto' });
+          markActiveScroll();
+          scrollDirty = true;
+          requestTick();
+        }
+      }, { passive: false });
+
+      window.addEventListener('scroll', () => {
+        markActiveScroll();
+        scrollDirty = true;
+        requestTick();
+      }, { passive: true });
+
+      let hasMoved = false;
+      window.addEventListener('pointermove', e => {
+        if (!hasMoved && e.clientX === 0 && e.clientY === 0) return;
+        hasMoved = true;
+        mx = e.clientX / cachedWinW - .5;
+        my = e.clientY / cachedWinH - .5;
+        if (sp < 1) requestTick();
+      }, { passive: true });
 
       window.addEventListener('resize', () => {
         layoutHero();
         sizeCanvas();
+        measureLayout();
+        scrollDirty = true;
+        requestTick();
       });
+
+      if ('ResizeObserver' in window) {
+        const ro = new ResizeObserver(() => {
+          measureLayout();
+          scrollDirty = true;
+          requestTick();
+        });
+        ro.observe(document.body);
+      }
 
       layoutHero();
       sizeCanvas();
+      measureLayout();
       if (document.fonts && document.fonts.ready) {
-        document.fonts.ready.then(layoutHero);
+        document.fonts.ready.then(() => {
+          layoutHero();
+          measureLayout();
+          scrollDirty = true;
+          requestTick();
+        });
       }
 
-      requestAnimationFrame(tick);
+      requestTick();
     })();
   </script>
 </body>

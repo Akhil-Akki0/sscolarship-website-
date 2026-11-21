@@ -1,6 +1,6 @@
 {
-  "name": "Mossline",
-  "description": "Floating moss island scroll fly-in landing page for Mossline environmental data.",
+  "name": "SZ — Find Your Funded Future",
+  "description": "Real scholarships matched to your student profile, with official application links only.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
